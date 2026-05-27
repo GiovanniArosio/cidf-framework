@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Figure 1 — CIDF Architecture</title>
+<meta name="viewport" content="width=794" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────────────────
+     Print-ready A4 portrait architecture figure.
+     - Single page, white background, academic aesthetic.
+     - Color-coded layers, thin connectors, captioned.
+  ───────────────────────────────────────────────────────── */
+
+  :root {
+    --ink:       #1a1d24;
+    --ink-2:     #424857;
+    --ink-3:     #6b7180;
+    --rule:      #d8dbe2;
+    --rule-soft: #ececf0;
+    --bg:        #ffffff;
+    --bg-soft:   #fafafb;
+
+    /* layer accents — academic, low-saturation */
+    --teal:   #0e8d80;
+    --teal-bg:#e8f5f3;
+    --blue:   #2563b0;
+    --blue-bg:#e8effa;
+    --purple: #6b4fbb;
+    --purple-bg:#efebf8;
+    --amber:  #b07a0a;
+    --amber-bg:#fbf2dd;
+    --green:  #2f8a5b;
+    --green-bg:#e7f4ec;
+
+    --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #eef0f3; color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+  /* A4 portrait page — flows on screen, fits one A4 page in print */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    padding: 14mm 16mm 12mm;
+    background: var(--bg);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    position: relative;
+    display: block;
+    color: var(--ink);
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    html, body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { margin: 0; box-shadow: none; width: 210mm; min-height: 0; height: auto; }
+    .layer, .conn, .caption { break-inside: avoid; }
+  }
+
+  /* ── header ─────────────────────────────────────────── */
+  .head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 0.6pt solid var(--rule);
+    margin-bottom: 14px;
+  }
+  .head .left {
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .head .right {
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    color: var(--ink-3);
+  }
+  .title {
+    font-family: var(--serif);
+    font-size: 18pt;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 10.5pt;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+    max-width: 150mm;
+    line-height: 1.4;
+  }
+
+  /* ── legend (single line) ───────────────────────────── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    padding: 7px 10px;
+    border: 0.6pt solid var(--rule);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    background: var(--bg-soft);
+  }
+  .legend .item {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--mono);
+    font-size: 7.8pt; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .legend .sw {
+    width: 9px; height: 9px; border-radius: 2px;
+    border: 0.6pt solid rgba(0,0,0,0.15);
+  }
+  .sw.teal{background:var(--teal);} .sw.blue{background:var(--blue);}
+  .sw.purple{background:var(--purple);} .sw.amber{background:var(--amber);}
+  .sw.green{background:var(--green);}
+
+  /* ── diagram column ─────────────────────────────────── */
+  .diagram {
+    display: block;
+  }
+
+  .layer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22mm 1fr;
+    gap: 6mm;
+    align-items: stretch;
+    break-inside: avoid;
+  }
+  .layer-tag {
+    font-family: var(--mono);
+    font-size: 7.6pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 6px;
+    border-right: 0.6pt solid var(--rule);
+    padding-right: 6mm;
+    text-align: right;
+  }
+  .layer-tag .num {
+    display: block;
+    color: var(--ink-2);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .layer-tag .nm {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 8.4pt;
+    letter-spacing: 0.1em;
+  }
+  .layer-tag .accent {
+    display: block;
+    width: 18px; height: 2px;
+    margin: 6px 0 0 auto;
+    background: currentColor;
+  }
+  .l-input .layer-tag, .l-input .layer-tag .accent { color: var(--teal); }
+  .l-proc  .layer-tag, .l-proc  .layer-tag .accent { color: var(--blue); }
+  .l-cidi  .layer-tag, .l-cidi  .layer-tag .accent { color: var(--amber); }
+  .l-out   .layer-tag, .l-out   .layer-tag .accent { color: var(--green); }
+  .l-input .layer-tag .num, .l-proc .layer-tag .num,
+  .l-cidi .layer-tag .num, .l-out .layer-tag .num { color: var(--ink-3); }
+  .l-input .layer-tag .nm { color: var(--teal); }
+  .l-proc  .layer-tag .nm { color: var(--blue); }
+  .l-cidi  .layer-tag .nm { color: var(--amber); }
+  .l-out   .layer-tag .nm { color: var(--green); }
+
+  .layer-body { padding: 4px 0; min-width: 0; }
+
+  /* card primitives */
+  .card {
+    background: var(--bg);
+    border: 0.7pt solid var(--accent, var(--rule));
+    border-radius: 4px;
+    padding: 8px 10px 9px;
+    position: relative;
+  }
+  .card.tinted { background: var(--accent-bg, var(--bg-soft)); }
+  .card .head-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .card .id {
+    font-family: var(--mono);
+    font-size: 6.8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent, var(--ink-3));
+  }
+  .card .badge {
+    font-family: var(--mono);
+    font-size: 6.6pt;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    padding: 1px 5px;
+    border: 0.5pt solid var(--rule);
+    border-radius: 999px;
+    background: #fff;
+  }
+  .card h3 {
+    margin: 0 0 3px;
+    font-size: 10.5pt;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card p {
+    margin: 0;
+    font-size: 8.6pt;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .card ul {
+    margin: 5px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 7.6pt;
+    color: var(--ink-2);
+    display: grid; gap: 2px;
+  }
+  .card ul li::before {
+    content: "▸ ";
+    color: var(--accent);
+    font-size: 6.5pt;
+  }
+
+  .acc-teal   { --accent: var(--teal);   --accent-bg: var(--teal-bg); }
+  .acc-blue   { --accent: var(--blue);   --accent-bg: var(--blue-bg); }
+  .acc-purple { --accent: var(--purple); --accent-bg: var(--purple-bg); }
+  .acc-amber  { --accent: var(--amber);  --accent-bg: var(--amber-bg); }
+  .acc-green  { --accent: var(--green);  --accent-bg: var(--green-bg); }
+
+  /* layouts per layer */
+  .row { display: grid; gap: 5mm; }
+  .input-row { grid-template-columns: 1fr 1fr; }
+
+  .proc-row { grid-template-columns: 52mm 1fr; gap: 5mm; align-items: stretch; }
+
+  .iva-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin-top: 5px;
+  }
+  .iva-grid .card { padding: 6px 8px 7px; }
+  .iva-grid .card h3 { font-size: 9pt; }
+  .iva-grid .card p { font-size: 7.8pt; }
+  .iva-grid .card ul { font-size: 7pt; }
+
+  .cidi-row {
+    display: grid; grid-template-columns: 1fr;
+    gap: 4mm;
+  }
+  .formula {
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: #fff;
+    border: 0.7pt dashed var(--amber);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 10pt;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .formula .tci { color: var(--blue); font-weight: 500; }
+  .formula .iva { color: var(--purple); font-weight: 500; }
+  .formula .out { color: var(--amber); font-weight: 600; }
+  .sens {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    margin-top: 5px;
+  }
+  .sens-note {
+    background: #fff;
+    border: 0.6pt solid var(--rule);
+    border-left: 2pt solid var(--amber);
+    padding: 6px 9px;
+    border-radius: 2px;
+  }
+  .sens-note .lab {
+    font-family: var(--mono);
+    font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 2px;
+  }
+  .sens-note p {
+    margin: 0; font-size: 8pt; color: var(--ink-2); line-height: 1.4;
+  }
+
+  /* output: 3 case chips + answer box */
+  .out-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.5mm;
+  }
+  .case {
+    border: 0.7pt solid var(--green);
+    border-radius: 4px;
+    padding: 7px 9px;
+    background: #fff;
+    text-align: left;
+    position: relative;
+  }
+  .case .yr {
+    font-family: var(--mono);
+    font-size: 7pt; letter-spacing: 0.14em;
+    color: var(--green);
+  }
+  .case .nm {
+    font-size: 10pt; font-weight: 600; margin-top: 2px; color: var(--ink);
+    line-height: 1.2;
+  }
+  .case .meta {
+    font-family: var(--mono);
+    font-size: 6.6pt; color: var(--ink-3);
+    margin-top: 3px;
+  }
+  .answer {
+    margin-top: 4mm;
+    border: 0.8pt solid var(--green);
+    background: var(--green-bg);
+    border-radius: 4px;
+    padding: 9px 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+  .answer .icon {
+    width: 24px; height: 24px;
+    border: 0.8pt solid var(--green);
+    border-radius: 50%;
+    color: var(--green);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    display: grid; place-items: center;
+    font-size: 12pt;
+    background: #fff;
+  }
+  .answer h4 {
+    margin: 0; font-size: 10pt; font-weight: 600; color: var(--ink);
+  }
+  .answer p {
+    margin: 2px 0 0; font-size: 8.4pt; color: var(--ink-2); line-height: 1.35;
+  }
+
+  /* ── connectors (SVG between layers) ────────────────── */
+  .conn {
+    position: relative;
+    height: 30px;
+    margin-left: 28mm; /* aligns past the tag column */
+  }
+  .conn svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .conn .lab {
+    position: absolute;
+    left: calc(50% + 14px);
+    top: 50%; transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3);
+    background: #fff;
+    padding: 1px 6px;
+  }
+
+  /* compact external services strip under processing */
+  .ext-strip {
+    margin-top: 4mm;
+    display: grid;
+    grid-template-columns: 22mm 1fr;
+    gap: 6mm;
+    align-items: stretch;
+    break-inside: avoid;
+  }
+  .ext-tag {
+    font-family: var(--mono);
+    font-size: 7.4pt; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-3);
+    padding-right: 6mm;
+    text-align: right;
+    border-right: 0.6pt dashed var(--rule);
+    padding-top: 4px;
+  }
+  .ext-tag .nm { display:block; color: var(--ink); font-weight:600; font-size: 7.8pt; }
+  .ext-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+  }
+  .ext {
+    border: 0.6pt dashed var(--rule);
+    border-radius: 4px;
+    background: var(--bg-soft);
+    padding: 6px 9px;
+  }
+  .ext .lab {
+    font-family: var(--mono); font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 2px;
+  }
+  .ext h5 {
+    margin: 0 0 2px; font-size: 9pt; font-weight: 600; color: var(--ink);
+  }
+  .ext p {
+    margin: 0; font-size: 7.6pt; color: var(--ink-2); line-height: 1.35;
+  }
+
+  /* ── caption / footer ───────────────────────────────── */
+  .caption {
+    margin-top: 10mm;
+    padding-top: 8px;
+    border-top: 0.6pt solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .caption .fig {
+    font-family: var(--serif);
+    font-size: 9.2pt;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .caption .fig b {
+    font-weight: 600;
+  }
+  .caption .fig i {
+    font-style: italic;
+    color: var(--ink-2);
+  }
+  .caption .pg {
+    font-family: var(--mono);
+    font-size: 7.6pt; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+</style>
+</head>
+<body>
+
+<div class="page" data-screen-label="Figure 1 — CIDF Architecture">
+
+  <!-- header -->
+  <div class="head">
+    <div class="left">MSc Thesis · Chapter 3 · Methodology</div>
+    <div class="right">Fig. 1</div>
+  </div>
+
+  <h1 class="title">CIDF Architecture</h1>
+  <p class="subtitle">Cyber-Interpretive Disruption Framework — vertical data pipeline from heterogeneous corpus ingestion to a composite, case-comparable empirical output.</p>
+
+  <!-- legend -->
+  <div class="legend">
+    <div class="item"><span class="sw teal"></span>Input</div>
+    <div class="item"><span class="sw blue"></span>TCI · Technical Complexity</div>
+    <div class="item"><span class="sw purple"></span>IVA · Interpretive Void</div>
+    <div class="item"><span class="sw amber"></span>CIDI · Integration</div>
+    <div class="item"><span class="sw green"></span>Output · Findings</div>
+  </div>
+
+  <!-- diagram -->
+  <div class="diagram">
+
+    <!-- LAYER 1 — INPUT -->
+    <section class="layer l-input">
+      <div class="layer-tag">
+        <span class="num">Layer 01</span>
+        <span class="nm">Input</span>
+        <span class="accent"></span>
+      </div>
+      <div class="layer-body">
+        <div class="row input-row">
+          <div class="card acc-teal tinted">
+            <div class="head-row">
+              <span class="id">IN.01</span>
+              <span class="badge">json</span>
+            </div>
+            <h3>Technical Corpus</h3>
+            <p>Forensic, expert-validated material produced by responders and threat intelligence vendors.</p>
+            <ul>
+              <li>CERT advisories &amp; national-CSIRT reports</li>
+              <li>Commercial threat intelligence</li>
+              <li>Forensic / reverse-engineering analyses</li>
+            </ul>
+          </div>
+          <div class="card acc-teal tinted">
+            <div class="head-row">
+              <span class="id">IN.02</span>
+              <span class="badge">json</span>
+            </div>
+            <h3>Public Corpus</h3>
+            <p>Public-facing discourse around each event, time-aligned to the technical record.</p>
+            <ul>
+              <li>News media &amp; long-form journalism</li>
+              <li>Institutional statements (gov / EU / NATO)</li>
+              <li>Social-media discourse</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- connector -->
+    <div class="conn">
+      <svg viewBox="0 0 600 38" preserveAspectRatio="none">
+        <defs>
+          <marker id="ar-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2563b0"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="2" x2="300" y2="32" stroke="#2563b0" stroke-width="0.8" marker-end="url(#ar-blue)"/>
+      </svg>
+      <div class="lab">normalised documents</div>
+    </div>
+
+    <!-- LAYER 2 — PROCESSING -->
+    <section class="layer l-proc">
+      <div class="layer-tag">
+        <span class="num">Layer 02</span>
+        <span class="nm">Processing</span>
+        <span class="accent"></span>
+      </div>
+      <div class="layer-body">
+        <div class="row proc-row">
+
+          <!-- TCI -->
+          <div class="card acc-blue tinted" style="display:flex; flex-direction:column;">
+            <div class="head-row">
+              <span class="id">PR.A · TCI</span>
+              <span class="badge">scikit-learn</span>
+            </div>
+            <h3>Technical Complexity Index</h3>
+            <p>MITRE ATT&amp;CK mapping; five signals aggregated into one bounded score.</p>
+            <ul>
+              <li>Tactics count · technique diversity</li>
+              <li>Stealth · persistence</li>
+              <li>Lateral movement</li>
+            </ul>
+            <div style="margin-top:auto; padding-top:6px;">
+              <div style="font-family:var(--mono); font-size:7pt; letter-spacing:0.1em; color:var(--ink-3);">OUTPUT</div>
+              <div style="font-family:var(--mono); font-size:9.4pt; color:var(--blue); font-weight:600;">TCI ∈ [0, 1]</div>
+            </div>
+          </div>
+
+          <!-- IVA -->
+          <div class="card acc-purple tinted">
+            <div class="head-row">
+              <span class="id">PR.B · IVA · 4 modules</span>
+              <span class="badge">multimodal NLP</span>
+            </div>
+            <h3>Interpretive Void Analyzer</h3>
+            <p>Four orthogonal modules quantifying the meaning-making gap between technical event and public narrative.</p>
+
+            <div class="iva-grid">
+              <div class="card acc-purple">
+                <div class="head-row"><span class="id">B.1</span><span class="badge">LLM</span></div>
+                <h3>Attribution Drift</h3>
+                <p>LLM-assisted extraction of attribution claims.</p>
+                <ul>
+                  <li>Actor plurality</li>
+                  <li>Temporal instability</li>
+                  <li>Convergence delay</li>
+                  <li>Confidence dispersion</li>
+                </ul>
+              </div>
+              <div class="card acc-purple">
+                <div class="head-row"><span class="id">B.2</span><span class="badge">BERTopic</span></div>
+                <h3>Narrative Fragmentation</h3>
+                <p>Topic geometry over sentence embeddings.</p>
+                <ul>
+                  <li>Cluster dispersion</li>
+                  <li>Dominance ratio</li>
+                  <li>Inter-cluster distance</li>
+                </ul>
+              </div>
+              <div class="card acc-purple">
+                <div class="head-row"><span class="id">B.3</span><span class="badge">MiniLM-L6-v2</span></div>
+                <h3>Technical–Public Gap</h3>
+                <p>Distance between technical and public corpora.</p>
+                <ul>
+                  <li>Cosine distance (embeddings)</li>
+                  <li>Jaccard distance (lexical)</li>
+                  <li>Complexity differential</li>
+                </ul>
+              </div>
+              <div class="card acc-purple">
+                <div class="head-row"><span class="id">B.4</span><span class="badge">temporal</span></div>
+                <h3>Amplification Velocity</h3>
+                <p>Who speaks first, how fast, how late institutions arrive.</p>
+                <ul>
+                  <li>Information-void duration</li>
+                  <li>Early non-institutional ratio</li>
+                  <li>Peak velocity · institutional lag</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:baseline; font-family:var(--mono); font-size:7pt; letter-spacing:0.1em; color:var(--ink-3);">
+              <span>OUTPUT</span>
+              <span style="color:var(--purple); font-weight:600; font-size:9.4pt; letter-spacing:0.02em;">IVA = mean(B.1…B.4) ∈ [0, 1]</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- external services -->
+        <div class="ext-strip">
+          <div class="ext-tag">
+            <span class="nm">External</span>
+            services
+          </div>
+          <div class="ext-grid">
+            <div class="ext">
+              <div class="lab">LLM API · attribution extraction</div>
+              <h5>Claude / Ollama</h5>
+              <p>Structured extraction of attribution claims, actor mentions and confidence qualifiers.</p>
+            </div>
+            <div class="ext">
+              <div class="lab">Python stack · NLP &amp; ML</div>
+              <h5>BERTopic · sentence-transformers · scikit-learn</h5>
+              <p>Topic modelling, embeddings (all-MiniLM-L6-v2), distance metrics, sensitivity analysis.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- connector -->
+    <div class="conn">
+      <svg viewBox="0 0 600 38" preserveAspectRatio="none">
+        <defs>
+          <marker id="ar-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#b07a0a"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="2" x2="300" y2="32" stroke="#b07a0a" stroke-width="0.8" marker-end="url(#ar-amber)"/>
+      </svg>
+      <div class="lab">TCI · IVA</div>
+    </div>
+
+    <!-- LAYER 3 — INTEGRATION -->
+    <section class="layer l-cidi">
+      <div class="layer-tag">
+        <span class="num">Layer 03</span>
+        <span class="nm">Integration</span>
+        <span class="accent"></span>
+      </div>
+      <div class="layer-body">
+        <div class="card acc-amber tinted">
+          <div class="head-row">
+            <span class="id">INT.01 · CIDI</span>
+            <span class="badge">composite scalar</span>
+          </div>
+          <h3>Cyber-Interpretive Disruption Index</h3>
+          <p>Weighted composition of the technical complexity signal and the interpretive-void aggregate; a single, case-comparable scalar.</p>
+          <div class="formula">
+            CIDI &nbsp;=&nbsp; <span class="tci">0.40 × TCI</span> &nbsp;+&nbsp; <span class="iva">0.60 × IVA</span> &nbsp;→&nbsp; <span class="out">[0, 1]</span>
+          </div>
+          <div class="sens">
+            <div class="sens-note">
+              <div class="lab">Sensitivity analysis</div>
+              <p>Grid sweep over w<sub>TCI</sub> ∈ [0.2, 0.6] tests the stability of case rankings under alternative TCI / IVA balances; robustness band reported per case.</p>
+            </div>
+            <div class="sens-note">
+              <div class="lab">Comparator</div>
+              <p>Side-by-side CIDI decomposition for the three cases, with module-level deltas (B.1–B.4) and cross-case z-scores for the discussion chapter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- connector -->
+    <div class="conn">
+      <svg viewBox="0 0 600 38" preserveAspectRatio="none">
+        <defs>
+          <marker id="ar-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2f8a5b"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="2" x2="300" y2="32" stroke="#2f8a5b" stroke-width="0.8" marker-end="url(#ar-green)"/>
+      </svg>
+      <div class="lab">indexed cases</div>
+    </div>
+
+    <!-- LAYER 4 — OUTPUT -->
+    <section class="layer l-out">
+      <div class="layer-tag">
+        <span class="num">Layer 04</span>
+        <span class="nm">Output</span>
+        <span class="accent"></span>
+      </div>
+      <div class="layer-body">
+        <div class="out-grid">
+          <div class="case">
+            <div class="yr">2017</div>
+            <div class="nm">NotPetya</div>
+            <div class="meta">global wiper · NATO attribution</div>
+          </div>
+          <div class="case">
+            <div class="yr">2024</div>
+            <div class="nm">PAP Hack</div>
+            <div class="meta">state-press intrusion · PL</div>
+          </div>
+          <div class="case">
+            <div class="yr">2024 – 2025</div>
+            <div class="nm">Romania Election Crisis</div>
+            <div class="meta">election-cycle disinformation · RO</div>
+          </div>
+        </div>
+
+        <div class="answer">
+          <div class="icon">RQ</div>
+          <div>
+            <h4>Empirical Answer to the Research Question</h4>
+            <p>Comparative CIDI evidence, discussed against the literature: hypothesis verdict, boundary conditions, limitations and further work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- caption -->
+  <div class="caption">
+    <div class="fig">
+      <b>Figure 1</b> — <i>CIDF Architecture: from corpus ingestion to empirical output.</i>
+      Four-layer pipeline (Input → Processing → Integration → Output). The Processing layer runs two parallel tracks (TCI, IVA) whose outputs are linearly combined in the CIDI composite index (Eq. INT.01) and instantiated on three case studies.
+    </div>
+    <div class="pg">CIDF · v1.0</div>
+  </div>
+
+</div>
+
+</body>
+</html>
