@@ -18,6 +18,14 @@ The CIDF operationalizes this relationship through three integrated instruments:
 
 ---
 
+## Framework Architecture
+
+![CIDF Architecture — Figure 1](docs/figures/Figure_1___CIDF_Architecture.png)
+
+*Figure 1 — CIDF Architecture: from corpus ingestion to empirical output.*
+
+---
+
 ## Components
 
 ### TCI — Technical Complexity Index
