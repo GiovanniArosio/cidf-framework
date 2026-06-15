@@ -1,0 +1,18 @@
+{
+  "case": "PAP Hack",
+  "date": "2024-05-31",
+  "source": "PAP official communications + Reuters + Cybernews + Secfense analysis",
+  "tactics": [
+    "TA0001 Initial Access",
+    "TA0002 Execution",
+    "TA0005 Defense Evasion",
+    "TA0040 Impact"
+  ],
+  "techniques": [
+    "T1078 Valid Accounts",
+    "T1565.002 Data Manipulation Transmitted Data"
+  ],
+  "stealth": 0.5,
+  "persistence": false,
+  "lateral_movement": false
+}
