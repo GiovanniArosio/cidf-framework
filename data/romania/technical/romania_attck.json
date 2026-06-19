@@ -1,0 +1,28 @@
+{
+  "case_id": "romania_election_2024",
+  "case_name": "Romania Presidential Election Crisis",
+  "date": "2024-11-20",
+  "sources": [
+    "CSAT Declassified Intelligence Report (November 2024)",
+    "Romanian SRI/SIE Intelligence Summaries",
+    "European Commission DSA Request to TikTok (2024)",
+    "Agerpres investigative reporting on CSAT documents"
+  ],
+  "tactics": [
+    "TA0043 Reconnaissance",
+    "TA0042 Resource Development",
+    "TA0001 Initial Access",
+    "TA0005 Defense Evasion"
+  ],
+  "techniques": [
+    "T1593.001 Search Social Media",
+    "T1585.001 Establish Social Media Accounts",
+    "T1586.001 Compromise Social Media Accounts",
+    "T1190 Exploit Public-Facing Application",
+    "T1566.003 Spearphishing via Service",
+    "T1090 Proxy"
+  ],
+  "stealth": 0.80,
+  "persistence": true,
+  "lateral_movement": false
+}
