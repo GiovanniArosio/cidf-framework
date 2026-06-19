@@ -1,0 +1,9 @@
+{
+  "doc_id": "romania_tech_002",
+  "case": "romania_election_2024",
+  "source_type": "technical",
+  "source_name": "TikTok Technical Transparency Report",
+  "date": "2024-12-15",
+  "text": "TikTok identified a network of 27,217 fake accounts operating coordinated inauthentic behavior to promote Georgescu and AUR party during the Romanian election period. The network exploited TikToks monetization and recommendation algorithm through undisclosed paid promotion totaling approximately 362,500 euros routed through the platform. A fake engagement provider supplied coordinated comment networks generating over 2.1 million inauthentic comments. The operation used dormant accounts created in 2016 and rapidly activated before the election, a technique consistent with pre-positioned influence operation infrastructure.",
+  "url": "https://www.tiktok.com/transparency/romania-election-technical-report"
+}

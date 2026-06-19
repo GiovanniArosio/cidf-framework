@@ -1,0 +1,9 @@
+{
+  "doc_id": "romania_tech_001",
+  "case": "romania_election_2024",
+  "source_type": "technical",
+  "source_name": "Romanian SRI Technical Assessment",
+  "date": "2024-12-04",
+  "text": "Romanian intelligence identified coordinated inauthentic behavior on TikTok involving a network of over 25,000 accounts activated two weeks before the November 2024 election. The network used Turkish IP addresses and Russian email services for account creation, consistent with troll farm infrastructure. Coordination occurred via Telegram channels using operational security measures typical of state-sponsored actors. Parallel cyber operations involved 85,000 SQL injection and cross-site scripting attempts against electoral IT infrastructure from 33 countries using advanced anonymization including proxies and VPNs.",
+  "url": "https://sri.ro/technical-assessment-romania-election-2024"
+}

@@ -1,0 +1,9 @@
+{
+  "doc_id": "pap_tech_001",
+  "case": "pap_hack",
+  "source_type": "technical",
+  "source_name": "Secfense / Cybernews Analysis",
+  "date": "2024-06-01",
+  "text": "The PAP hack involved unauthorized access to the Polish Press Agency content management system via compromised credentials, classified as a valid accounts attack under MITRE ATT&CK T1078. The attacker injected false content directly into the PAP newswire using existing authenticated sessions, bypassing standard editorial controls. The attack vector was low-sophistication but high-impact: no malware was deployed, no lateral movement occurred, and no persistence mechanism was established. The false dispatch was published twice suggesting the attacker retained temporary access to the CMS before being locked out.",
+  "url": "https://cybernews.com/security/pap-hack-technical-analysis"
+}

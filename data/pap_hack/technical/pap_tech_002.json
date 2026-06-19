@@ -1,0 +1,9 @@
+{
+  "doc_id": "pap_tech_002",
+  "case": "pap_hack",
+  "source_type": "technical",
+  "source_name": "PAP Internal Security Statement",
+  "date": "2024-06-03",
+  "text": "PAP identified and blocked the exploit used to introduce the false message into the PAP news service. The attack involved data manipulation of transmitted data classified as T1565.002 under MITRE ATT&CK impact techniques. The agency confirmed a hacking attack on its servers and identified the source of the leaked credentials used to publish two texts with false information. The content injection technique exploited authentication weaknesses in the CMS rather than deploying persistent malware or establishing network backdoors.",
+  "url": "https://www.pap.pl/en/news/pap-technical-statement-june3"
+}
