@@ -1,0 +1,9 @@
+{
+  "doc_id": "notpetya_pub_006",
+  "case": "notpetya",
+  "source_type": "institutional",
+  "source_name": "US-CERT",
+  "date": "2017-07-01",
+  "text": "Alert TA17-181A: Petya Ransomware. US-CERT issued technical indicators and mitigation advice for the Petya ransomware outbreak affecting systems globally. The alert focused on mitigation rather than attribution, reflecting the initial criminal ransomware framing. Organizations were advised to apply patches for EternalBlue and disable SMBv1.",
+  "url": "https://www.cisa.gov/news-events/alerts/2017/07/01/petya-ransomware"
+}

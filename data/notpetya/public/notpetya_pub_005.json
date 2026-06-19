@@ -1,0 +1,9 @@
+{
+  "doc_id": "notpetya_pub_005",
+  "case": "notpetya",
+  "source_type": "technical",
+  "source_name": "Cisco Talos",
+  "date": "2017-07-05",
+  "text": "Nyetya ransomware took the world by storm in June 2017. The outbreak was tied to a supply-chain compromise of the Ukrainian tax software M.E.Doc. The campaign was destructive and geopolitically motivated, using EternalBlue for lateral movement and targeting Ukrainian infrastructure while causing global collateral damage.",
+  "url": "https://blog.talosintelligence.com/2017/07/the-medoc-connection.html"
+}
