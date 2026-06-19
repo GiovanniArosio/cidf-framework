@@ -1,0 +1,9 @@
+{
+  "doc_id": "notpetya_tech_001",
+  "case": "notpetya",
+  "source_type": "technical",
+  "source_name": "Cisco Talos",
+  "date": "2017-07-05",
+  "text": "Nyetya is a destructive malware that took the world by storm in June 2017. The outbreak was tied to a supply-chain compromise of the Ukrainian accounting software M.E.Doc via a backdoored update mechanism. The malware used EternalBlue and EternalRomance SMB exploits for lateral movement, credential dumping via LSASS, and Mimikatz for credential harvesting. It overwrote the Master Boot Record rendering systems unbootable. The campaign was destructive and geopolitically motivated, not financially driven despite displaying a ransom note.",
+  "url": "https://blog.talosintelligence.com/2017/07/the-medoc-connection.html"
+}

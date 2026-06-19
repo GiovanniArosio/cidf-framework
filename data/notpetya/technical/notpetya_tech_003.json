@@ -1,0 +1,9 @@
+{
+  "doc_id": "notpetya_tech_003",
+  "case": "notpetya",
+  "source_type": "technical",
+  "source_name": "SentinelOne",
+  "date": "2017-06-30",
+  "text": "While NotPetya shows characteristics similar to ransomware it is more akin to a wiper which is generally regarded as malware responsible for destroying data on the target hard disk. The malware propagates using EternalBlue exploit for SMBv1 vulnerabilities and uses credential dumping to spread laterally across networks using Windows Management Instrumentation and PsExec. The encryption routine does not store the information needed for decryption confirming it was designed for destruction not financial gain.",
+  "url": "https://www.sentinelone.com/blog/dissecting-notpetya"
+}
