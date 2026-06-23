@@ -185,7 +185,7 @@ if __name__ == "__main__":
     cases = [
         ("notpetya", "data/notpetya/public", "2017-06-27"),
         ("pap_hack", "data/pap_hack/public", "2024-05-31"),
-        ("romania", "data/romania/public", "2024-11-24"),
+        ("kasat_viasat", "data/kasat_viasat/public", "2022-02-24"),
     ]
     for name, path, date in cases:
         score = calculate_amplification_velocity(path, date)

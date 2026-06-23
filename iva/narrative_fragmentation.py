@@ -128,7 +128,7 @@ if __name__ == "__main__":
     cases = [
         ("notpetya", "data/notpetya/public"),
         ("pap_hack", "data/pap_hack/public"),
-        ("romania",  "data/romania/public"),
+        ("kasat_viasat", "data/kasat_viasat/public"),
     ]
     for name, path in cases:
         score = calculate_narrative_fragmentation(path)
