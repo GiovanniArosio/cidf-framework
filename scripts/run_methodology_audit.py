@@ -48,7 +48,10 @@ sys.path.insert(0, str(ROOT))
 from tci.tci_calculator import analyze_tci, calculate_tci  # noqa: E402
 from iva.attribution_drift import analyze_attribution_drift  # noqa: E402
 from iva.amplification_velocity import analyze_response_timing  # noqa: E402
-from cidi.cidi_integrator import compute_cidi  # noqa: E402
+from cidi.cidi_integrator import (  # noqa: E402
+    CORE_SCENARIOS, EXTENDED_SCENARIOS, core_interpretive_vector,
+    run_cidi_scenario,
+)
 from scripts.validate_corpus import discover, build_summary  # noqa: E402
 
 ACTIVE_CASES = {
@@ -118,16 +121,8 @@ def run_tpg(case: str, skip_embeddings: bool) -> dict:
         return {"status": f"diagnostic error: {exc}", "included_in_aggregate": False}
 
 
-def maybe_cidi(tci: dict, attribution: dict, narrative: dict, response: dict) -> dict:
-    """Compute CIDI only when prerequisites exist; otherwise withhold."""
-    tci_value = tci.get("evidence_adjusted_score")
-    if tci_value is None:
-        return {"available": False,
-                "reason": "CIDI withheld: TCI evidence-adjusted score undefined "
-                          "(no documented components).",
-                "cidi": None}
-
-    iva_components = {
+def _iva_components(attribution: dict, narrative: dict, response: dict) -> dict:
+    return {
         "attribution_drift": (
             attribution.get("composite_score") if attribution.get("available") else None
         ),
@@ -138,12 +133,74 @@ def maybe_cidi(tci: dict, attribution: dict, narrative: dict, response: dict) ->
             response.get("proxy_score") if response.get("available") else None
         ),
     }
-    return compute_cidi(
-        tci_value,
-        iva_components,
-        tci_evidence_coverage=tci.get("evidence_coverage"),
-        tci_score_kind="evidence_adjusted",
-    )
+
+
+def cidi_for_case(tci: dict, attribution: dict, narrative: dict, response: dict) -> dict:
+    """Compute IVC_core and all Core + Extended CIDI scenarios for one case.
+
+    There is deliberately no single ``cidi`` field. Extended scenarios are
+    withheld (not imputed) wherever the Response Timing Proxy is unavailable.
+    """
+    tci_value = tci.get("evidence_adjusted_score")
+    coverage = tci.get("evidence_coverage")
+    components = _iva_components(attribution, narrative, response)
+
+    ivc_core = core_interpretive_vector(components)
+
+    core = {
+        sc.name: run_cidi_scenario(
+            sc, tci_value=tci_value, tci_score_kind="evidence_adjusted",
+            tci_evidence_coverage=coverage, iva_components=components)
+        for sc in CORE_SCENARIOS
+    }
+    extended = {
+        sc.name: run_cidi_scenario(
+            sc, tci_value=tci_value, tci_score_kind="evidence_adjusted",
+            tci_evidence_coverage=coverage, iva_components=components)
+        for sc in EXTENDED_SCENARIOS
+    }
+    return {
+        "tci_score_kind": "evidence_adjusted",
+        "tci_value": tci_value,
+        "tci_evidence_coverage": coverage,
+        "ivc_core": ivc_core["aggregate_score"] if ivc_core["available"] else None,
+        "ivc_core_detail": ivc_core,
+        "cidi_core_scenarios": core,
+        "cidi_extended_scenarios": extended,
+    }
+
+
+def _scenario_ranking(cases: dict, scenarios) -> dict:
+    """Descriptive ordering of cases per scenario + whether it is stable.
+
+    Cases whose CIDI is unavailable for a scenario are excluded from that
+    scenario's ordering. Stability is reported only over the cases actually
+    available; no claim is made beyond them.
+    """
+    key = f"cidi_{scenarios[0].model_type}_scenarios"
+    orderings: dict[str, list[str]] = {}
+    for sc in scenarios:
+        scored = []
+        for c in cases.values():
+            res = c["cidi_synthesis"][key][sc.name]
+            if res.get("available"):
+                scored.append((c["label"], res["cidi"]))
+        # Descending CIDI; deterministic label tie-break.
+        scored.sort(key=lambda x: (-x[1], x[0]))
+        orderings[sc.name] = [label for label, _ in scored]
+
+    included = sorted({lbl for order in orderings.values() for lbl in order})
+    distinct = {tuple(v) for v in orderings.values()}
+    stable = len(distinct) == 1
+    return {
+        "model_type": scenarios[0].model_type,
+        "cases_included": included,
+        "orderings": orderings,
+        "ranking_stable": stable,
+        "note": "Descriptive ordering across weighting scenarios for the cases "
+                "with available scores only. No causal or out-of-sample claim is "
+                "made.",
+    }
 
 
 def build_results(skip_embeddings: bool) -> dict:
@@ -155,7 +212,6 @@ def build_results(skip_embeddings: bool) -> dict:
         narrative = run_narrative(case, skip_embeddings)
         response = run_response_timing(case)
         tpg = run_tpg(case, skip_embeddings)
-        cidi = maybe_cidi(tci, attribution, narrative, response)
         cases[case] = {
             "label": meta["label"],
             "crisis_date": meta["crisis_date"],
@@ -166,7 +222,7 @@ def build_results(skip_embeddings: bool) -> dict:
                 "response_timing_proxy": response,
                 "technical_public_gap_diagnostic": tpg,
             },
-            "cidi_exploratory": cidi,
+            "cidi_synthesis": cidi_for_case(tci, attribution, narrative, response),
         }
 
     return {
@@ -175,13 +231,21 @@ def build_results(skip_embeddings: bool) -> dict:
         "excluded_cases": ["romania (archived under data/_excluded_cases)"],
         "validation": validation,
         "cases": cases,
+        "core_ranking_stability": _scenario_ranking(cases, CORE_SCENARIOS),
+        "extended_ranking_stability": _scenario_ranking(cases, EXTENDED_SCENARIOS),
         "notes": [
-            "Technical–Public Gap is an exploratory diagnostic and is excluded "
-            "from every aggregate and from CIDI.",
-            "CIDI is an optional exploratory synthesis, not the primary result.",
+            "CIDI is a scenario-based exploratory synthesis, not a primary "
+            "inferential result; no unique validated weighting is claimed.",
+            "Technical–Public Gap is an exploratory diagnostic, excluded from "
+            "every aggregate and from every CIDI formula.",
+            "Response Timing Proxy is unavailable for KA-SAT and is never "
+            "imputed; Extended CIDI is therefore unavailable for KA-SAT.",
+            "Evidence coverage is shown alongside scores but never folded into "
+            "them.",
             "The corpus consists of curated, source-derived analytical summaries "
-            "(~15/case), not raw articles or the full public sphere.",
-            "No final ranked conclusion is asserted; see coverage and warnings.",
+            "(~14-15/case), not raw articles or the full public sphere.",
+            "All outputs are exploratory, corpus-bound and non-causal; no final "
+            "ranked conclusion is asserted beyond the three available cases.",
         ],
     }
 
@@ -255,18 +319,68 @@ def write_summary(results: dict, out_path: Path) -> None:
         tpg = c["iva"]["technical_public_gap_diagnostic"]
         comps = tpg.get("components")
         if comps:
-            L.append(f"- Technical–Public Gap (DIAGNOSTIC ONLY, excluded from "
-                     f"aggregates): cosine {_fmt(comps['cosine_distance'])}, "
+            L.append(f"- Technical–Public Gap (DIAGNOSTIC ONLY, never a CIDI/IVA "
+                     f"input): cosine {_fmt(comps['cosine_distance'])}, "
                      f"jaccard {_fmt(comps['jaccard_distance'])}")
         else:
             L.append(f"- Technical–Public Gap (DIAGNOSTIC ONLY): {tpg.get('status')}")
-        cidi = c["cidi_exploratory"]
-        if cidi.get("available"):
-            L.append(f"- CIDI (exploratory synthesis): {_fmt(cidi['cidi'])} "
-                     f"[not a primary result]")
-        else:
-            L.append(f"- CIDI: WITHHELD — {cidi.get('reason')}")
+        L.append(f"- IVC_core (0.5·AttrDrift + 0.5·NarrFrag): "
+                 f"{_fmt(c['cidi_synthesis']['ivc_core'])}")
         L.append("")
+
+    # --- Core CIDI scenarios (primary comparative synthesis) ---
+    L.append("## CIDI Core scenarios (exploratory synthesis — not a primary "
+             "inferential result)")
+    L.append("TCI input = evidence-adjusted score; evidence coverage is a "
+             "separate caveat, never folded in.")
+    L.append("| Case | core_neutral (0.5/0.5) | core_interpretive (0.4/0.6) | "
+             "core_technical (0.6/0.4) | (coverage caveat) |")
+    L.append("|---|---|---|---|---|")
+    for c in results["cases"].values():
+        sc = c["cidi_synthesis"]["cidi_core_scenarios"]
+        L.append(
+            f"| {c['label']} | {_fmt(sc['core_neutral'].get('cidi'))} | "
+            f"{_fmt(sc['core_interpretive_prioritized'].get('cidi'))} | "
+            f"{_fmt(sc['core_technical_prioritized'].get('cidi'))} | "
+            f"cov {_fmt(c['cidi_synthesis']['tci_evidence_coverage'],2)} |")
+    L.append("")
+
+    # --- Extended CIDI scenarios (supplementary) ---
+    L.append("## CIDI Extended scenarios (supplementary; includes Response "
+             "Timing Proxy)")
+    L.append("Extended scores are NOT comparable across cases when timing data "
+             "is unavailable.")
+    L.append("| Case | extended_neutral | extended_interpretive | "
+             "extended_technical | status |")
+    L.append("|---|---|---|---|---|")
+    for c in results["cases"].values():
+        sc = c["cidi_synthesis"]["cidi_extended_scenarios"]
+        n = sc["extended_neutral"]
+        if n.get("available"):
+            L.append(
+                f"| {c['label']} | {_fmt(n['cidi'])} | "
+                f"{_fmt(sc['extended_interpretive_prioritized'].get('cidi'))} | "
+                f"{_fmt(sc['extended_technical_prioritized'].get('cidi'))} | "
+                f"available |")
+        else:
+            L.append(f"| {c['label']} | — | — | — | UNAVAILABLE: {n.get('reason')} |")
+    L.append("")
+
+    # --- Ranking robustness ---
+    def _ranking_block(title: str, rk: dict) -> None:
+        L.append(f"### {title}")
+        L.append(f"- cases included: {', '.join(rk['cases_included']) or '(none)'}")
+        for scen, order in rk["orderings"].items():
+            L.append(f"- {scen}: {' > '.join(order) if order else '(none)'}")
+        L.append(f"- ranking stable across scenarios: "
+                 f"**{'YES' if rk['ranking_stable'] else 'NO'}**")
+        L.append(f"- {rk['note']}")
+        L.append("")
+
+    L.append("## Ranking robustness")
+    _ranking_block("Core scenarios", results["core_ranking_stability"])
+    _ranking_block("Extended scenarios (available cases only)",
+                   results["extended_ranking_stability"])
 
     L.append("## Methodological limitations")
     for n in results["notes"]:

@@ -149,21 +149,72 @@ for c in cases.values():
             st.caption(tpg.get("status", "n/a"))
 
 # --------------------------------------------------------------------------
-# 3) Optional exploratory CIDI synthesis (NOT primary)
+# 3) CIDI Core scenarios (primary comparative synthesis — but scenario-based)
 # --------------------------------------------------------------------------
-st.header("3 · CIDI — optional exploratory synthesis (not the primary result)")
-st.caption("Withheld whenever a required IVA component is unavailable or the "
-           "TCI evidence-adjusted score is undefined.")
-cidi_rows = []
-for c in cases.values():
-    cidi = c["cidi_exploratory"]
-    cidi_rows.append({
+st.header("3 · CIDI Core — scenario-based synthesis (no single definitive value)")
+st.caption("CIDI is a scenario-based exploratory synthesis, not a primary "
+           "inferential result. IVC_core = 0.5·Attribution Drift + 0.5·Narrative "
+           "Fragmentation. TCI input = evidence-adjusted; coverage is a separate "
+           "caveat, never folded in.")
+
+
+def _core_row(c):
+    sc = c["cidi_synthesis"]["cidi_core_scenarios"]
+    return {
         "Case": c["label"],
-        "CIDI (exploratory)": _fmt(cidi.get("cidi")) if cidi.get("available")
-        else "WITHHELD",
-        "Status": "computed" if cidi.get("available") else cidi.get("reason", ""),
-    })
-st.dataframe(pd.DataFrame(cidi_rows).set_index("Case"), use_container_width=True)
+        "IVC_core": c["cidi_synthesis"]["ivc_core"],
+        "core_neutral (0.5/0.5)": sc["core_neutral"].get("cidi"),
+        "core_interpretive (0.4/0.6)": sc["core_interpretive_prioritized"].get("cidi"),
+        "core_technical (0.6/0.4)": sc["core_technical_prioritized"].get("cidi"),
+        "TCI coverage (caveat)": c["cidi_synthesis"]["tci_evidence_coverage"],
+    }
+
+
+core_df = pd.DataFrame([_core_row(c) for c in cases.values()]).set_index("Case")
+st.dataframe(core_df.style.format("{:.3f}"), use_container_width=True)
+
+rk = results["core_ranking_stability"]
+order_lines = "\n".join(f"- **{s}**: {' > '.join(o)}"
+                        for s, o in rk["orderings"].items())
+st.markdown(f"**Core ranking** (descriptive, no causal claim):\n\n{order_lines}")
+if rk["ranking_stable"]:
+    st.success("Core ranking is STABLE across all three Core weighting scenarios.")
+else:
+    st.warning("Core ranking CHANGES across Core weighting scenarios.")
+
+# --------------------------------------------------------------------------
+# 4) CIDI Extended scenarios (supplementary)
+# --------------------------------------------------------------------------
+st.header("4 · CIDI Extended — supplementary (includes Response Timing Proxy)")
+st.warning("Extended scores are **not comparable across cases** when timing data "
+           "is unavailable. The Response Timing Proxy is unavailable for KA-SAT "
+           "and is never imputed, so KA-SAT has no Extended CIDI.")
+
+
+def _ext_row(c):
+    sc = c["cidi_synthesis"]["cidi_extended_scenarios"]
+    n = sc["extended_neutral"]
+    if not n.get("available"):
+        return {"Case": c["label"], "extended_neutral": "UNAVAILABLE",
+                "extended_interpretive": "UNAVAILABLE",
+                "extended_technical": "UNAVAILABLE", "status": n.get("reason", "")}
+    return {
+        "Case": c["label"],
+        "extended_neutral": _fmt(n.get("cidi")),
+        "extended_interpretive": _fmt(sc["extended_interpretive_prioritized"].get("cidi")),
+        "extended_technical": _fmt(sc["extended_technical_prioritized"].get("cidi")),
+        "status": "available",
+    }
+
+
+st.dataframe(pd.DataFrame([_ext_row(c) for c in cases.values()]).set_index("Case"),
+             use_container_width=True)
+ext = results["extended_ranking_stability"]
+if ext["cases_included"]:
+    ext_lines = "\n".join(f"- **{s}**: {' > '.join(o)}"
+                          for s, o in ext["orderings"].items())
+    st.markdown(f"**Extended ranking** (available cases only — "
+                f"{', '.join(ext['cases_included'])}):\n\n{ext_lines}")
 
 st.divider()
 st.subheader("Methodological limitations")

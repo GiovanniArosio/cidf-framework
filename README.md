@@ -24,6 +24,8 @@ The CIDF operationalizes this relationship through three integrated instruments:
 
 *Figure 1 — CIDF Architecture: from corpus ingestion to empirical output.*
 
+> Note: Figure 1 predates the scenario-based CIDI revision and still shows the single `CIDI = 0.40 × TCI + 0.60 × IVA` formula. The authoritative, current CIDI definition is the two-level scenario-based synthesis described below and in `docs/methodology_hardening_report.md`.
+
 ---
 
 ## Components
@@ -38,10 +40,25 @@ A set of NLP instruments measuring communicative disruption — reported **indiv
 - **Mainstream–Institutional Response Timing Proxy** — relative timing/concentration of sampled mainstream vs institutional documents (formerly "Amplification Velocity"). Exploratory; corpus-bound; returns an explicit unavailable state when early-window evidence is insufficient.
 - **Technical–Public Gap** — semantic/lexical/length distance between technical and public summaries. **Diagnostic only** — excluded from every aggregate.
 
-### CIDI — Cyber-Interpretive Disruption Index (optional, exploratory)
-An **optional, exploratory** synthesis (CIDI = 0.40 × TCI + 0.60 × IVA), **not** the primary result. It is computed only when valid inputs exist and is withheld when any required IVA component is unavailable. The asymmetric weighting is a modelling choice reflecting the thesis's argument that the interpretive dimension carries greater analytical weight — not an empirical finding.
+### CIDI — Cyber-Interpretive Disruption Index (scenario-based synthesis)
+CIDI is a **scenario-based exploratory synthesis rather than a primary inferential result**. Its purpose is to summarize alternative, transparent modelling choices *after* the substantive comparison of evidence-aware TCI and individual IVA components. **No unique empirically validated weighting structure is claimed**, and no single value is presented as "the" CIDI. It has two levels:
 
-> **Primary result architecture:** (1) evidence-aware TCI, (2) individual IVA components, (3) transparent case comparison, (4) optional exploratory CIDI as a supplementary synthesis only.
+- **CIDI Core** (primary comparative synthesis, available for all three cases) — combines evidence-adjusted TCI with the *Core Interpretive Vector*:
+  `IVC_core = 0.50 × Attribution Drift + 0.50 × Narrative Fragmentation`.
+  *The Core Interpretive Vector combines Attribution Drift and Narrative Fragmentation with equal weights because both directly represent instability in the attributional and narrative dimensions of the constructed corpus.*
+- **CIDI Extended** (supplementary, only where the Response Timing Proxy is available) — adds it at a lower weight:
+  `IVA_extended = 0.40 × Attribution Drift + 0.40 × Narrative Fragmentation + 0.20 × Response Timing Proxy`.
+  *The Extended Interpretive Vector incorporates the Response Timing Proxy with a lower weight because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability.*
+
+Each level is evaluated under three transparent weight scenarios — neutral (0.50/0.50), interpretive-prioritized (0.40/0.60), technical-prioritized (0.60/0.40) — reported as a **ranking-stability** comparison, not a point estimate.
+
+Explicit guarantees:
+- the **Technical–Public Gap diagnostic is excluded from every aggregate** and never enters a CIDI formula;
+- the **Response Timing Proxy is unavailable for KA-SAT and is never imputed**, so KA-SAT has **no Extended CIDI** (a valid data limitation);
+- **evidence coverage is shown alongside scores but never mathematically folded into them**;
+- all outputs remain exploratory, corpus-bound and non-causal.
+
+> **Primary result architecture:** (1) evidence-aware TCI, (2) individual IVA components, (3) transparent case comparison, (4) scenario-based CIDI Core + supplementary Extended as exploratory syntheses only.
 
 ---
 

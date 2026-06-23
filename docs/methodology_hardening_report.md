@@ -191,17 +191,55 @@ near-ceiling Jaccard warning and the standardized-summary caveat are emitted.
 On the active data the composite barely varied (≈0.48–0.49) — an artefact of
 near-ceiling lexical distance, not a finding.
 
-## 7. CIDI — de-emphasised and cleaned
+## 7. CIDI — scenario-based Core / Extended synthesis
 
-`cidi/cidi_integrator.py` no longer contains hard-coded NotPetya/PAP/Romania
-values and does not auto-run on defaults. `compute_cidi()` requires explicit,
-validated inputs, rejects the Technical–Public Gap diagnostic as an input, and
-**withholds** CIDI when any required IVA component is unavailable. Sensitivity is
-exposed but explicitly labelled as algebraic weight-sensitivity, not empirical
-robustness.
+`cidi/cidi_integrator.py` contains no hard-coded case values and never auto-runs
+on defaults. CIDI is a **scenario-based exploratory synthesis, not a primary
+inferential result; no unique empirically validated weighting structure is
+claimed**, and no single field is presented as "the" CIDI. Two levels:
 
-**Result (recomputed on corrected Attribution Drift).** NotPetya 0.537 and PAP
-0.274 (exploratory); **KA-SAT withheld** (response-timing proxy unavailable).
+* **CIDI Core** (all three cases) over the Core Interpretive Vector
+  `IVC_core = 0.50·Attribution Drift + 0.50·Narrative Fragmentation` — equal
+  weights because both directly represent attributional and narrative
+  instability in the constructed corpus.
+* **CIDI Extended** (only where the Response Timing Proxy is available) over
+  `IVA_extended = 0.40·Attribution Drift + 0.40·Narrative Fragmentation +
+  0.20·Response Timing Proxy` — the proxy enters at a lower weight because it
+  captures contextual temporal pressure, not an equivalent direct manifestation
+  of interpretive instability.
+
+Each level is evaluated under three transparent weight scenarios
+(neutral 0.50/0.50, interpretive-prioritized 0.40/0.60, technical-prioritized
+0.60/0.40). The TCI input is always the **evidence-adjusted** score; evidence
+coverage is shown as a separate caveat and **never folded into the score**.
+`calculate_weighted_iva()` rejects the Technical–Public Gap diagnostic, requires
+weights that sum to 1.0 and are defined for exactly the supplied components, and
+withholds (never imputes) when a required component is unavailable. There is no
+silent equal-weight aggregation.
+
+**Results (evidence-adjusted TCI; AttrDrift/NarrFrag from §2/§4):**
+
+IVC_core — NotPetya 0.469, KA-SAT 0.342, PAP 0.353.
+
+| Case | core_neutral | core_interpretive | core_technical |
+|---|---|---|---|
+| NotPetya | 0.565 | 0.546 | 0.585 |
+| KA-SAT | 0.446 | 0.425 | 0.467 |
+| PAP | 0.301 | 0.312 | 0.291 |
+
+**Core ranking is stable across all three scenarios: NotPetya > KA-SAT > PAP.**
+
+| Case | extended_neutral | extended_interpretive | extended_technical |
+|---|---|---|---|
+| NotPetya | 0.561 | 0.540 | 0.581 |
+| KA-SAT | — | — | — (unavailable: Response Timing Proxy not imputed) |
+| PAP | 0.283 | 0.289 | 0.276 |
+
+Extended ranking (available cases only): NotPetya > PAP, stable. **KA-SAT
+Extended CIDI is unavailable** because the Response Timing Proxy is unavailable —
+a valid data limitation, not a fallback. The audit output uses the keys
+`cidi_core_scenarios`, `cidi_extended_scenarios`, `core_ranking_stability`,
+`extended_ranking_stability` (never a single `cidi`).
 
 ## 8. Reproducibility
 

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-06-23T14:01:07.272584+00:00",
+  "generated_utc": "2026-06-23T14:19:08.954204+00:00",
   "active_cases": [
     "notpetya",
     "kasat_viasat",
@@ -363,58 +363,260 @@
           ]
         }
       },
-      "cidi_exploratory": {
-        "available": true,
-        "cidi": 0.5367938927993445,
-        "iva_aggregate": 0.45298982133224097,
-        "tci_value": 0.6625,
+      "cidi_synthesis": {
         "tci_score_kind": "evidence_adjusted",
+        "tci_value": 0.6625,
         "tci_evidence_coverage": 0.8,
-        "weights": {
-          "alpha": 0.4,
-          "beta": 0.6
+        "ivc_core": 0.4683736208872504,
+        "ivc_core_detail": {
+          "available": true,
+          "aggregate_score": 0.4683736208872504,
+          "components": {
+            "attribution_drift": 0.29092237442922375,
+            "narrative_fragmentation": 0.645824867345277
+          },
+          "weights": {
+            "attribution_drift": 0.5,
+            "narrative_fragmentation": 0.5
+          },
+          "scenario_name": "ivc_core",
+          "scenario_rationale": "Core Interpretive Vector (equal-weight Attribution Drift + Narrative Fragmentation).",
+          "warnings": [
+            "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+          ]
         },
-        "components_used": {
-          "attribution_drift": 0.29092237442922375,
-          "narrative_fragmentation": 0.645824867345277,
-          "response_timing_proxy": 0.4222222222222222
+        "cidi_core_scenarios": {
+          "core_neutral": {
+            "available": true,
+            "scenario_name": "core_neutral",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+            "cidi": 0.5654368104436251,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.5,
+              "beta": 0.5
+            },
+            "iva_aggregate": 0.4683736208872504,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4683736208872504,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_neutral",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_interpretive_prioritized": {
+            "available": true,
+            "scenario_name": "core_interpretive_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+            "cidi": 0.5460241725323502,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.4,
+              "beta": 0.6
+            },
+            "iva_aggregate": 0.4683736208872504,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4683736208872504,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_interpretive_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_technical_prioritized": {
+            "available": true,
+            "scenario_name": "core_technical_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+            "cidi": 0.5848494483549002,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.6,
+              "beta": 0.4
+            },
+            "iva_aggregate": 0.4683736208872504,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4683736208872504,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_technical_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          }
         },
-        "sensitivity": {
-          "alphas": [
-            0.2,
-            0.25,
-            0.3,
-            0.35,
-            0.4,
-            0.44999999999999996,
-            0.5,
-            0.55,
-            0.6
-          ],
-          "cidi_scores": [
-            0.4948918570657928,
-            0.5053673659991808,
-            0.5158428749325686,
-            0.5263183838659566,
-            0.5367938927993445,
-            0.5472694017327325,
-            0.5577449106661205,
-            0.5682204195995084,
-            0.5786959285328963
-          ],
-          "baseline_cidi": 0.5367938927993445,
-          "alpha_sensitivity_band": [
-            0.4948918570657928,
-            0.5786959285328963
-          ],
-          "band_width": 0.0838040714671035,
-          "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
-        },
-        "warnings": [
-          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only.",
-          "TCI input (evidence_adjusted) rests on evidence coverage 0.80; lower coverage means a less clean comparison.",
-          "Technical–Public Gap diagnostic is excluded from this aggregate."
-        ]
+        "cidi_extended_scenarios": {
+          "extended_neutral": {
+            "available": true,
+            "scenario_name": "extended_neutral",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+            "cidi": 0.5608216705771223,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.5,
+              "beta": 0.5
+            },
+            "iva_aggregate": 0.4591433411542447,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4591433411542447,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277,
+                "response_timing_proxy": 0.4222222222222222
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_neutral",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          },
+          "extended_interpretive_prioritized": {
+            "available": true,
+            "scenario_name": "extended_interpretive_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+            "cidi": 0.5404860046925468,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.4,
+              "beta": 0.6
+            },
+            "iva_aggregate": 0.4591433411542447,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4591433411542447,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277,
+                "response_timing_proxy": 0.4222222222222222
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_interpretive_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          },
+          "extended_technical_prioritized": {
+            "available": true,
+            "scenario_name": "extended_technical_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+            "cidi": 0.5811573364616979,
+            "tci_value": 0.6625,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.8,
+            "weights": {
+              "alpha": 0.6,
+              "beta": 0.4
+            },
+            "iva_aggregate": 0.4591433411542447,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.4591433411542447,
+              "components": {
+                "attribution_drift": 0.29092237442922375,
+                "narrative_fragmentation": 0.645824867345277,
+                "response_timing_proxy": 0.4222222222222222
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_technical_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.80; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          }
+        }
       }
     },
     "kasat_viasat": {
@@ -775,16 +977,236 @@
           ]
         }
       },
-      "cidi_exploratory": {
-        "available": false,
-        "reason": "CIDI withheld: unavailable IVA component(s): response_timing_proxy. No aggregation over missing components.",
-        "cidi": null,
-        "unavailable_components": [
-          "response_timing_proxy"
-        ],
-        "warnings": [
-          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only."
-        ]
+      "cidi_synthesis": {
+        "tci_score_kind": "evidence_adjusted",
+        "tci_value": 0.5499999999999999,
+        "tci_evidence_coverage": 0.6,
+        "ivc_core": 0.34177590027135807,
+        "ivc_core_detail": {
+          "available": true,
+          "aggregate_score": 0.34177590027135807,
+          "components": {
+            "attribution_drift": 0.17424934274249348,
+            "narrative_fragmentation": 0.5093024578002227
+          },
+          "weights": {
+            "attribution_drift": 0.5,
+            "narrative_fragmentation": 0.5
+          },
+          "scenario_name": "ivc_core",
+          "scenario_rationale": "Core Interpretive Vector (equal-weight Attribution Drift + Narrative Fragmentation).",
+          "warnings": [
+            "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+          ]
+        },
+        "cidi_core_scenarios": {
+          "core_neutral": {
+            "available": true,
+            "scenario_name": "core_neutral",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+            "cidi": 0.445887950135679,
+            "tci_value": 0.5499999999999999,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.6,
+            "weights": {
+              "alpha": 0.5,
+              "beta": 0.5
+            },
+            "iva_aggregate": 0.34177590027135807,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.34177590027135807,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_neutral",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.60; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_interpretive_prioritized": {
+            "available": true,
+            "scenario_name": "core_interpretive_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+            "cidi": 0.42506554016281484,
+            "tci_value": 0.5499999999999999,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.6,
+            "weights": {
+              "alpha": 0.4,
+              "beta": 0.6
+            },
+            "iva_aggregate": 0.34177590027135807,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.34177590027135807,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_interpretive_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.60; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_technical_prioritized": {
+            "available": true,
+            "scenario_name": "core_technical_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+            "cidi": 0.46671036010854317,
+            "tci_value": 0.5499999999999999,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.6,
+            "weights": {
+              "alpha": 0.6,
+              "beta": 0.4
+            },
+            "iva_aggregate": 0.34177590027135807,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.34177590027135807,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_technical_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.60; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          }
+        },
+        "cidi_extended_scenarios": {
+          "extended_neutral": {
+            "available": false,
+            "scenario_name": "extended_neutral",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+            "cidi": null,
+            "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+            "iva": {
+              "available": false,
+              "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+              "aggregate_score": null,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227,
+                "response_timing_proxy": null
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_neutral",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+            ],
+            "model_type": "extended"
+          },
+          "extended_interpretive_prioritized": {
+            "available": false,
+            "scenario_name": "extended_interpretive_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+            "cidi": null,
+            "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+            "iva": {
+              "available": false,
+              "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+              "aggregate_score": null,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227,
+                "response_timing_proxy": null
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_interpretive_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+            ],
+            "model_type": "extended"
+          },
+          "extended_technical_prioritized": {
+            "available": false,
+            "scenario_name": "extended_technical_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+            "cidi": null,
+            "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+            "iva": {
+              "available": false,
+              "reason": "unavailable component(s): response_timing_proxy (not imputed).",
+              "aggregate_score": null,
+              "components": {
+                "attribution_drift": 0.17424934274249348,
+                "narrative_fragmentation": 0.5093024578002227,
+                "response_timing_proxy": null
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_technical_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+            ],
+            "model_type": "extended"
+          }
+        }
       }
     },
     "pap_hack": {
@@ -1151,65 +1573,319 @@
           ]
         }
       },
-      "cidi_exploratory": {
-        "available": true,
-        "cidi": 0.27435633785823643,
-        "iva_aggregate": 0.29059389643039407,
-        "tci_value": 0.25,
+      "cidi_synthesis": {
         "tci_score_kind": "evidence_adjusted",
+        "tci_value": 0.25,
         "tci_evidence_coverage": 0.4,
-        "weights": {
-          "alpha": 0.4,
-          "beta": 0.6
+        "ivc_core": 0.3525575113122578,
+        "ivc_core_detail": {
+          "available": true,
+          "aggregate_score": 0.3525575113122578,
+          "components": {
+            "attribution_drift": 0.11032048706240485,
+            "narrative_fragmentation": 0.5947945355621108
+          },
+          "weights": {
+            "attribution_drift": 0.5,
+            "narrative_fragmentation": 0.5
+          },
+          "scenario_name": "ivc_core",
+          "scenario_rationale": "Core Interpretive Vector (equal-weight Attribution Drift + Narrative Fragmentation).",
+          "warnings": [
+            "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+          ]
         },
-        "components_used": {
-          "attribution_drift": 0.11032048706240485,
-          "narrative_fragmentation": 0.5947945355621108,
-          "response_timing_proxy": 0.16666666666666666
+        "cidi_core_scenarios": {
+          "core_neutral": {
+            "available": true,
+            "scenario_name": "core_neutral",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+            "cidi": 0.30127875565612894,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.5,
+              "beta": 0.5
+            },
+            "iva_aggregate": 0.3525575113122578,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.3525575113122578,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_neutral",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Neutral 0.50/0.50 split of TCI vs IVC_core.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_interpretive_prioritized": {
+            "available": true,
+            "scenario_name": "core_interpretive_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+            "cidi": 0.3115345067873547,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.4,
+              "beta": 0.6
+            },
+            "iva_aggregate": 0.3525575113122578,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.3525575113122578,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_interpretive_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Interpretive-prioritized 0.40/0.60 (thesis argument, not an empirical finding).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          },
+          "core_technical_prioritized": {
+            "available": true,
+            "scenario_name": "core_technical_prioritized",
+            "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+            "cidi": 0.29102300452490315,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.6,
+              "beta": 0.4
+            },
+            "iva_aggregate": 0.3525575113122578,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.3525575113122578,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108
+              },
+              "weights": {
+                "attribution_drift": 0.5,
+                "narrative_fragmentation": 0.5
+              },
+              "scenario_name": "core_technical_prioritized",
+              "scenario_rationale": "Core Interpretive Vector = equal-weight Attribution Drift + Narrative Fragmentation (the two components most directly representing attributional and narrative instability). Technical-prioritized 0.60/0.40 (counterfactual sensitivity scenario).",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "core"
+          }
         },
-        "sensitivity": {
-          "alphas": [
-            0.2,
-            0.25,
-            0.3,
-            0.35,
-            0.4,
-            0.44999999999999996,
-            0.5,
-            0.55,
-            0.6
-          ],
-          "cidi_scores": [
-            0.2824751171443153,
-            0.28044542232279557,
-            0.27841572750127586,
-            0.27638603267975614,
-            0.27435633785823643,
-            0.2723266430367167,
-            0.270296948215197,
-            0.2682672533936773,
-            0.26623755857215764
-          ],
-          "baseline_cidi": 0.27435633785823643,
-          "alpha_sensitivity_band": [
-            0.26623755857215764,
-            0.2824751171443153
-          ],
-          "band_width": 0.01623755857215764,
-          "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
-        },
-        "warnings": [
-          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only.",
-          "TCI input (evidence_adjusted) rests on evidence coverage 0.40; lower coverage means a less clean comparison.",
-          "Technical–Public Gap diagnostic is excluded from this aggregate."
-        ]
+        "cidi_extended_scenarios": {
+          "extended_neutral": {
+            "available": true,
+            "scenario_name": "extended_neutral",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+            "cidi": 0.28268967119156985,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.5,
+              "beta": 0.5
+            },
+            "iva_aggregate": 0.31537934238313964,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.31537934238313964,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108,
+                "response_timing_proxy": 0.16666666666666666
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_neutral",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Neutral 0.50/0.50 split of TCI vs IVA_extended.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          },
+          "extended_interpretive_prioritized": {
+            "available": true,
+            "scenario_name": "extended_interpretive_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+            "cidi": 0.2892276054298838,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.4,
+              "beta": 0.6
+            },
+            "iva_aggregate": 0.31537934238313964,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.31537934238313964,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108,
+                "response_timing_proxy": 0.16666666666666666
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_interpretive_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Interpretive-prioritized 0.40/0.60.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          },
+          "extended_technical_prioritized": {
+            "available": true,
+            "scenario_name": "extended_technical_prioritized",
+            "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+            "cidi": 0.27615173695325584,
+            "tci_value": 0.25,
+            "tci_score_kind": "evidence_adjusted",
+            "tci_evidence_coverage": 0.4,
+            "weights": {
+              "alpha": 0.6,
+              "beta": 0.4
+            },
+            "iva_aggregate": 0.31537934238313964,
+            "iva": {
+              "available": true,
+              "aggregate_score": 0.31537934238313964,
+              "components": {
+                "attribution_drift": 0.11032048706240485,
+                "narrative_fragmentation": 0.5947945355621108,
+                "response_timing_proxy": 0.16666666666666666
+              },
+              "weights": {
+                "attribution_drift": 0.4,
+                "narrative_fragmentation": 0.4,
+                "response_timing_proxy": 0.2
+              },
+              "scenario_name": "extended_technical_prioritized",
+              "scenario_rationale": "Extended Interpretive Vector adds the Response Timing Proxy at a lower weight (0.20) because it captures contextual temporal pressure rather than an equivalent direct manifestation of interpretive instability. Technical-prioritized 0.60/0.40.",
+              "warnings": [
+                "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal."
+              ]
+            },
+            "warnings": [
+              "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; weights are transparent modelling choices, not empirically validated causal importance. Exploratory, corpus-bound, non-causal.",
+              "TCI input (evidence_adjusted) rests on evidence coverage 0.40; coverage is a separate caveat and is NOT folded into the score.",
+              "Technical–Public Gap is excluded from this aggregate."
+            ],
+            "model_type": "extended"
+          }
+        }
       }
     }
   },
+  "core_ranking_stability": {
+    "model_type": "core",
+    "cases_included": [
+      "KA-SAT / Viasat",
+      "NotPetya",
+      "PAP Hack"
+    ],
+    "orderings": {
+      "core_neutral": [
+        "NotPetya",
+        "KA-SAT / Viasat",
+        "PAP Hack"
+      ],
+      "core_interpretive_prioritized": [
+        "NotPetya",
+        "KA-SAT / Viasat",
+        "PAP Hack"
+      ],
+      "core_technical_prioritized": [
+        "NotPetya",
+        "KA-SAT / Viasat",
+        "PAP Hack"
+      ]
+    },
+    "ranking_stable": true,
+    "note": "Descriptive ordering across weighting scenarios for the cases with available scores only. No causal or out-of-sample claim is made."
+  },
+  "extended_ranking_stability": {
+    "model_type": "extended",
+    "cases_included": [
+      "NotPetya",
+      "PAP Hack"
+    ],
+    "orderings": {
+      "extended_neutral": [
+        "NotPetya",
+        "PAP Hack"
+      ],
+      "extended_interpretive_prioritized": [
+        "NotPetya",
+        "PAP Hack"
+      ],
+      "extended_technical_prioritized": [
+        "NotPetya",
+        "PAP Hack"
+      ]
+    },
+    "ranking_stable": true,
+    "note": "Descriptive ordering across weighting scenarios for the cases with available scores only. No causal or out-of-sample claim is made."
+  },
   "notes": [
-    "Technical–Public Gap is an exploratory diagnostic and is excluded from every aggregate and from CIDI.",
-    "CIDI is an optional exploratory synthesis, not the primary result.",
-    "The corpus consists of curated, source-derived analytical summaries (~15/case), not raw articles or the full public sphere.",
-    "No final ranked conclusion is asserted; see coverage and warnings."
+    "CIDI is a scenario-based exploratory synthesis, not a primary inferential result; no unique validated weighting is claimed.",
+    "Technical–Public Gap is an exploratory diagnostic, excluded from every aggregate and from every CIDI formula.",
+    "Response Timing Proxy is unavailable for KA-SAT and is never imputed; Extended CIDI is therefore unavailable for KA-SAT.",
+    "Evidence coverage is shown alongside scores but never folded into them.",
+    "The corpus consists of curated, source-derived analytical summaries (~14-15/case), not raw articles or the full public sphere.",
+    "All outputs are exploratory, corpus-bound and non-causal; no final ranked conclusion is asserted beyond the three available cases."
   ]
 }
