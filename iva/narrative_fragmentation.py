@@ -28,6 +28,7 @@ Author: Giovanni Arosio
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -36,6 +37,9 @@ from scipy.stats import entropy as scipy_entropy
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_distances
 from sentence_transformers import SentenceTransformer
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.corpus_schema import is_active_analysis  # noqa: E402
 
 MODEL_NAME = "all-MiniLM-L6-v2"
 _model = None
@@ -59,11 +63,14 @@ def _get_model() -> SentenceTransformer:
 
 
 def _load_corpus(corpus_path: str) -> list[str]:
+    """Load in-scope document texts (excludes context_preincident material)."""
     texts = []
     path = Path(corpus_path)
     for file in sorted(path.glob("*.json")):
         with open(file, "r", encoding="utf-8") as f:
             doc = json.load(f)
+            if not is_active_analysis(doc):
+                continue
             if "text" in doc and doc["text"].strip():
                 texts.append(doc["text"].strip())
     return texts

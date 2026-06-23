@@ -100,9 +100,13 @@ attribution coding.
   secondary actor recorded in the coding note. The single-valued actor field
   therefore *under-counts* actor plurality by design; this is documented and
   visible in the audit CSV.
-* **Pre-incident context** (`pap_pub_014`, dated before the incident) is coded
-  on its own stored wording; the audit flags that this document predates the
-  event and that its attribution is pattern-based.
+* **Pre-incident context** (`pap_pub_014`, dated 2024-05-15, before the
+  2024-05-31 event) is coded on its own stored wording but carries
+  `"analysis_role": "context_preincident"`. It is **excluded from every
+  event-level metric** (Attribution Drift, Narrative Fragmentation, Response
+  Timing Proxy, Technical–Public Gap, CIDI inputs) while remaining visible in the
+  audit CSV as retained contextual material. All other documents default to
+  `"analysis_role": "analysis"`.
 
 ## 6. Reproducing the coding
 
@@ -120,10 +124,21 @@ data.
 
 ## 7. How the coding feeds Attribution Drift
 
-`iva/attribution_drift.py` reads these structured fields (no keyword matching).
-Documents are sorted deterministically by `(date, doc_id)`. `no_claim` documents
-are **excluded** from actor-transition calculations; `unknown` actors are handled
-explicitly (tracked as unidentified claims, never counted as a distinct actor);
-`state_actor` is **not** a separate actor category. See that module's docstring
-for the component definitions (actor plurality, temporal instability,
-convergence delay, confidence dispersion) and their exploratory caveats.
+`iva/attribution_drift.py` reads these structured fields (no keyword matching),
+over `analysis_role == "analysis"` documents sorted by `(date, doc_id)`. It keeps
+two distinct state sets:
+
+* `ATTRIBUTION_RELATED_STATES = {attributed, uncertain, denial}` — these build the
+  ordered **attribution-related sequence** (an `uncertain`/`unknown` document
+  appears explicitly as `unknown`).
+* `IDENTIFIED_ACTOR_STATES = {attributed, denial}` — only these can contribute a
+  *specific* actor to plurality.
+
+`no_claim` documents are excluded from the sequence; `unknown` is reported as an
+unresolved-claim count/proportion and never counted as a distinct actor;
+`state_actor` is not a category. **Temporal instability** is measured over the
+full attribution-related sequence (so `unknown → russia` registers).
+**Convergence** requires three consecutive documents naming the same specific
+actor and is dated to the third confirming document; if no such run exists the
+module reports `converged: false` with a `null` score. See the module docstring
+for the full definitions and exploratory caveats.

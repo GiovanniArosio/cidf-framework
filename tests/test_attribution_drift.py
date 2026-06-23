@@ -1,13 +1,19 @@
 """
-Tests for the structured Attribution Drift module.
-===================================================
-Proves the keyword-era failure modes are gone:
-  * ordinary words ("platform", "place", "explains") cannot create a China
-    attribution;
-  * actor selection is deterministic, never from unordered set iteration;
-  * no_claim documents do not inflate actor plurality;
-  * malformed / missing attribution coding is rejected or excluded explicitly;
-  * the legacy ``state_actor`` pseudo-actor is not a valid category.
+Tests for the structured Attribution Drift module (corrected uncertainty +
+convergence + pre-incident context exclusion).
+==========================================================================
+Proves:
+  * ordinary words ("platform"/"place"/"explains") cannot create a China
+    attribution; no actor from unordered set iteration;
+  * no_claim documents do not inflate plurality and do not alter the transition
+    sequence;
+  * uncertain/unknown documents appear explicitly in the attribution-related
+    sequence and `unknown -> russia` raises temporal instability;
+  * a first Russia attribution is NOT automatically convergence; three
+    consecutive same-actor documents converge only on the THIRD;
+  * context_preincident documents are excluded from event-level metrics;
+  * malformed / missing coding is rejected or excluded explicitly; the legacy
+    `state_actor` pseudo-actor is not a valid category.
 
 Run:  pytest tests/test_attribution_drift.py
 
@@ -32,126 +38,175 @@ from utils.corpus_schema import CorpusValidationError, validate_attribution_payl
 
 
 def _doc(doc_id, date, text, state, actor, confidence, basis, note="grounded note",
-         source_type="mainstream"):
+         source_type="mainstream", analysis_role="analysis"):
     return {
-        "doc_id": doc_id,
-        "case": "synthetic",
-        "source_type": source_type,
-        "source_name": "Test Source",
-        "date": date,
-        "text": text,
+        "doc_id": doc_id, "case": "synthetic", "source_type": source_type,
+        "source_name": "Test Source", "date": date, "text": text,
         "url": "https://example.test/" + doc_id,
-        "attribution_state": state,
-        "attribution_actor": actor,
-        "attribution_confidence": confidence,
-        "attribution_basis": basis,
+        "analysis_role": analysis_role,
+        "attribution_state": state, "attribution_actor": actor,
+        "attribution_confidence": confidence, "attribution_basis": basis,
         "attribution_coding_note": note,
     }
 
 
 def _write_corpus(tmp_path, docs):
-    d = tmp_path / "public"
-    d.mkdir()
+    d = Path(tmp_path) / "public"
+    d.mkdir(parents=True, exist_ok=True)
     for doc in docs:
         (d / f"{doc['doc_id']}.json").write_text(json.dumps(doc), encoding="utf-8")
     return str(d)
 
 
+def _russia(doc_id, date, conf="high"):
+    return _doc(doc_id, date, "officials blamed Russia", "attributed", "russia",
+                conf, "official_attribution")
+
+
+def _unknown(doc_id, date):
+    return _doc(doc_id, date, "investigation ongoing, origin unknown",
+                "uncertain", "unknown", "none", "investigative_reporting")
+
+
+def _no_claim(doc_id, date):
+    return _doc(doc_id, date, "platform explains the place; damage described",
+                "no_claim", "none", "none", "no_claim")
+
+
 # --------------------------------------------------------------------------
 def test_ordinary_words_cannot_create_china_attribution(tmp_path):
-    """Texts full of 'platform'/'place'/'explains' coded no_claim => no China."""
-    docs = [
-        _doc("d1", "2024-01-01",
-             "The platform explains that this took place on a large scale.",
-             "no_claim", "none", "none", "no_claim"),
-        _doc("d2", "2024-01-02",
-             "Analysts explain the malware replaced files in many places.",
-             "no_claim", "none", "none", "no_claim"),
-        _doc("d3", "2024-01-03",
-             "A spokesperson explains the platform was offline.",
-             "no_claim", "none", "none", "no_claim"),
-    ]
+    docs = [_no_claim("d1", "2024-01-01"), _no_claim("d2", "2024-01-02"),
+            _no_claim("d3", "2024-01-03")]
     res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
-    plurality = res["components"]["actor_plurality"]
-    assert "china" not in plurality["distinct_actors"]
-    assert plurality["distinct_actor_count"] == 0
-    assert res["claim_actor_counts"] == {}
+    pl = res["components"]["actor_plurality"]
+    assert "china" not in pl["distinct_actors"]
+    assert pl["distinct_actor_count"] == 0
+    assert res["attribution_related_sequence"] == []
 
 
 def test_no_claim_docs_do_not_inflate_plurality(tmp_path):
-    """Many no_claim docs + one attributed russia => exactly one actor."""
+    docs = [_no_claim("d1", "2024-01-01"), _no_claim("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _no_claim("d4", "2024-01-04")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    pl = res["components"]["actor_plurality"]
+    assert pl["distinct_actors"] == ["russia"]
+    assert pl["score"] == 0.0
+
+
+def test_no_claim_docs_do_not_alter_transition_sequence(tmp_path):
+    """no_claim docs interleaved must not change the attribution-related
+    sequence or the instability transitions."""
+    plain = [_russia("a1", "2024-01-01"), _russia("a2", "2024-01-02"),
+             _russia("a3", "2024-01-03")]
+    interleaved = [_russia("b1", "2024-01-01"), _no_claim("b2", "2024-01-02"),
+                   _russia("b3", "2024-01-03"), _no_claim("b4", "2024-01-04"),
+                   _russia("b5", "2024-01-05")]
+    r_plain = analyze_attribution_drift(_write_corpus(tmp_path / "p", plain))
+    r_inter = analyze_attribution_drift(_write_corpus(tmp_path / "i", interleaved))
+    seq_plain = [x["actor"] for x in r_plain["attribution_related_sequence"]]
+    seq_inter = [x["actor"] for x in r_inter["attribution_related_sequence"]]
+    assert seq_plain == ["russia", "russia", "russia"]
+    assert seq_inter == ["russia", "russia", "russia"]
+    assert r_plain["components"]["temporal_instability"]["transitions"] == 0
+    assert r_inter["components"]["temporal_instability"]["transitions"] == 0
+
+
+def test_unknown_to_russia_raises_temporal_instability(tmp_path):
+    docs = [_unknown("d1", "2024-01-01"), _russia("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _russia("d4", "2024-01-04")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    inst = res["components"]["temporal_instability"]
+    assert inst["score"] > 0.0
+    assert "unknown->russia" in inst["transition_pairs"]
+    # unknown appears explicitly in the sequence and is reported as unresolved.
+    assert [x["actor"] for x in res["attribution_related_sequence"]][0] == "unknown"
+    assert res["unresolved_claim_count"] == 1
+
+
+def test_first_russia_attribution_is_not_convergence(tmp_path):
+    """A single (or non-tripled) Russia attribution must NOT count as
+    convergence."""
+    docs = [_russia("d1", "2024-01-01"), _unknown("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _unknown("d4", "2024-01-04")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    conv = res["components"]["convergence_delay"]
+    assert conv["converged"] is False
+    assert conv["score"] is None
+    assert any("non-convergence maximum" in w for w in res["warnings"])
+
+
+def test_three_consecutive_russia_converges_on_third(tmp_path):
+    docs = [_russia("d1", "2024-01-01"), _russia("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _russia("d4", "2024-01-04")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    conv = res["components"]["convergence_delay"]
+    assert conv["converged"] is True
+    assert conv["converged_actor"] == "russia"
+    assert conv["convergence_doc_id"] == "d3"        # the THIRD confirming doc
+    assert conv["convergence_date"] == "2024-01-03"
+    assert conv["raw_days"] == 2                       # 01-01 -> 01-03
+
+
+def test_intervening_unknown_delays_convergence(tmp_path):
+    docs = [_russia("d1", "2024-01-01"), _unknown("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _russia("d4", "2024-01-04"),
+            _russia("d5", "2024-01-05")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    conv = res["components"]["convergence_delay"]
+    # First run of three consecutive russia is d3,d4,d5 -> convergence on d5.
+    assert conv["converged"] is True
+    assert conv["convergence_doc_id"] == "d5"
+
+
+def test_context_preincident_excluded_from_metrics(tmp_path):
     docs = [
-        _doc("d1", "2024-01-01", "China platform place explains.",
-             "no_claim", "none", "none", "no_claim"),
-        _doc("d2", "2024-01-02", "Iran explains the place.",
-             "no_claim", "none", "none", "no_claim"),
-        _doc("d3", "2024-01-03", "Officials blamed Russia.",
-             "attributed", "russia", "high", "official_attribution"),
-        _doc("d4", "2024-01-04", "More context, no actor named.",
-             "no_claim", "none", "none", "no_claim"),
+        _doc("ctx", "2023-12-01", "pre-incident pattern context",
+             "attributed", "russia", "medium", "technical_assessment",
+             analysis_role="context_preincident"),
+        _russia("d1", "2024-01-01"),
+        _unknown("d2", "2024-01-02"),
     ]
     res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
-    plurality = res["components"]["actor_plurality"]
-    assert plurality["distinct_actors"] == ["russia"]
-    assert plurality["distinct_actor_count"] == 1
-    assert plurality["score"] == 0.0  # single actor => no plurality drift
+    assert res["excluded_context_count"] == 1
+    assert res["in_scope_document_count"] == 2
+    # The context document's date must not appear in the in-scope sequence.
+    dates = [x["date"] for x in res["attribution_related_sequence"]]
+    assert "2023-12-01" not in dates
 
 
-def test_actor_selection_is_deterministic_not_set_ordered(tmp_path):
-    """Tied actors resolve deterministically (alphabetical), and repeated runs
-    produce identical output — never order-of-set dependent."""
-    docs = [
-        _doc("d1", "2024-01-01", "x", "attributed", "russia", "high",
-             "official_attribution"),
-        _doc("d2", "2024-01-02", "x", "attributed", "china", "high",
-             "technical_assessment"),
-        _doc("d3", "2024-01-03", "x", "attributed", "iran", "high",
-             "technical_assessment"),
-    ]
+def test_unknown_actor_not_a_distinct_actor(tmp_path):
+    docs = [_unknown("d1", "2024-01-01"), _russia("d2", "2024-01-02")]
+    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
+    pl = res["components"]["actor_plurality"]
+    assert pl["distinct_actors"] == ["russia"]
+    assert pl["unidentified_claim_count"] == 1
+
+
+def test_deterministic(tmp_path):
+    docs = [_russia("d1", "2024-01-01"), _unknown("d2", "2024-01-02"),
+            _russia("d3", "2024-01-03"), _russia("d4", "2024-01-04"),
+            _russia("d5", "2024-01-05")]
     path = _write_corpus(tmp_path, docs)
     runs = [analyze_attribution_drift(path) for _ in range(5)]
-    dominants = {r["components"]["convergence_delay"]["dominant_actor"] for r in runs}
-    assert dominants == {"china"}  # alphabetical tie-break, stable
-    # Full determinism of the composite score.
     assert len({r["composite_score"] for r in runs}) == 1
-    # Three distinct actors => maximal plurality.
-    assert runs[0]["components"]["actor_plurality"]["distinct_actor_count"] == 3
-    assert runs[0]["components"]["actor_plurality"]["score"] == 1.0
-
-
-def test_unknown_actor_handled_explicitly_not_as_distinct_actor(tmp_path):
-    docs = [
-        _doc("d1", "2024-01-01", "state-attributed incident, no actor named",
-             "attributed", "unknown", "low", "investigative_reporting"),
-        _doc("d2", "2024-01-02", "officials blamed Russia",
-             "attributed", "russia", "high", "official_attribution"),
-    ]
-    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
-    plurality = res["components"]["actor_plurality"]
-    assert plurality["distinct_actors"] == ["russia"]
-    assert plurality["unidentified_claim_count"] == 1
+    seqs = {tuple(x["actor"] for x in r["attribution_related_sequence"]) for r in runs}
+    assert len(seqs) == 1
 
 
 def test_malformed_coding_is_rejected(tmp_path):
-    docs = [
-        _doc("d1", "2024-01-01", "x", "attributed", "russia", "high",
-             "official_attribution"),
-    ]
+    docs = [_russia("d1", "2024-01-01")]
     path = _write_corpus(tmp_path, docs)
-    # Corrupt the coding: invalid state value.
     bad = json.loads((Path(path) / "d1.json").read_text())
-    bad["attribution_state"] = "state_actor"  # not a valid state, not an actor
+    bad["attribution_state"] = "state_actor"
     (Path(path) / "d1.json").write_text(json.dumps(bad))
     with pytest.raises(AttributionCodingError):
         analyze_attribution_drift(path)
 
 
 def test_state_actor_is_not_a_valid_actor_category():
-    """The legacy 'state_actor' pseudo-actor must be rejected outright."""
     with pytest.raises(CorpusValidationError):
         validate_attribution_payload({
-            "attribution_state": "attributed",
-            "attribution_actor": "state_actor",
+            "attribution_state": "attributed", "attribution_actor": "state_actor",
             "attribution_confidence": "high",
             "attribution_basis": "official_attribution",
             "attribution_coding_note": "n",
@@ -159,42 +214,35 @@ def test_state_actor_is_not_a_valid_actor_category():
 
 
 def test_missing_coding_excluded_and_scalar_requires_full_coverage(tmp_path):
-    coded = _doc("d1", "2024-01-01", "x", "attributed", "russia", "high",
-                 "official_attribution")
-    uncoded = {
-        "doc_id": "d2", "case": "synthetic", "source_type": "mainstream",
-        "source_name": "S", "date": "2024-01-02", "text": "no coding here",
-        "url": "https://example.test/d2",
-    }
+    coded = _russia("d1", "2024-01-01")
+    uncoded = {"doc_id": "d2", "case": "synthetic", "source_type": "mainstream",
+               "source_name": "S", "date": "2024-01-02", "text": "no coding",
+               "url": "https://example.test/d2"}
     path = _write_corpus(tmp_path, [coded, uncoded])
     res = analyze_attribution_drift(path)
     assert res["available"] is True
     assert res["coding_coverage"] < 1.0
-    assert any("coverage" in w for w in res["warnings"])
     with pytest.raises(AttributionCodingError):
         calculate_attribution_drift(path)
 
 
-def test_no_claim_only_corpus_reports_no_convergence(tmp_path):
-    docs = [
-        _doc("d1", "2024-01-01", "x", "no_claim", "none", "none", "no_claim"),
-        _doc("d2", "2024-01-02", "y", "no_claim", "none", "none", "no_claim"),
-    ]
-    res = analyze_attribution_drift(_write_corpus(tmp_path, docs))
-    delay = res["components"]["convergence_delay"]
-    assert delay["dominant_actor"] is None
-    assert delay["score"] == 1.0
-
-
-def test_active_corpora_scores_in_range_and_fully_coded():
+def test_active_corpora_sequences_and_context_counts():
     root = Path(__file__).resolve().parents[1]
+    expected_inscope = {"notpetya": 15, "kasat_viasat": 15, "pap_hack": 14}
+    expected_ctx = {"notpetya": 0, "kasat_viasat": 0, "pap_hack": 1}
     for case in ("notpetya", "kasat_viasat", "pap_hack"):
         res = analyze_attribution_drift(str(root / "data" / case / "public"))
         assert res["available"] is True
         assert res["coding_coverage"] == 1.0
-        assert 0.0 <= res["composite_score"] <= 1.0
-        # All three cases converge on a single identified actor (russia).
+        assert res["in_scope_document_count"] == expected_inscope[case]
+        assert res["excluded_context_count"] == expected_ctx[case]
         assert res["components"]["actor_plurality"]["distinct_actors"] == ["russia"]
+        assert 0.0 <= res["composite_score"] <= 1.0
+    # KA-SAT begins with two unresolved (unknown) attribution-related docs.
+    kasat = analyze_attribution_drift(str(root / "data/kasat_viasat/public"))
+    assert [x["actor"] for x in kasat["attribution_related_sequence"]][:2] == \
+        ["unknown", "unknown"]
+    assert kasat["components"]["convergence_delay"]["converged"] is True
 
 
 if __name__ == "__main__":

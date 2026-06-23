@@ -129,6 +129,20 @@ def test_active_kasat_corpus_is_unavailable():
     assert "early window" in res["reason"]
 
 
+def test_context_preincident_excluded(tmp_path):
+    ctx = _doc("ctx", "2023-12-01", "institutional")
+    ctx["analysis_role"] = "context_preincident"
+    docs = [
+        _doc("m1", "2024-01-01", "mainstream"),
+        _doc("i1", "2024-01-01", "institutional"),
+        ctx,  # pre-incident institutional context — must be excluded
+    ]
+    res = analyze_response_timing(_corpus(tmp_path, docs), "2024-01-01")
+    diag = res["diagnostics"]
+    assert diag["group_counts"]["official"] == 1            # ctx not counted
+    assert diag["first_official_date"] == "2024-01-01"      # not 2023-12-01
+
+
 def test_active_notpetya_available_and_in_range():
     root = Path(__file__).resolve().parents[1]
     res = analyze_response_timing(str(root / "data/notpetya/public"), "2017-06-27")

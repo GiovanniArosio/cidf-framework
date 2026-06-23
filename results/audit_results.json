@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-06-23T13:44:15.890092+00:00",
+  "generated_utc": "2026-06-23T14:01:07.272584+00:00",
   "active_cases": [
     "notpetya",
     "kasat_viasat",
@@ -96,23 +96,81 @@
       "iva": {
         "attribution_drift": {
           "available": true,
-          "composite_score": 0.11375342465753426,
+          "composite_score": 0.29092237442922375,
           "weights": [
             0.3,
             0.25,
             0.25,
             0.2
           ],
-          "document_count": 15,
+          "in_scope_document_count": 15,
+          "excluded_context_count": 0,
           "coding_coverage": 1.0,
           "state_counts": {
             "no_claim": 8,
             "attributed": 7
           },
-          "claim_actor_counts": {
-            "russia": 6,
-            "unknown": 1
-          },
+          "attribution_related_sequence": [
+            {
+              "doc_id": "notpetya_pub_007",
+              "date": "2017-10-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "notpetya_pub_008",
+              "date": "2018-02-14",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "notpetya_pub_009",
+              "date": "2018-02-15",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "notpetya_pub_010",
+              "date": "2018-02-15",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "notpetya_pub_011",
+              "date": "2018-02-15",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "notpetya_pub_013",
+              "date": "2018-12-01",
+              "state": "attributed",
+              "actor": "unknown",
+              "confidence": "low"
+            },
+            {
+              "doc_id": "notpetya_pub_015",
+              "date": "2020-07-30",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            }
+          ],
+          "identified_actor_sequence": [
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia"
+          ],
+          "unresolved_claim_count": 1,
+          "unresolved_claim_proportion": 0.14285714285714285,
           "components": {
             "actor_plurality": {
               "score": 0.0,
@@ -120,20 +178,26 @@
                 "russia"
               ],
               "distinct_actor_count": 1,
-              "actor_counts": {
-                "russia": 6
-              },
               "unidentified_claim_count": 1
             },
             "temporal_instability": {
-              "score": 0.0,
-              "transitions": 0,
-              "sequence_length": 6
+              "score": 0.3333333333333333,
+              "transitions": 2,
+              "sequence_length": 7,
+              "transition_pairs": [
+                "russia->unknown",
+                "unknown->russia"
+              ]
             },
             "convergence_delay": {
-              "score": 0.26301369863013696,
-              "raw_days": 96,
-              "dominant_actor": "russia",
+              "converged": true,
+              "score": 0.6383561643835617,
+              "raw_days": 233,
+              "converged_actor": "russia",
+              "convergence_doc_id": "notpetya_pub_009",
+              "convergence_date": "2018-02-15",
+              "first_inscope_date": "2017-06-27",
+              "run_length": 3,
               "horizon_days": 365.0
             },
             "confidence_dispersion": {
@@ -301,8 +365,8 @@
       },
       "cidi_exploratory": {
         "available": true,
-        "cidi": 0.5013601028450068,
-        "iva_aggregate": 0.3939335047416778,
+        "cidi": 0.5367938927993445,
+        "iva_aggregate": 0.45298982133224097,
         "tci_value": 0.6625,
         "tci_score_kind": "evidence_adjusted",
         "tci_evidence_coverage": 0.8,
@@ -311,7 +375,7 @@
           "beta": 0.6
         },
         "components_used": {
-          "attribution_drift": 0.11375342465753426,
+          "attribution_drift": 0.29092237442922375,
           "narrative_fragmentation": 0.645824867345277,
           "response_timing_proxy": 0.4222222222222222
         },
@@ -328,22 +392,22 @@
             0.6
           ],
           "cidi_scores": [
-            0.44764680379334226,
-            0.4610751285562583,
-            0.47450345331917443,
-            0.48793177808209054,
-            0.5013601028450068,
-            0.5147884276079228,
-            0.5282167523708389,
-            0.541645077133755,
-            0.5550734018966711
+            0.4948918570657928,
+            0.5053673659991808,
+            0.5158428749325686,
+            0.5263183838659566,
+            0.5367938927993445,
+            0.5472694017327325,
+            0.5577449106661205,
+            0.5682204195995084,
+            0.5786959285328963
           ],
-          "baseline_cidi": 0.5013601028450068,
+          "baseline_cidi": 0.5367938927993445,
           "alpha_sensitivity_band": [
-            0.44764680379334226,
-            0.5550734018966711
+            0.4948918570657928,
+            0.5786959285328963
           ],
-          "band_width": 0.10742659810332883,
+          "band_width": 0.0838040714671035,
           "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
         },
         "warnings": [
@@ -426,23 +490,121 @@
       "iva": {
         "attribution_drift": {
           "available": true,
-          "composite_score": 0.0293841095890411,
+          "composite_score": 0.17424934274249348,
           "weights": [
             0.3,
             0.25,
             0.25,
             0.2
           ],
-          "document_count": 15,
+          "in_scope_document_count": 15,
+          "excluded_context_count": 0,
           "coding_coverage": 1.0,
           "state_counts": {
             "uncertain": 2,
             "attributed": 10,
             "no_claim": 3
           },
-          "claim_actor_counts": {
-            "russia": 10
-          },
+          "attribution_related_sequence": [
+            {
+              "doc_id": "kasat_pub_003",
+              "date": "2022-03-11",
+              "state": "uncertain",
+              "actor": "unknown",
+              "confidence": "none"
+            },
+            {
+              "doc_id": "kasat_pub_006",
+              "date": "2022-03-23",
+              "state": "uncertain",
+              "actor": "unknown",
+              "confidence": "none"
+            },
+            {
+              "doc_id": "kasat_pub_007",
+              "date": "2022-03-24",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "kasat_pub_008",
+              "date": "2022-03-31",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "kasat_pub_001",
+              "date": "2022-05-09",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_002",
+              "date": "2022-05-09",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_009",
+              "date": "2022-05-09",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_004",
+              "date": "2022-05-10",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_005",
+              "date": "2022-05-10",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_014",
+              "date": "2022-05-10",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_012",
+              "date": "2022-05-11",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "kasat_pub_013",
+              "date": "2022-05-11",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            }
+          ],
+          "identified_actor_sequence": [
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia"
+          ],
+          "unresolved_claim_count": 2,
+          "unresolved_claim_proportion": 0.16666666666666666,
           "components": {
             "actor_plurality": {
               "score": 0.0,
@@ -450,26 +612,31 @@
                 "russia"
               ],
               "distinct_actor_count": 1,
-              "actor_counts": {
-                "russia": 10
-              },
-              "unidentified_claim_count": 0
+              "unidentified_claim_count": 2
             },
             "temporal_instability": {
-              "score": 0.0,
-              "transitions": 0,
-              "sequence_length": 10
+              "score": 0.09090909090909091,
+              "transitions": 1,
+              "sequence_length": 12,
+              "transition_pairs": [
+                "unknown->russia"
+              ]
             },
             "convergence_delay": {
-              "score": 0.03561643835616438,
-              "raw_days": 13,
-              "dominant_actor": "russia",
+              "converged": true,
+              "score": 0.16164383561643836,
+              "raw_days": 59,
+              "converged_actor": "russia",
+              "convergence_doc_id": "kasat_pub_001",
+              "convergence_date": "2022-05-09",
+              "first_inscope_date": "2022-03-11",
+              "run_length": 3,
               "horizon_days": 365.0
             },
             "confidence_dispersion": {
-              "score": 0.1024,
-              "n_claims": 10,
-              "variance": 0.0256
+              "score": 0.5555555555555557,
+              "n_claims": 12,
+              "variance": 0.13888888888888892
             }
           },
           "warnings": []
@@ -691,23 +858,106 @@
       "iva": {
         "attribution_drift": {
           "available": true,
-          "composite_score": 0.020480000000000005,
+          "composite_score": 0.11032048706240485,
           "weights": [
             0.3,
             0.25,
             0.25,
             0.2
           ],
-          "document_count": 15,
+          "in_scope_document_count": 14,
+          "excluded_context_count": 1,
           "coding_coverage": 1.0,
           "state_counts": {
-            "attributed": 10,
             "no_claim": 4,
+            "attributed": 9,
             "uncertain": 1
           },
-          "claim_actor_counts": {
-            "russia": 10
-          },
+          "attribution_related_sequence": [
+            {
+              "doc_id": "pap_pub_002",
+              "date": "2024-05-31",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_003",
+              "date": "2024-05-31",
+              "state": "uncertain",
+              "actor": "unknown",
+              "confidence": "none"
+            },
+            {
+              "doc_id": "pap_pub_005",
+              "date": "2024-05-31",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "pap_pub_006",
+              "date": "2024-05-31",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "high"
+            },
+            {
+              "doc_id": "pap_pub_007",
+              "date": "2024-06-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_008",
+              "date": "2024-06-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_009",
+              "date": "2024-06-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_011",
+              "date": "2024-06-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_012",
+              "date": "2024-06-05",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            },
+            {
+              "doc_id": "pap_pub_013",
+              "date": "2024-09-01",
+              "state": "attributed",
+              "actor": "russia",
+              "confidence": "medium"
+            }
+          ],
+          "identified_actor_sequence": [
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia",
+            "russia"
+          ],
+          "unresolved_claim_count": 1,
+          "unresolved_claim_proportion": 0.1,
           "components": {
             "actor_plurality": {
               "score": 0.0,
@@ -715,49 +965,57 @@
                 "russia"
               ],
               "distinct_actor_count": 1,
-              "actor_counts": {
-                "russia": 10
-              },
-              "unidentified_claim_count": 0
+              "unidentified_claim_count": 1
             },
             "temporal_instability": {
-              "score": 0.0,
-              "transitions": 0,
-              "sequence_length": 10
+              "score": 0.2222222222222222,
+              "transitions": 2,
+              "sequence_length": 10,
+              "transition_pairs": [
+                "russia->unknown",
+                "unknown->russia"
+              ]
             },
             "convergence_delay": {
-              "score": 0.0,
-              "raw_days": 0,
-              "dominant_actor": "russia",
+              "converged": true,
+              "score": 0.0027397260273972603,
+              "raw_days": 1,
+              "converged_actor": "russia",
+              "convergence_doc_id": "pap_pub_007",
+              "convergence_date": "2024-06-01",
+              "first_inscope_date": "2024-05-31",
+              "run_length": 3,
               "horizon_days": 365.0
             },
             "confidence_dispersion": {
-              "score": 0.10240000000000002,
+              "score": 0.2703999999999999,
               "n_claims": 10,
-              "variance": 0.025600000000000005
+              "variance": 0.06759999999999998
             }
           },
-          "warnings": []
+          "warnings": [
+            "1 context_preincident document(s) excluded from event-level metrics (retained in the corpus/CSV only)."
+          ]
         },
         "narrative_fragmentation": {
           "available": true,
           "method": "embedding-based K-Means clustering",
-          "n_documents": 15,
+          "n_documents": 14,
           "primary_k": 4,
           "primary": {
             "k": 4,
-            "score": 0.6165631091160803,
-            "dispersion": 0.8527936308491302,
-            "dominance": 0.6,
-            "inter_cluster_distance": 0.31815218925476074,
+            "score": 0.5947945355621108,
+            "dispersion": 0.8446958733715438,
+            "dominance": 0.5,
+            "inter_cluster_distance": 0.35638728737831116,
             "cluster_sizes": [
-              6,
-              6,
               2,
+              7,
+              4,
               1
             ]
           },
-          "score": 0.6165631091160803,
+          "score": 0.5947945355621108,
           "weights": [
             0.4,
             0.3,
@@ -772,47 +1030,47 @@
           "sensitivity": [
             {
               "k": 3,
-              "score": 0.5350460573651813,
-              "dispersion": 0.7766490138119515,
-              "dominance": 0.4,
-              "inter_cluster_distance": 0.3479548394680023,
+              "score": 0.5145204733024404,
+              "dispersion": 0.7559279292634754,
+              "dominance": 0.3571428571428571,
+              "inter_cluster_distance": 0.35002148151397705,
               "cluster_sizes": [
-                5,
+                4,
                 9,
                 1
               ]
             },
             {
               "k": 4,
-              "score": 0.6165631091160803,
-              "dispersion": 0.8527936308491302,
-              "dominance": 0.6,
-              "inter_cluster_distance": 0.31815218925476074,
+              "score": 0.5947945355621108,
+              "dispersion": 0.8446958733715438,
+              "dominance": 0.5,
+              "inter_cluster_distance": 0.35638728737831116,
               "cluster_sizes": [
-                6,
-                6,
                 2,
+                7,
+                4,
                 1
               ]
             },
             {
               "k": 5,
-              "score": 0.6392437105554819,
-              "dispersion": 0.8927518470035196,
-              "dominance": 0.6,
-              "inter_cluster_distance": 0.3404765725135803,
+              "score": 0.6266501680607331,
+              "dispersion": 0.8549912206176893,
+              "dominance": 0.5714285714285714,
+              "inter_cluster_distance": 0.37741702795028687,
               "cluster_sizes": [
                 4,
-                2,
                 6,
                 2,
+                1,
                 1
               ]
             }
           ],
           "score_range_over_k": [
-            0.5350460573651813,
-            0.6392437105554819
+            0.5145204733024404,
+            0.6266501680607331
           ],
           "warnings": [
             "Exploratory: corpus is ~15 curated, source-derived analytical summaries per case (not raw articles or the full public sphere). Method is embedding-based K-Means clustering (not BERTopic). Interpret cluster counts as exploratory; see k-sensitivity."
@@ -846,15 +1104,15 @@
             "crisis_date": "2024-05-31",
             "early_window_days": 3,
             "source_type_counts": {
-              "institutional": 8,
+              "institutional": 7,
               "mainstream": 7
             },
             "group_counts": {
-              "official": 8,
+              "official": 7,
               "public_facing": 7
             },
             "non_institutional_count": 0,
-            "first_official_date": "2024-05-15",
+            "first_official_date": "2024-05-31",
             "first_public_facing_date": "2024-05-31",
             "first_technical_date": null,
             "early_window_composition": {
@@ -876,27 +1134,27 @@
           "status": "exploratory_diagnostic_only",
           "included_in_aggregate": false,
           "n_technical_docs": 2,
-          "n_public_docs": 15,
+          "n_public_docs": 14,
           "components": {
-            "cosine_distance": 0.2723885178565979,
-            "jaccard_distance": 0.9014675052410901,
+            "cosine_distance": 0.2720353603363037,
+            "jaccard_distance": 0.8982300884955752,
             "document_length_differential": {
-              "score": 0.4053333333333333,
+              "score": 0.4014285714285714,
               "mean_words_technical": 81.0,
-              "mean_words_public": 60.733333333333334,
-              "abs_difference_words": 20.266666666666666
+              "mean_words_public": 60.92857142857143,
+              "abs_difference_words": 20.07142857142857
             }
           },
           "warnings": [
             "EXPLORATORY DIAGNOSTIC ONLY — not part of any IVA/CIDI aggregate. The corpus consists of standardized, source-derived analytical summaries (not raw articles or the full public sphere); with small, summarized corpora the composite varies too little across cases to support comparative interpretation.",
-            "Jaccard distance 0.901 is near ceiling (>= 0.85); lexical distance is saturated and not discriminating between cases."
+            "Jaccard distance 0.898 is near ceiling (>= 0.85); lexical distance is saturated and not discriminating between cases."
           ]
         }
       },
       "cidi_exploratory": {
         "available": true,
-        "cidi": 0.2607419551565494,
-        "iva_aggregate": 0.26790325859424896,
+        "cidi": 0.27435633785823643,
+        "iva_aggregate": 0.29059389643039407,
         "tci_value": 0.25,
         "tci_score_kind": "evidence_adjusted",
         "tci_evidence_coverage": 0.4,
@@ -905,8 +1163,8 @@
           "beta": 0.6
         },
         "components_used": {
-          "attribution_drift": 0.020480000000000005,
-          "narrative_fragmentation": 0.6165631091160803,
+          "attribution_drift": 0.11032048706240485,
+          "narrative_fragmentation": 0.5947945355621108,
           "response_timing_proxy": 0.16666666666666666
         },
         "sensitivity": {
@@ -922,22 +1180,22 @@
             0.6
           ],
           "cidi_scores": [
-            0.26432260687539916,
-            0.26342744394568673,
-            0.26253228101597426,
-            0.26163711808626183,
-            0.2607419551565494,
-            0.25984679222683693,
-            0.25895162929712445,
-            0.25805646636741203,
-            0.2571613034376996
+            0.2824751171443153,
+            0.28044542232279557,
+            0.27841572750127586,
+            0.27638603267975614,
+            0.27435633785823643,
+            0.2723266430367167,
+            0.270296948215197,
+            0.2682672533936773,
+            0.26623755857215764
           ],
-          "baseline_cidi": 0.2607419551565494,
+          "baseline_cidi": 0.27435633785823643,
           "alpha_sensitivity_band": [
-            0.2571613034376996,
-            0.26432260687539916
+            0.26623755857215764,
+            0.2824751171443153
           ],
-          "band_width": 0.007161303437699551,
+          "band_width": 0.01623755857215764,
           "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
         },
         "warnings": [

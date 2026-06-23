@@ -221,9 +221,23 @@ def write_summary(results: dict, out_path: Path) -> None:
         L.append(f"### {c['label']}")
         ad = c["iva"]["attribution_drift"]
         if ad.get("available"):
-            L.append(f"- Attribution Drift: {_fmt(ad['composite_score'])} "
-                     f"(coding coverage {_fmt(ad['coding_coverage'],2)}; "
-                     f"distinct actors {ad['components']['actor_plurality']['distinct_actors']})")
+            conv = ad["components"]["convergence_delay"]
+            conv_str = (f"converged @ {conv['convergence_date']} "
+                        f"(actor {conv['converged_actor']}, "
+                        f"{conv['raw_days']}d)") if conv["converged"] else "NOT CONVERGED"
+            seq = " → ".join(
+                f"{x['actor']}" for x in ad["attribution_related_sequence"])
+            L.append(
+                f"- Attribution Drift: {_fmt(ad['composite_score'])} "
+                f"(in-scope docs {ad['in_scope_document_count']}, "
+                f"context excluded {ad['excluded_context_count']}, "
+                f"coding coverage {_fmt(ad['coding_coverage'],2)})")
+            L.append(f"    - distinct identified actors: "
+                     f"{ad['components']['actor_plurality']['distinct_actors']}; "
+                     f"unresolved claims: {ad['unresolved_claim_count']} "
+                     f"({_fmt(ad['unresolved_claim_proportion'],2)})")
+            L.append(f"    - convergence: {conv_str}")
+            L.append(f"    - attribution-related sequence: {seq}")
         else:
             L.append(f"- Attribution Drift: UNAVAILABLE — {ad.get('reason')}")
         nf = c["iva"]["narrative_fragmentation"]

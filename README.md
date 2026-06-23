@@ -33,7 +33,7 @@ Measures the operational sophistication of cyber incidents using the MITRE ATT&C
 
 ### IVA — Interpretive Void Analyzer
 A set of NLP instruments measuring communicative disruption — reported **individually**, not as a single forced composite:
-- **Attribution Drift** — instability of responsibility claims over time, from a manual, text-grounded **structured coding** protocol (no keyword/LLM extraction).
+- **Attribution Drift** — instability of responsibility claims over time, from a manual, text-grounded **structured coding** protocol (no keyword/LLM extraction). Uncertain/unknown claims appear explicitly in the temporal sequence (so early unresolved attribution counts); convergence requires three consecutive documents naming the same specific actor.
 - **Narrative Fragmentation** — diversity of competing narratives via **embedding-based K-Means clustering** of sentence embeddings (not BERTopic), reported with k = 3/4/5 sensitivity. Exploratory.
 - **Mainstream–Institutional Response Timing Proxy** — relative timing/concentration of sampled mainstream vs institutional documents (formerly "Amplification Velocity"). Exploratory; corpus-bound; returns an explicit unavailable state when early-window evidence is insufficient.
 - **Technical–Public Gap** — semantic/lexical/length distance between technical and public summaries. **Diagnostic only** — excluded from every aggregate.
@@ -54,6 +54,8 @@ An **optional, exploratory** synthesis (CIDI = 0.40 × TCI + 0.60 × IVA), **not
 | PAP Hack | May 2024 | Incomplete public technical evidence; low TCI evidence coverage |
 
 > Romania has been **removed** from the active scored dataset (not a defensible MITRE ATT&CK Enterprise case). Its raw materials are archived under `data/_excluded_cases/romania/` as a methodological boundary case and are never used in active analysis.
+
+> **Pre-incident context exclusion.** `pap_pub_014` (dated 2024-05-15, before the 2024-05-31 PAP event) is marked `"analysis_role": "context_preincident"` and excluded from every event-level metric, leaving **14 in-scope** analytical documents for PAP (NotPetya and KA-SAT have 15 each). It remains visible in the audit CSV as retained context.
 
 ---
 

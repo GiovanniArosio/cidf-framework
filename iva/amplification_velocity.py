@@ -32,10 +32,14 @@ Author: Giovanni Arosio
 from __future__ import annotations
 
 import json
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.corpus_schema import is_active_analysis  # noqa: E402
 
 OFFICIAL_SOURCES = frozenset({"institutional"})
 PUBLIC_FACING_SOURCES = frozenset({"mainstream", "non_institutional"})
@@ -57,11 +61,14 @@ METHOD_NOTE = (
 
 
 def _load_corpus(corpus_path: str) -> list[dict]:
+    """Load in-scope documents (excludes context_preincident material)."""
     docs = []
     path = Path(corpus_path)
     for file in sorted(path.glob("*.json")):
         with open(file, "r", encoding="utf-8") as f:
             doc = json.load(f)
+            if not is_active_analysis(doc):
+                continue
             if "date" in doc and "source_type" in doc:
                 docs.append(doc)
     return docs

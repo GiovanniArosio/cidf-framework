@@ -46,6 +46,25 @@ documents (45 total).
   validity of attribution coding. Archived cases are ignored unless
   `--include-excluded` is passed.
 
+## 1a. Analytical scope — pre-incident context exclusion
+
+`pap_pub_014` (NASK) is dated **2024-05-15**, before the PAP Hack event
+(2024-05-31). The document and its source text are kept unchanged, but it is
+marked `"analysis_role": "context_preincident"`. The schema defaults every other
+document to `"analysis"`, and **every event-level metric excludes
+non-`analysis` documents**: Attribution Drift, Narrative Fragmentation, the
+Response Timing Proxy, the Technical–Public Gap diagnostic, and the CIDI inputs
+produced by the audit runner. The document remains visible in
+`data/attribution_coding_audit.csv` as retained contextual material.
+
+**In-scope analytical documents per case (after context exclusion):**
+
+| Case | public docs | in-scope (`analysis`) | excluded (`context_preincident`) |
+|---|---|---|---|
+| NotPetya | 15 | 15 | 0 |
+| KA-SAT / Viasat | 15 | 15 | 0 |
+| PAP Hack | 15 | 14 | 1 (`pap_pub_014`) |
+
 ## 2. Attribution Drift — keyword matching → structured coding
 
 **Problem.** Substring matching produced false positives (`pla` ∈
@@ -59,19 +78,44 @@ attribution.
   with five fields per public document, validated by machine
   (`validate_attribution_payload`) against cross-field rules.
 * `iva/attribution_drift.py` reads the structured fields only — no keyword
-  matching. Documents are sorted by `(date, doc_id)`; `no_claim` documents are
-  excluded from actor-transition calculations; `unknown` actors are handled
-  explicitly (counted as unidentified claims, never as a distinct actor);
-  `state_actor` is not a category. The dominant actor is chosen by count with an
-  alphabetical tie-break (deterministic).
+  matching. `state_actor` is not a category; `no_claim` documents are excluded
+  from temporal transitions. Two state sets are kept deliberately distinct:
+
+  ```python
+  ATTRIBUTION_RELATED_STATES = {"attributed", "uncertain", "denial"}
+  IDENTIFIED_ACTOR_STATES    = {"attributed", "denial"}
+  ```
+
+  * An ordered **attribution-related sequence** includes every attribution-related
+    document; an `uncertain`/`unknown` document appears explicitly as `unknown`.
+  * **Actor plurality** counts only distinct *identified* actors; `unknown` never
+    inflates plurality (it is reported as an unresolved-claim count/proportion).
+  * **Temporal instability** compares consecutive items in the FULL
+    attribution-related sequence, so `unknown → russia`, `russia → unknown` and
+    `russia → china` all register. This restores the early-unresolved signal
+    that the previous version discarded (notably for KA-SAT).
+  * **Convergence** = the first run of **three consecutive** attribution-related
+    documents naming the **same specific actor** (no intervening `unknown`,
+    competing actor, or `denial`); the convergence date is the **third**
+    confirming document. Delay is measured from the first in-scope document.
+    Non-convergence yields `converged: false`, component `score: null`, and an
+    explicitly labelled non-convergence maximum (1.0) in the composite with a
+    warning — never a silent ordinary score.
 * Coding is the single source of truth in the JSONs;
   `data/attribution_coding_audit.csv` is regenerated from them.
 
-**Result (composite, exploratory).** NotPetya 0.114, KA-SAT 0.029,
-PAP 0.020. All three cases converge on a single identified actor (`russia`), so
-actor-plurality and actor-switching drift are ≈ 0; the differentiation lies in
-**convergence timing** (NotPetya took longest). Previous keyword-era scores are
-invalid and were not retained.
+**Result (composite, exploratory).** NotPetya **0.291**, KA-SAT **0.174**,
+PAP **0.110** (in-scope documents 15 / 15 / 14 — see §1a). All three converge on
+a single identified actor (`russia`), so actor-plurality is 0; differentiation
+comes from early unresolved claims and convergence timing:
+
+| Case | in-scope | unresolved | attribution-related sequence | convergence (3rd doc) | delay |
+|---|---|---|---|---|---|
+| NotPetya | 15 | 1 | russia×5 → unknown → russia | 2018-02-15 | 233 d |
+| KA-SAT | 15 | 2 | unknown → unknown → russia×10 | 2022-05-09 | 59 d |
+| PAP | 14 | 1 | russia → unknown → russia×8 | 2024-06-01 | 1 d |
+
+Previous keyword-era scores are invalid and were not retained.
 
 ## 3. TCI — absence/“unknown” conflation → evidence-aware
 
@@ -156,8 +200,8 @@ validated inputs, rejects the Technical–Public Gap diagnostic as an input, and
 exposed but explicitly labelled as algebraic weight-sensitivity, not empirical
 robustness.
 
-**Result.** NotPetya 0.501 and PAP 0.261 (exploratory); **KA-SAT withheld**
-(response-timing proxy unavailable).
+**Result (recomputed on corrected Attribution Drift).** NotPetya 0.537 and PAP
+0.274 (exploratory); **KA-SAT withheld** (response-timing proxy unavailable).
 
 ## 8. Reproducibility
 
@@ -184,8 +228,9 @@ pytest                                          # test suite
 * **Stealth** is treated as an analyst inference everywhere it is scored (no
   source directly measures it); coded `unknown` for PAP where even an inference
   is ungrounded.
-* **`pap_pub_014`** (NASK) predates the incident and its attribution is
-  pattern-based; coded on its stored wording and flagged.
+* **`pap_pub_014`** (NASK) predates the incident; it is coded on its stored
+  wording but marked `context_preincident` and **excluded** from every
+  event-level metric (see §1a), so it does not influence any score.
 * **`pap_pub_013`** names a network "tied to Belarusian and Russian
   intelligence"; coded with Russia primary and Belarus recorded in the note, so
   the single-valued actor field under-counts plurality by one (documented).

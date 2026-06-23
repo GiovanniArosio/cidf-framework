@@ -83,6 +83,20 @@ def test_near_ceiling_jaccard_warns(tmp_path):
     assert any("near ceiling" in w for w in res["warnings"])
 
 
+def test_context_preincident_excluded(tmp_path):
+    tech = _corpus(tmp_path, "technical", ["alpha beta gamma"] * 3)
+    pubd = tmp_path / "public"
+    pubd.mkdir()
+    for i in range(3):
+        (pubd / f"p_{i}.json").write_text(
+            json.dumps({"doc_id": f"p_{i}", "text": "one two three"}), encoding="utf-8")
+    (pubd / "ctx.json").write_text(
+        json.dumps({"doc_id": "ctx", "text": "pre-incident context",
+                    "analysis_role": "context_preincident"}), encoding="utf-8")
+    res = tpg.diagnose_technical_public_gap(tech, str(pubd))
+    assert res["n_public_docs"] == 3  # context document excluded
+
+
 def test_always_carries_diagnostic_caveat(tmp_path):
     tech = _corpus(tmp_path, "technical", ["alpha beta"] * 2)
     pub = _corpus(tmp_path, "public", ["alpha gamma"] * 2)

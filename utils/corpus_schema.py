@@ -89,6 +89,23 @@ ATTRIBUTION_FIELDS = (
     "attribution_coding_note",
 )
 
+# Analytical role of a document. Active event-level metrics use only
+# ``analysis`` documents; ``context_preincident`` material is retained and
+# reported but excluded from every event-level score.
+ANALYSIS_ROLE_FIELD = "analysis_role"
+DEFAULT_ANALYSIS_ROLE = "analysis"
+VALID_ANALYSIS_ROLES = frozenset({"analysis", "context_preincident"})
+
+
+def analysis_role(raw: dict[str, Any]) -> str:
+    """Return a document's analysis role, defaulting to ``analysis``."""
+    return raw.get(ANALYSIS_ROLE_FIELD, DEFAULT_ANALYSIS_ROLE)
+
+
+def is_active_analysis(raw: dict[str, Any]) -> bool:
+    """True if the document participates in active event-level metrics."""
+    return analysis_role(raw) == DEFAULT_ANALYSIS_ROLE
+
 # Canonical fields the adapter understands. Repository-native aliases are
 # accepted on input; the original payload is preserved untouched in ``raw``.
 _FIELD_ALIASES: dict[str, tuple[str, ...]] = {
@@ -102,7 +119,7 @@ _REQUIRED_CANONICAL = ("id", "text", "source", "source_type", "date")
 # Recognised non-canonical fields that are valid repository metadata and must
 # not be flagged as "unsupported" by the validator.
 _KNOWN_EXTRA_FIELDS = frozenset(
-    {"case", "doc_id", "source_name"} | set(ATTRIBUTION_FIELDS)
+    {"case", "doc_id", "source_name", "analysis_role"} | set(ATTRIBUTION_FIELDS)
 )
 
 
@@ -226,6 +243,22 @@ class CorpusDocument:
 
         if self.url is not None and not isinstance(self.url, str):
             raise CorpusValidationError("Field 'url' must be a string or None.")
+
+        role = self.raw.get(ANALYSIS_ROLE_FIELD, DEFAULT_ANALYSIS_ROLE)
+        if role not in VALID_ANALYSIS_ROLES:
+            raise CorpusValidationError(
+                f"Field 'analysis_role' must be one of "
+                f"{sorted(VALID_ANALYSIS_ROLES)}, got {role!r}."
+            )
+
+    # -- analytical role ---------------------------------------------------
+    @property
+    def analysis_role(self) -> str:
+        return self.raw.get(ANALYSIS_ROLE_FIELD, DEFAULT_ANALYSIS_ROLE)
+
+    @property
+    def is_active_analysis(self) -> bool:
+        return self.analysis_role == DEFAULT_ANALYSIS_ROLE
 
     # -- attribution coding ------------------------------------------------
     def has_attribution_coding(self) -> bool:

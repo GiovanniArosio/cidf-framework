@@ -101,6 +101,20 @@ def test_unavailable_for_tiny_corpus(tmp_path):
     assert "2 documents" in res["reason"]
 
 
+def test_context_preincident_excluded(tmp_path):
+    d = tmp_path / "public"
+    d.mkdir()
+    for i in range(15):
+        (d / f"doc_{i:03d}.json").write_text(
+            json.dumps({"doc_id": f"d{i}", "text": f"variant {i} cyber incident framing"}),
+            encoding="utf-8")
+    (d / "ctx.json").write_text(
+        json.dumps({"doc_id": "ctx", "text": "pre-incident context material",
+                    "analysis_role": "context_preincident"}), encoding="utf-8")
+    res = nf.analyze_narrative_fragmentation(str(d))
+    assert res["n_documents"] == 15  # context document excluded
+
+
 def test_score_in_range(tmp_path):
     res = nf.analyze_narrative_fragmentation(_corpus(tmp_path, 15))
     assert 0.0 <= res["score"] <= 1.0

@@ -32,7 +32,7 @@ PUBLIC_GLOBS = (
 )
 
 HEADER = [
-    "case", "doc_id", "date", "source_type", "source_name",
+    "case", "doc_id", "date", "source_type", "source_name", "analysis_role",
     *ATTRIBUTION_FIELDS,
 ]
 
@@ -51,6 +51,7 @@ def main() -> int:
                 "date": d.get("date"),
                 "source_type": d.get("source_type"),
                 "source_name": d.get("source_name") or d.get("source"),
+                "analysis_role": d.get("analysis_role", "analysis"),
                 **{f: d.get(f) for f in ATTRIBUTION_FIELDS},
             })
 
