@@ -5,5 +5,10 @@
   "source_name": "Euronews / Reuters",
   "date": "2022-05-09",
   "text": "This article reports that the United States, Britain, Canada, Estonia and the European Union publicly blamed Russia for a large cyberattack on Viasat’s KA-SAT satellite internet network at the onset of the war in Ukraine. Officials state that the operation took tens of thousands of modems offline and was intended to disrupt Ukrainian command and control, with additional impacts on communication services in several EU member states. Quotes from senior Western officials describe the incident as a deliberate and malicious act and highlight the scale of communication loss at the beginning of the conflict.",
-  "url": "https://www.euronews.com/2022/05/10/uk-ukraine-crisis-cyber"
+  "url": "https://www.euronews.com/2022/05/10/uk-ukraine-crisis-cyber",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "Reports the US, Britain, Canada, Estonia and the EU 'publicly blamed Russia for a large cyberattack on Viasat's KA-SAT'."
 }

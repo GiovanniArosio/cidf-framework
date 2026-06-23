@@ -5,5 +5,10 @@
   "source_name": "European Council",
   "date": "2020-07-30",
   "text": "The EU imposed its first-ever cyber sanctions targeting individuals and entities associated with major cyberattacks including NotPetya. The sanctions regime includes travel bans and asset freezes against Russian military agents tied to attacks on Ukrainian infrastructure and global incidents. The decision operationalized the EU Cyber Diplomacy Toolbox adopted in June 2017 and situated NotPetya within the class of state-linked malicious cyber activities justifying EU-wide restrictive measures.",
-  "url": "https://www.consilium.europa.eu/en/press/press-releases/2020/07/30/cyber-attacks-council-imposes-first-ever-sanctions"
+  "url": "https://www.consilium.europa.eu/en/press/press-releases/2020/07/30/cyber-attacks-council-imposes-first-ever-sanctions",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "EU sanctions text targets 'Russian military agents tied to attacks on Ukrainian infrastructure' including NotPetya."
 }

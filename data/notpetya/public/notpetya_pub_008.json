@@ -5,5 +5,10 @@
   "source_name": "UK Foreign Office",
   "date": "2018-02-14",
   "text": "The UK government judges that the Russian government, specifically the Russian military, was responsible for the destructive NotPetya cyber attack. The attack was reckless and indiscriminate, disrupted organisations across Europe costing hundreds of millions of pounds, and was part of the Kremlin's ongoing effort to destabilize Ukraine. This statement represented an unusual step of publicly attributing and condemning a state for a major cyber incident.",
-  "url": "https://www.gov.uk/government/news/russia-was-behind-notpetya-cyberattack"
+  "url": "https://www.gov.uk/government/news/russia-was-behind-notpetya-cyberattack",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "UK government 'judges that the Russian government, specifically the Russian military, was responsible'."
 }

@@ -5,5 +5,10 @@
   "source_name": "Reuters",
   "date": "2022-05-10",
   "text": "This short Reuters piece reports that the UK government publicly stated it believed Russia carried out the 24 February cyber operation targeting Viasat’s KA-SAT communications in Ukraine. The article relays comments from the Foreign Secretary describing the episode as a calculated and harmful assault that disrupted communications for citizens and businesses across Europe. It notes that the statement aligns with assessments from other Western governments and presents the attribution as part of a series of condemnations of Russian cyber activities linked to the war.",
-  "url": "https://www.reuters.com/world/uk/uk-says-russia-was-behind-feb-24-viasat-cyber-attack-2022-05-10/"
+  "url": "https://www.reuters.com/world/uk/uk-says-russia-was-behind-feb-24-viasat-cyber-attack-2022-05-10/",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "Reports the UK government 'stated it believed Russia carried out the 24 February cyber operation' against KA-SAT."
 }

@@ -5,5 +5,10 @@
   "source_name": "NPR",
   "date": "2017-06-27",
   "text": "Ransomware hit at least six countries Tuesday in a massive ransomware attack that locked systems in Ukraine and other states. The attack spread rapidly across Europe hitting major firms including Maersk, WPP, Rosneft and FedEx. Early reports compared it to the WannaCry outbreak and described it as financially motivated ransomware demanding Bitcoin payment.",
-  "url": "https://www.npr.org/2017/06/27/ransomware-attack"
+  "url": "https://www.npr.org/2017/06/27/ransomware-attack",
+  "attribution_state": "no_claim",
+  "attribution_actor": "none",
+  "attribution_confidence": "none",
+  "attribution_basis": "no_claim",
+  "attribution_coding_note": "Frames the event as 'financially motivated ransomware demanding Bitcoin payment'; no responsible actor named in the stored text."
 }

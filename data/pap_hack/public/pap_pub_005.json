@@ -5,5 +5,10 @@
   "source_name": "Polish Digital Affairs Minister Krzysztof Gawkowski",
   "date": "2024-05-31",
   "text": "The PAP report on a partial mobilisation is fake. This all looks like a cyberattack and planned disinformation. All indicates that we are dealing with a cyberattack coming from the Russian side. The goal was to spread disinformation before the elections to the European Parliament and to paralyse society. We are at cyberwar with Russia.",
-  "url": "https://twitter.com/KGawkowski/status/pap-cyberattack"
+  "url": "https://twitter.com/KGawkowski/status/pap-cyberattack",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "Digital Affairs Minister states 'we are dealing with a cyberattack coming from the Russian side' and 'we are at cyberwar with Russia'."
 }

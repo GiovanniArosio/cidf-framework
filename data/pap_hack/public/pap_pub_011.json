@@ -5,5 +5,10 @@
   "source_name": "Cybernews",
   "date": "2024-06-01",
   "text": "The false mobilization story appeared on PAP at least twice before being removed. Polish officials blamed Russian hackers for the content injection attack on the national press agency. The incident demonstrated how compromise of a trusted newswire allows adversaries to inject false narratives directly into the information bloodstream of an EU member state, testing resilience and response mechanisms in real time.",
-  "url": "https://cybernews.com/news/poland-pap-hack-russia-mobilization"
+  "url": "https://cybernews.com/news/poland-pap-hack-russia-mobilization",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "medium",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "Reports 'Polish officials blamed Russian hackers for the content injection attack' on the national press agency."
 }

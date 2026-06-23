@@ -5,5 +5,10 @@
   "source_name": "SentinelOne",
   "date": "2017-06-30",
   "text": "Dissecting NotPetya: while the malware shows characteristics similar to ransomware, it is more akin to a wiper, which is generally regarded as malware responsible for destroying data on the target hard disk. NotPetya was not designed to recover files after payment — the ransom screen was a facade concealing its true destructive purpose.",
-  "url": "https://www.sentinelone.com/blog/dissecting-notpetya"
+  "url": "https://www.sentinelone.com/blog/dissecting-notpetya",
+  "attribution_state": "no_claim",
+  "attribution_actor": "none",
+  "attribution_confidence": "none",
+  "attribution_basis": "no_claim",
+  "attribution_coding_note": "Technical analysis arguing NotPetya 'is more akin to a wiper'; the stored text makes no attribution claim and names no actor."
 }

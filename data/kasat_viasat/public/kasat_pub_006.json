@@ -5,5 +5,10 @@
   "source_name": "Wired",
   "date": "2022-03-23",
   "text": "This Wired feature describes a satellite internet hack that left tens of thousands of people across Europe without service, focusing on outages linked to Viasat’s KA-SAT network. It recounts disruptions experienced by customers in countries such as Poland and France and explains that thousands of wind turbines in Germany lost remote connectivity during the incident. The article emphasises lingering uncertainty about the attackers and motives while noting that the timing coincided with Russia’s invasion of Ukraine, and it discusses the broader implications of such events for reliance on satellite communications in contemporary conflicts.",
-  "url": "https://www.wired.com/story/viasat-internet-hack-ukraine-russia/"
+  "url": "https://www.wired.com/story/viasat-internet-hack-ukraine-russia/",
+  "attribution_state": "uncertain",
+  "attribution_actor": "unknown",
+  "attribution_confidence": "none",
+  "attribution_basis": "investigative_reporting",
+  "attribution_coding_note": "Emphasises 'lingering uncertainty about the attackers and motives'; Russia's invasion is referenced only as timing context."
 }

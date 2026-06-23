@@ -5,5 +5,10 @@
   "source_name": "White House",
   "date": "2018-02-15",
   "text": "In June 2017, the Russian military launched the most destructive and costly cyber attack in history. NotPetya caused billions of dollars in damage across Europe, Asia, and the Americas and was part of the Kremlin's ongoing effort to destabilize Ukraine. It was also a reckless and indiscriminate cyber attack that will be met with international consequences.",
-  "url": "https://trumpwhitehouse.archives.gov/briefings-statements/statement-press-secretary-russia-notpetya"
+  "url": "https://trumpwhitehouse.archives.gov/briefings-statements/statement-press-secretary-russia-notpetya",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "high",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "White House statement: 'the Russian military launched the most destructive and costly cyber attack in history'."
 }

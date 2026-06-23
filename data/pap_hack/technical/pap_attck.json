@@ -14,5 +14,13 @@
   ],
   "stealth": 0.5,
   "persistence": false,
-  "lateral_movement": false
+  "lateral_movement": false,
+  "evidence_status": {
+    "tactics": "documented_present",
+    "techniques": "documented_present",
+    "stealth": "unknown",
+    "persistence": "unknown",
+    "lateral_movement": "unknown"
+  },
+  "evidence_status_note": "PAP has incomplete public technical evidence. Tactics (4) and techniques (2: T1078 Valid Accounts, T1565.002 Data Manipulation) are documented (PAP, Reuters, Cybernews, Secfense). Stealth (0.5) is a non-committal midpoint with no grounding, coded 'unknown'. Persistence and lateral movement are coded 'unknown' rather than documented_absence: the public evidence does not establish their absence; the binary 'false' values are retained only for legacy-floor compatibility and must not be read as documented absence."
 }

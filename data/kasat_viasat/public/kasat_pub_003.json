@@ -5,5 +5,10 @@
   "source_name": "Reuters",
   "date": "2022-03-11",
   "text": "This exclusive Reuters article reports that Western intelligence agencies were investigating a cyber incident that disrupted broadband satellite internet access in Ukraine and parts of Europe at the time of Russia’s invasion. It explains that hackers disabled modems that communicate with Viasat’s KA-SAT satellite, affecting tens of thousands of customers and having potential implications for Ukrainian military communications. The piece highlights uncertainty over the perpetrators, notes that the attack coincided with Russian military movements, and presents the investigation as part of wider efforts to understand cyber activity surrounding the conflict.",
-  "url": "https://www.reuters.com/world/europe/exclusive-us-spy-agency-probes-sabotage-satellite-internet-2022-03-11/"
+  "url": "https://www.reuters.com/world/europe/exclusive-us-spy-agency-probes-sabotage-satellite-internet-2022-03-11/",
+  "attribution_state": "uncertain",
+  "attribution_actor": "unknown",
+  "attribution_confidence": "none",
+  "attribution_basis": "investigative_reporting",
+  "attribution_coding_note": "Highlights 'uncertainty over the perpetrators' and an ongoing investigation; Russian military movement appears only as timing context, not attribution."
 }

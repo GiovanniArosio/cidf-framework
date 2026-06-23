@@ -18,5 +18,13 @@
   "stealth": 0.2,
   "persistence": false,
   "lateral_movement": true,
+  "evidence_status": {
+    "tactics": "documented_present",
+    "techniques": "documented_present",
+    "stealth": "inferred",
+    "persistence": "unknown",
+    "lateral_movement": "documented_present"
+  },
+  "evidence_status_note": "Per KASAT_EVIDENCE.md: Initial Access, Lateral Movement, Discovery and Impact are documented at tactic level, and techniques T1083/T1485/T1561.001/T1529/T1498 are documented (Viasat, SentinelOne, MITRE ATT&CK S1125). Persistence is coded 'unknown' (explicitly listed as Unknown in the evidence audit) rather than documented_absence; the binary 'persistence': false is retained only for legacy-floor compatibility. Stealth (0.2) is an analyst inference from overt large-scale disruption, not a directly measured value.",
   "methodological_note": "Evidence-based KA-SAT mapping. Initial Access, Lateral Movement, Discovery, and Impact are documented at tactic level. The techniques T1083, T1485, T1561.001, T1529, and T1498 are supported by Viasat, SentinelOne, and MITRE ATT&CK S1125. Persistence is coded false only as a conservative lower-bound in the current binary TCI model; a stricter evidence-status model should mark persistence as unknown. Stealth is coded low because the operation produced overt large-scale service disruption, but no source directly measures stealth; a stricter model should treat stealth as an inferred qualitative judgement rather than a directly documented component."
 }

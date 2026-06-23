@@ -32,5 +32,13 @@
   ],
   "stealth": 0.25,
   "persistence": false,
-  "lateral_movement": true
+  "lateral_movement": true,
+  "evidence_status": {
+    "tactics": "documented_present",
+    "techniques": "documented_present",
+    "stealth": "inferred",
+    "persistence": "documented_absence",
+    "lateral_movement": "documented_present"
+  },
+  "evidence_status_note": "NotPetya is comparatively well documented. Tactics (9) and techniques (15) are documented by MITRE ATT&CK S0368, Cisco Talos and ESET. Lateral movement is documented (SMB admin shares / EternalBlue). Persistence is coded documented_absence: NotPetya is a destructive wiper that did not retain a foothold; the Persistence tactic and Scheduled Task technique in the mapping relate to reboot-triggering of the wipe, not survival. Stealth (0.25) is an analyst inference from the overt, destructive nature, not a directly measured value."
 }

@@ -1,0 +1,957 @@
+{
+  "generated_utc": "2026-06-23T13:44:15.890092+00:00",
+  "active_cases": [
+    "notpetya",
+    "kasat_viasat",
+    "pap_hack"
+  ],
+  "excluded_cases": [
+    "romania (archived under data/_excluded_cases)"
+  ],
+  "validation": {
+    "summary": {
+      "files_scanned": 56,
+      "corpus_documents": 53,
+      "non_corpus_files_skipped": 3,
+      "documents_with_errors": 0,
+      "documents_with_warnings": 0,
+      "source_type_distribution": {
+        "institutional": 16,
+        "mainstream": 27,
+        "technical": 10
+      },
+      "ok": true
+    },
+    "errors": []
+  },
+  "cases": {
+    "notpetya": {
+      "label": "NotPetya",
+      "crisis_date": "2017-06-27",
+      "tci": {
+        "conservative_floor_score": 0.58,
+        "evidence_adjusted_score": 0.6625,
+        "assessed_score_including_inferred": 0.58,
+        "evidence_coverage": 0.8,
+        "assessment_coverage": 1.0,
+        "documented_components": [
+          "tactics",
+          "techniques",
+          "persistence",
+          "lateral_movement"
+        ],
+        "inferred_components": [
+          "stealth"
+        ],
+        "unknown_components": [],
+        "applicable_component_count": 5,
+        "component_results": {
+          "tactics": {
+            "status": "documented_present",
+            "raw_value": 0.9,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "techniques": {
+            "status": "documented_present",
+            "raw_value": 0.75,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "stealth": {
+            "status": "inferred",
+            "raw_value": 0.25,
+            "in_floor": true,
+            "in_evidence_adjusted": false,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "persistence": {
+            "status": "documented_absence",
+            "raw_value": 0.0,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "lateral_movement": {
+            "status": "documented_present",
+            "raw_value": 1.0,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          }
+        },
+        "legacy_score": 0.58,
+        "warnings": [
+          "assessed_score_including_inferred includes analyst inference for: stealth."
+        ],
+        "legacy_calculate_tci": 0.58
+      },
+      "iva": {
+        "attribution_drift": {
+          "available": true,
+          "composite_score": 0.11375342465753426,
+          "weights": [
+            0.3,
+            0.25,
+            0.25,
+            0.2
+          ],
+          "document_count": 15,
+          "coding_coverage": 1.0,
+          "state_counts": {
+            "no_claim": 8,
+            "attributed": 7
+          },
+          "claim_actor_counts": {
+            "russia": 6,
+            "unknown": 1
+          },
+          "components": {
+            "actor_plurality": {
+              "score": 0.0,
+              "distinct_actors": [
+                "russia"
+              ],
+              "distinct_actor_count": 1,
+              "actor_counts": {
+                "russia": 6
+              },
+              "unidentified_claim_count": 1
+            },
+            "temporal_instability": {
+              "score": 0.0,
+              "transitions": 0,
+              "sequence_length": 6
+            },
+            "convergence_delay": {
+              "score": 0.26301369863013696,
+              "raw_days": 96,
+              "dominant_actor": "russia",
+              "horizon_days": 365.0
+            },
+            "confidence_dispersion": {
+              "score": 0.24000000000000005,
+              "n_claims": 7,
+              "variance": 0.06000000000000001
+            }
+          },
+          "warnings": []
+        },
+        "narrative_fragmentation": {
+          "available": true,
+          "method": "embedding-based K-Means clustering",
+          "n_documents": 15,
+          "primary_k": 4,
+          "primary": {
+            "k": 4,
+            "score": 0.645824867345277,
+            "dispersion": 0.8732328992520361,
+            "dominance": 0.5333333333333333,
+            "inter_cluster_distance": 0.4551056921482086,
+            "cluster_sizes": [
+              7,
+              4,
+              1,
+              3
+            ]
+          },
+          "score": 0.645824867345277,
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "random_state": 42,
+          "sensitivity_k": [
+            3,
+            4,
+            5
+          ],
+          "sensitivity": [
+            {
+              "k": 3,
+              "score": 0.5796060387221609,
+              "dispersion": 0.8649735207179272,
+              "dominance": 0.4,
+              "inter_cluster_distance": 0.37872210144996643,
+              "cluster_sizes": [
+                3,
+                9,
+                3
+              ]
+            },
+            {
+              "k": 4,
+              "score": 0.645824867345277,
+              "dispersion": 0.8732328992520361,
+              "dominance": 0.5333333333333333,
+              "inter_cluster_distance": 0.4551056921482086,
+              "cluster_sizes": [
+                7,
+                4,
+                1,
+                3
+              ]
+            },
+            {
+              "k": 5,
+              "score": 0.6825925357357936,
+              "dispersion": 0.9068270745913876,
+              "dominance": 0.6,
+              "inter_cluster_distance": 0.4662056863307953,
+              "cluster_sizes": [
+                2,
+                6,
+                3,
+                3,
+                1
+              ]
+            }
+          ],
+          "score_range_over_k": [
+            0.5796060387221609,
+            0.6825925357357936
+          ],
+          "warnings": [
+            "Exploratory: corpus is ~15 curated, source-derived analytical summaries per case (not raw articles or the full public sphere). Method is embedding-based K-Means clustering (not BERTopic). Interpret cluster counts as exploratory; see k-sensitivity."
+          ]
+        },
+        "response_timing_proxy": {
+          "available": true,
+          "method": "mainstream_institutional_response_timing_proxy",
+          "proxy_score": 0.4222222222222222,
+          "components": {
+            "void_duration": {
+              "score": 0.13333333333333333,
+              "raw_days": 4,
+              "horizon_days": 30.0,
+              "definition": "days from crisis date to first sampled institutional doc"
+            },
+            "early_public_share": {
+              "score": 1.0,
+              "early_public_facing": 3,
+              "early_official": 0,
+              "definition": "share of early-window docs that are mainstream/public-facing vs institutional"
+            },
+            "institutional_lag": {
+              "score": 0.13333333333333333,
+              "raw_days": 4,
+              "horizon_days": 30.0,
+              "definition": "days between first sampled mainstream and first institutional doc"
+            }
+          },
+          "diagnostics": {
+            "crisis_date": "2017-06-27",
+            "early_window_days": 3,
+            "source_type_counts": {
+              "institutional": 6,
+              "mainstream": 7,
+              "technical": 2
+            },
+            "group_counts": {
+              "official": 6,
+              "public_facing": 7,
+              "technical": 2
+            },
+            "non_institutional_count": 0,
+            "first_official_date": "2017-07-01",
+            "first_public_facing_date": "2017-06-27",
+            "first_technical_date": "2017-06-30",
+            "early_window_composition": {
+              "official": 0,
+              "public_facing": 3,
+              "technical": 1,
+              "other": 0
+            },
+            "peak_public_day": "2018-02-15",
+            "peak_public_count": 2,
+            "peak_public_concentration": 0.2857142857142857
+          },
+          "warnings": [
+            "Mainstream–Institutional Response Timing Proxy. Corpus-bound and exploratory: it describes only the relative timing/concentration of the sampled mainstream vs institutional documents in this curated corpus, not real-world diffusion, virality, or non-institutional amplification. Technical sources are reported separately and excluded from the official/public-facing comparison.",
+            "0 non_institutional documents in corpus; the public-facing group is entirely mainstream — no fringe/social/unverified layer exists to measure."
+          ]
+        },
+        "technical_public_gap_diagnostic": {
+          "status": "exploratory_diagnostic_only",
+          "included_in_aggregate": false,
+          "n_technical_docs": 3,
+          "n_public_docs": 15,
+          "components": {
+            "cosine_distance": 0.2860468626022339,
+            "jaccard_distance": 0.8428571428571429,
+            "document_length_differential": {
+              "score": 0.4159999999999999,
+              "mean_words_technical": 75.0,
+              "mean_words_public": 54.2,
+              "abs_difference_words": 20.799999999999997
+            }
+          },
+          "warnings": [
+            "EXPLORATORY DIAGNOSTIC ONLY — not part of any IVA/CIDI aggregate. The corpus consists of standardized, source-derived analytical summaries (not raw articles or the full public sphere); with small, summarized corpora the composite varies too little across cases to support comparative interpretation."
+          ]
+        }
+      },
+      "cidi_exploratory": {
+        "available": true,
+        "cidi": 0.5013601028450068,
+        "iva_aggregate": 0.3939335047416778,
+        "tci_value": 0.6625,
+        "tci_score_kind": "evidence_adjusted",
+        "tci_evidence_coverage": 0.8,
+        "weights": {
+          "alpha": 0.4,
+          "beta": 0.6
+        },
+        "components_used": {
+          "attribution_drift": 0.11375342465753426,
+          "narrative_fragmentation": 0.645824867345277,
+          "response_timing_proxy": 0.4222222222222222
+        },
+        "sensitivity": {
+          "alphas": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.44999999999999996,
+            0.5,
+            0.55,
+            0.6
+          ],
+          "cidi_scores": [
+            0.44764680379334226,
+            0.4610751285562583,
+            0.47450345331917443,
+            0.48793177808209054,
+            0.5013601028450068,
+            0.5147884276079228,
+            0.5282167523708389,
+            0.541645077133755,
+            0.5550734018966711
+          ],
+          "baseline_cidi": 0.5013601028450068,
+          "alpha_sensitivity_band": [
+            0.44764680379334226,
+            0.5550734018966711
+          ],
+          "band_width": 0.10742659810332883,
+          "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
+        },
+        "warnings": [
+          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only.",
+          "TCI input (evidence_adjusted) rests on evidence coverage 0.80; lower coverage means a less clean comparison.",
+          "Technical–Public Gap diagnostic is excluded from this aggregate."
+        ]
+      }
+    },
+    "kasat_viasat": {
+      "label": "KA-SAT / Viasat",
+      "crisis_date": "2022-02-24",
+      "tci": {
+        "conservative_floor_score": 0.37,
+        "evidence_adjusted_score": 0.5499999999999999,
+        "assessed_score_including_inferred": 0.4625,
+        "evidence_coverage": 0.6,
+        "assessment_coverage": 0.8,
+        "documented_components": [
+          "tactics",
+          "techniques",
+          "lateral_movement"
+        ],
+        "inferred_components": [
+          "stealth"
+        ],
+        "unknown_components": [
+          "persistence"
+        ],
+        "applicable_component_count": 5,
+        "component_results": {
+          "tactics": {
+            "status": "documented_present",
+            "raw_value": 0.4,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "techniques": {
+            "status": "documented_present",
+            "raw_value": 0.25,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "stealth": {
+            "status": "inferred",
+            "raw_value": 0.2,
+            "in_floor": true,
+            "in_evidence_adjusted": false,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "persistence": {
+            "status": "unknown",
+            "raw_value": 0.0,
+            "in_floor": false,
+            "in_evidence_adjusted": false,
+            "in_assessed": false,
+            "applicable": true
+          },
+          "lateral_movement": {
+            "status": "documented_present",
+            "raw_value": 1.0,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          }
+        },
+        "legacy_score": 0.37,
+        "warnings": [
+          "unknown components excluded from evidence-adjusted score: persistence (not treated as documented absence).",
+          "assessed_score_including_inferred includes analyst inference for: stealth."
+        ],
+        "legacy_calculate_tci": 0.37
+      },
+      "iva": {
+        "attribution_drift": {
+          "available": true,
+          "composite_score": 0.0293841095890411,
+          "weights": [
+            0.3,
+            0.25,
+            0.25,
+            0.2
+          ],
+          "document_count": 15,
+          "coding_coverage": 1.0,
+          "state_counts": {
+            "uncertain": 2,
+            "attributed": 10,
+            "no_claim": 3
+          },
+          "claim_actor_counts": {
+            "russia": 10
+          },
+          "components": {
+            "actor_plurality": {
+              "score": 0.0,
+              "distinct_actors": [
+                "russia"
+              ],
+              "distinct_actor_count": 1,
+              "actor_counts": {
+                "russia": 10
+              },
+              "unidentified_claim_count": 0
+            },
+            "temporal_instability": {
+              "score": 0.0,
+              "transitions": 0,
+              "sequence_length": 10
+            },
+            "convergence_delay": {
+              "score": 0.03561643835616438,
+              "raw_days": 13,
+              "dominant_actor": "russia",
+              "horizon_days": 365.0
+            },
+            "confidence_dispersion": {
+              "score": 0.1024,
+              "n_claims": 10,
+              "variance": 0.0256
+            }
+          },
+          "warnings": []
+        },
+        "narrative_fragmentation": {
+          "available": true,
+          "method": "embedding-based K-Means clustering",
+          "n_documents": 15,
+          "primary_k": 4,
+          "primary": {
+            "k": 4,
+            "score": 0.5093024578002227,
+            "dispersion": 0.820111964470926,
+            "dominance": 0.4666666666666667,
+            "inter_cluster_distance": 0.13752557337284088,
+            "cluster_sizes": [
+              8,
+              4,
+              2,
+              1
+            ]
+          },
+          "score": 0.5093024578002227,
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "random_state": 42,
+          "sensitivity_k": [
+            3,
+            4,
+            5
+          ],
+          "sensitivity": [
+            {
+              "k": 3,
+              "score": 0.5237388077791985,
+              "dispersion": 0.8830374409547586,
+              "dominance": 0.4666666666666667,
+              "inter_cluster_distance": 0.10174610465765,
+              "cluster_sizes": [
+                8,
+                5,
+                2
+              ]
+            },
+            {
+              "k": 4,
+              "score": 0.5093024578002227,
+              "dispersion": 0.820111964470926,
+              "dominance": 0.4666666666666667,
+              "inter_cluster_distance": 0.13752557337284088,
+              "cluster_sizes": [
+                8,
+                4,
+                2,
+                1
+              ]
+            },
+            {
+              "k": 5,
+              "score": 0.5498473751758716,
+              "dispersion": 0.8670089610455387,
+              "dominance": 0.5333333333333333,
+              "inter_cluster_distance": 0.14347930252552032,
+              "cluster_sizes": [
+                3,
+                2,
+                7,
+                2,
+                1
+              ]
+            }
+          ],
+          "score_range_over_k": [
+            0.5093024578002227,
+            0.5498473751758716
+          ],
+          "warnings": [
+            "Exploratory: corpus is ~15 curated, source-derived analytical summaries per case (not raw articles or the full public sphere). Method is embedding-based K-Means clustering (not BERTopic). Interpret cluster counts as exploratory; see k-sensitivity."
+          ]
+        },
+        "response_timing_proxy": {
+          "available": false,
+          "reason": "only 0 institutional/mainstream document(s) in the early window [2022-02-24 .. 2022-02-27]; need >= 2. No fallback value imputed.",
+          "method": "mainstream_institutional_response_timing_proxy",
+          "proxy_score": null,
+          "diagnostics": {
+            "crisis_date": "2022-02-24",
+            "early_window_days": 3,
+            "source_type_counts": {
+              "institutional": 2,
+              "mainstream": 13
+            },
+            "group_counts": {
+              "official": 2,
+              "public_facing": 13
+            },
+            "non_institutional_count": 0,
+            "first_official_date": "2022-05-01",
+            "first_public_facing_date": "2022-03-11",
+            "first_technical_date": null,
+            "early_window_composition": {
+              "official": 0,
+              "public_facing": 0,
+              "technical": 0,
+              "other": 0
+            },
+            "peak_public_day": "2022-05-09",
+            "peak_public_count": 3,
+            "peak_public_concentration": 0.23076923076923078
+          },
+          "warnings": [
+            "Mainstream–Institutional Response Timing Proxy. Corpus-bound and exploratory: it describes only the relative timing/concentration of the sampled mainstream vs institutional documents in this curated corpus, not real-world diffusion, virality, or non-institutional amplification. Technical sources are reported separately and excluded from the official/public-facing comparison."
+          ]
+        },
+        "technical_public_gap_diagnostic": {
+          "status": "exploratory_diagnostic_only",
+          "included_in_aggregate": false,
+          "n_technical_docs": 3,
+          "n_public_docs": 15,
+          "components": {
+            "cosine_distance": 0.3544553518295288,
+            "jaccard_distance": 0.9092592592592592,
+            "document_length_differential": {
+              "score": 0.19466666666666668,
+              "mean_words_technical": 79.66666666666667,
+              "mean_words_public": 89.4,
+              "abs_difference_words": 9.733333333333334
+            }
+          },
+          "warnings": [
+            "EXPLORATORY DIAGNOSTIC ONLY — not part of any IVA/CIDI aggregate. The corpus consists of standardized, source-derived analytical summaries (not raw articles or the full public sphere); with small, summarized corpora the composite varies too little across cases to support comparative interpretation.",
+            "Jaccard distance 0.909 is near ceiling (>= 0.85); lexical distance is saturated and not discriminating between cases."
+          ]
+        }
+      },
+      "cidi_exploratory": {
+        "available": false,
+        "reason": "CIDI withheld: unavailable IVA component(s): response_timing_proxy. No aggregation over missing components.",
+        "cidi": null,
+        "unavailable_components": [
+          "response_timing_proxy"
+        ],
+        "warnings": [
+          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only."
+        ]
+      }
+    },
+    "pap_hack": {
+      "label": "PAP Hack",
+      "crisis_date": "2024-05-31",
+      "tci": {
+        "conservative_floor_score": 0.1,
+        "evidence_adjusted_score": 0.25,
+        "assessed_score_including_inferred": 0.25,
+        "evidence_coverage": 0.4,
+        "assessment_coverage": 0.4,
+        "documented_components": [
+          "tactics",
+          "techniques"
+        ],
+        "inferred_components": [],
+        "unknown_components": [
+          "stealth",
+          "persistence",
+          "lateral_movement"
+        ],
+        "applicable_component_count": 5,
+        "component_results": {
+          "tactics": {
+            "status": "documented_present",
+            "raw_value": 0.4,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "techniques": {
+            "status": "documented_present",
+            "raw_value": 0.1,
+            "in_floor": true,
+            "in_evidence_adjusted": true,
+            "in_assessed": true,
+            "applicable": true
+          },
+          "stealth": {
+            "status": "unknown",
+            "raw_value": 0.5,
+            "in_floor": false,
+            "in_evidence_adjusted": false,
+            "in_assessed": false,
+            "applicable": true
+          },
+          "persistence": {
+            "status": "unknown",
+            "raw_value": 0.0,
+            "in_floor": false,
+            "in_evidence_adjusted": false,
+            "in_assessed": false,
+            "applicable": true
+          },
+          "lateral_movement": {
+            "status": "unknown",
+            "raw_value": 0.0,
+            "in_floor": false,
+            "in_evidence_adjusted": false,
+            "in_assessed": false,
+            "applicable": true
+          }
+        },
+        "legacy_score": 0.2,
+        "warnings": [
+          "unknown components excluded from evidence-adjusted score: stealth, persistence, lateral_movement (not treated as documented absence)."
+        ],
+        "legacy_calculate_tci": 0.2
+      },
+      "iva": {
+        "attribution_drift": {
+          "available": true,
+          "composite_score": 0.020480000000000005,
+          "weights": [
+            0.3,
+            0.25,
+            0.25,
+            0.2
+          ],
+          "document_count": 15,
+          "coding_coverage": 1.0,
+          "state_counts": {
+            "attributed": 10,
+            "no_claim": 4,
+            "uncertain": 1
+          },
+          "claim_actor_counts": {
+            "russia": 10
+          },
+          "components": {
+            "actor_plurality": {
+              "score": 0.0,
+              "distinct_actors": [
+                "russia"
+              ],
+              "distinct_actor_count": 1,
+              "actor_counts": {
+                "russia": 10
+              },
+              "unidentified_claim_count": 0
+            },
+            "temporal_instability": {
+              "score": 0.0,
+              "transitions": 0,
+              "sequence_length": 10
+            },
+            "convergence_delay": {
+              "score": 0.0,
+              "raw_days": 0,
+              "dominant_actor": "russia",
+              "horizon_days": 365.0
+            },
+            "confidence_dispersion": {
+              "score": 0.10240000000000002,
+              "n_claims": 10,
+              "variance": 0.025600000000000005
+            }
+          },
+          "warnings": []
+        },
+        "narrative_fragmentation": {
+          "available": true,
+          "method": "embedding-based K-Means clustering",
+          "n_documents": 15,
+          "primary_k": 4,
+          "primary": {
+            "k": 4,
+            "score": 0.6165631091160803,
+            "dispersion": 0.8527936308491302,
+            "dominance": 0.6,
+            "inter_cluster_distance": 0.31815218925476074,
+            "cluster_sizes": [
+              6,
+              6,
+              2,
+              1
+            ]
+          },
+          "score": 0.6165631091160803,
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "random_state": 42,
+          "sensitivity_k": [
+            3,
+            4,
+            5
+          ],
+          "sensitivity": [
+            {
+              "k": 3,
+              "score": 0.5350460573651813,
+              "dispersion": 0.7766490138119515,
+              "dominance": 0.4,
+              "inter_cluster_distance": 0.3479548394680023,
+              "cluster_sizes": [
+                5,
+                9,
+                1
+              ]
+            },
+            {
+              "k": 4,
+              "score": 0.6165631091160803,
+              "dispersion": 0.8527936308491302,
+              "dominance": 0.6,
+              "inter_cluster_distance": 0.31815218925476074,
+              "cluster_sizes": [
+                6,
+                6,
+                2,
+                1
+              ]
+            },
+            {
+              "k": 5,
+              "score": 0.6392437105554819,
+              "dispersion": 0.8927518470035196,
+              "dominance": 0.6,
+              "inter_cluster_distance": 0.3404765725135803,
+              "cluster_sizes": [
+                4,
+                2,
+                6,
+                2,
+                1
+              ]
+            }
+          ],
+          "score_range_over_k": [
+            0.5350460573651813,
+            0.6392437105554819
+          ],
+          "warnings": [
+            "Exploratory: corpus is ~15 curated, source-derived analytical summaries per case (not raw articles or the full public sphere). Method is embedding-based K-Means clustering (not BERTopic). Interpret cluster counts as exploratory; see k-sensitivity."
+          ]
+        },
+        "response_timing_proxy": {
+          "available": true,
+          "method": "mainstream_institutional_response_timing_proxy",
+          "proxy_score": 0.16666666666666666,
+          "components": {
+            "void_duration": {
+              "score": 0.0,
+              "raw_days": 0,
+              "horizon_days": 30.0,
+              "definition": "days from crisis date to first sampled institutional doc"
+            },
+            "early_public_share": {
+              "score": 0.5,
+              "early_public_facing": 6,
+              "early_official": 6,
+              "definition": "share of early-window docs that are mainstream/public-facing vs institutional"
+            },
+            "institutional_lag": {
+              "score": 0.0,
+              "raw_days": 0,
+              "horizon_days": 30.0,
+              "definition": "days between first sampled mainstream and first institutional doc"
+            }
+          },
+          "diagnostics": {
+            "crisis_date": "2024-05-31",
+            "early_window_days": 3,
+            "source_type_counts": {
+              "institutional": 8,
+              "mainstream": 7
+            },
+            "group_counts": {
+              "official": 8,
+              "public_facing": 7
+            },
+            "non_institutional_count": 0,
+            "first_official_date": "2024-05-15",
+            "first_public_facing_date": "2024-05-31",
+            "first_technical_date": null,
+            "early_window_composition": {
+              "official": 6,
+              "public_facing": 6,
+              "technical": 0,
+              "other": 0
+            },
+            "peak_public_day": "2024-06-01",
+            "peak_public_count": 3,
+            "peak_public_concentration": 0.42857142857142855
+          },
+          "warnings": [
+            "Mainstream–Institutional Response Timing Proxy. Corpus-bound and exploratory: it describes only the relative timing/concentration of the sampled mainstream vs institutional documents in this curated corpus, not real-world diffusion, virality, or non-institutional amplification. Technical sources are reported separately and excluded from the official/public-facing comparison.",
+            "0 non_institutional documents in corpus; the public-facing group is entirely mainstream — no fringe/social/unverified layer exists to measure."
+          ]
+        },
+        "technical_public_gap_diagnostic": {
+          "status": "exploratory_diagnostic_only",
+          "included_in_aggregate": false,
+          "n_technical_docs": 2,
+          "n_public_docs": 15,
+          "components": {
+            "cosine_distance": 0.2723885178565979,
+            "jaccard_distance": 0.9014675052410901,
+            "document_length_differential": {
+              "score": 0.4053333333333333,
+              "mean_words_technical": 81.0,
+              "mean_words_public": 60.733333333333334,
+              "abs_difference_words": 20.266666666666666
+            }
+          },
+          "warnings": [
+            "EXPLORATORY DIAGNOSTIC ONLY — not part of any IVA/CIDI aggregate. The corpus consists of standardized, source-derived analytical summaries (not raw articles or the full public sphere); with small, summarized corpora the composite varies too little across cases to support comparative interpretation.",
+            "Jaccard distance 0.901 is near ceiling (>= 0.85); lexical distance is saturated and not discriminating between cases."
+          ]
+        }
+      },
+      "cidi_exploratory": {
+        "available": true,
+        "cidi": 0.2607419551565494,
+        "iva_aggregate": 0.26790325859424896,
+        "tci_value": 0.25,
+        "tci_score_kind": "evidence_adjusted",
+        "tci_evidence_coverage": 0.4,
+        "weights": {
+          "alpha": 0.4,
+          "beta": 0.6
+        },
+        "components_used": {
+          "attribution_drift": 0.020480000000000005,
+          "narrative_fragmentation": 0.6165631091160803,
+          "response_timing_proxy": 0.16666666666666666
+        },
+        "sensitivity": {
+          "alphas": [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.44999999999999996,
+            0.5,
+            0.55,
+            0.6
+          ],
+          "cidi_scores": [
+            0.26432260687539916,
+            0.26342744394568673,
+            0.26253228101597426,
+            0.26163711808626183,
+            0.2607419551565494,
+            0.25984679222683693,
+            0.25895162929712445,
+            0.25805646636741203,
+            0.2571613034376996
+          ],
+          "baseline_cidi": 0.2607419551565494,
+          "alpha_sensitivity_band": [
+            0.2571613034376996,
+            0.26432260687539916
+          ],
+          "band_width": 0.007161303437699551,
+          "caveat": "Band reflects algebraic weight sensitivity only, not empirical robustness of the inputs."
+        },
+        "warnings": [
+          "CIDI is an optional, exploratory synthesis — not the primary result. It presupposes commensurability of a technical index and interpretive proxies measured on a small, curated corpus; treat it as illustrative only.",
+          "TCI input (evidence_adjusted) rests on evidence coverage 0.40; lower coverage means a less clean comparison.",
+          "Technical–Public Gap diagnostic is excluded from this aggregate."
+        ]
+      }
+    }
+  },
+  "notes": [
+    "Technical–Public Gap is an exploratory diagnostic and is excluded from every aggregate and from CIDI.",
+    "CIDI is an optional exploratory synthesis, not the primary result.",
+    "The corpus consists of curated, source-derived analytical summaries (~15/case), not raw articles or the full public sphere.",
+    "No final ranked conclusion is asserted; see coverage and warnings."
+  ]
+}

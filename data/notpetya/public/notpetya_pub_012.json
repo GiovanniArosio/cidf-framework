@@ -5,5 +5,10 @@
   "source_name": "Wired",
   "date": "2018-08-22",
   "text": "NotPetya was the most devastating cyberattack in history. The White House estimated the damage exceeded 10 billion USD globally. Maersk was forced to reinstall thousands of servers and tens of thousands of PCs. The malware spread from Ukraine across the globe hitting major corporations. Despite displaying a ransom note, NotPetya was designed to irreversibly destroy data — a wiper masquerading as ransomware.",
-  "url": "https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world"
+  "url": "https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world",
+  "attribution_state": "no_claim",
+  "attribution_actor": "none",
+  "attribution_confidence": "none",
+  "attribution_basis": "no_claim",
+  "attribution_coding_note": "Covers damage scale and the 'wiper masquerading as ransomware' nature; the stored summary names no responsible actor."
 }

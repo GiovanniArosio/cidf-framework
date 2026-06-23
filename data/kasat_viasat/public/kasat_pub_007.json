@@ -5,5 +5,10 @@
   "source_name": "The Washington Post",
   "date": "2022-03-24",
   "text": "This Washington Post article reports that U.S. intelligence analysts concluded Russian military hackers were responsible for the attack on a satellite broadband service used in Ukraine. It explains that the operation affected communication devices relied upon by Ukrainian forces and is viewed as part of Russia’s efforts to disrupt command and control during the opening phase of the war. The piece cites Ukrainian officials and unnamed U.S. sources, presenting the attribution as a private assessment at the time and situating the hack within broader concerns about cyber dimensions of the conflict.",
-  "url": "https://www.washingtonpost.com/national-security/2022/03/24/russian-military-behind-hack-satellite-communication-devices-ukraine"
+  "url": "https://www.washingtonpost.com/national-security/2022/03/24/russian-military-behind-hack-satellite-communication-devices-ukraine",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "medium",
+  "attribution_basis": "investigative_reporting",
+  "attribution_coding_note": "Reports US intelligence analysts 'concluded Russian military hackers were responsible', explicitly framed as a 'private assessment at the time' citing unnamed US sources."
 }

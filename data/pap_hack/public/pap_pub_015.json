@@ -5,5 +5,10 @@
   "source_name": "Demagog (Polish Fact-Checker)",
   "date": "2024-05-31",
   "text": "Demagog amplified PAP's correction on X immediately after the false mobilization dispatch appeared, labeling the message as fakenews and embedding PAP's official denial. The fact-checking outlet's rapid response was part of the broader institutional correction effort that helped contain public panic within hours of the false dispatch's publication and removal.",
-  "url": "https://demagog.org.pl/fake_news/pap-mobilizacja-fakenews"
+  "url": "https://demagog.org.pl/fake_news/pap-mobilizacja-fakenews",
+  "attribution_state": "no_claim",
+  "attribution_actor": "none",
+  "attribution_confidence": "none",
+  "attribution_basis": "no_claim",
+  "attribution_coding_note": "Fact-checker 'amplified PAP's correction' and labelled the message fakenews; the stored text attributes the act to no external actor."
 }

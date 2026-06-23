@@ -5,5 +5,10 @@
   "source_name": "European Commission / EU Newsroom",
   "date": "2022-05-01",
   "text": "This brief European Commission communication reports that several thousand internet users across Europe were left without service following a likely cyberattack at the beginning of Russia’s attack on Ukraine. It describes the event as a massive cyber-attack on satellites and notes the impact on connectivity for citizens, without going into technical detail. The item situates the outage within the broader context of the war and presents it as part of information provided to the public about evolving cyber-related consequences in Europe.",
-  "url": "https://ec.europa.eu/newsroom/cipr/redirection/item/740427/en/2357"
+  "url": "https://ec.europa.eu/newsroom/cipr/redirection/item/740427/en/2357",
+  "attribution_state": "no_claim",
+  "attribution_actor": "none",
+  "attribution_confidence": "none",
+  "attribution_basis": "no_claim",
+  "attribution_coding_note": "European Commission item describes 'a likely cyberattack' affecting EU users 'without going into technical detail'; no actor named."
 }

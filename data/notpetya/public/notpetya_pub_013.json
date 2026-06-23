@@ -5,5 +5,10 @@
   "source_name": "New York Times",
   "date": "2018-12-01",
   "text": "Merck's insurers denied claims after NotPetya hit its research, sales and manufacturing operations causing nearly 700 million USD in damage. Mondelez lost 1700 servers and 24000 laptops. The litigation raised the question of whether large-scale state-attributed cyber incidents constitute acts of war triggering war exclusion clauses in insurance policies.",
-  "url": "https://www.nytimes.com/2019/04/15/technology/merck-cyberattack-insurance.html"
+  "url": "https://www.nytimes.com/2019/04/15/technology/merck-cyberattack-insurance.html",
+  "attribution_state": "attributed",
+  "attribution_actor": "unknown",
+  "attribution_confidence": "low",
+  "attribution_basis": "investigative_reporting",
+  "attribution_coding_note": "Refers to 'large-scale state-attributed cyber incidents' in an acts-of-war insurance context; the stored text references state attribution but names no specific actor (coded actor 'unknown')."
 }

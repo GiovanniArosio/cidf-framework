@@ -5,5 +5,10 @@
   "source_name": "ABW (Internal Security Agency) spokesperson Jacek Dobrzyński",
   "date": "2024-06-01",
   "text": "Given the probable Russian cyberattack on the Polish Press Agency and the release of disinformation on alleged mobilisation in Poland, the ABW and the digital ministry have taken swift action. It is most likely a Russian disinformation operation. The Warsaw Prosecutor's Office opened an investigation into disinformation by disseminating false information by undetermined persons involved in or acting on behalf of foreign intelligence, with a potential sentence of at least eight years.",
-  "url": "https://abw.gov.pl/statement-pap-cyberattack"
+  "url": "https://abw.gov.pl/statement-pap-cyberattack",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "medium",
+  "attribution_basis": "official_attribution",
+  "attribution_coding_note": "ABW spokesperson cites a 'probable Russian cyberattack' and 'most likely a Russian disinformation operation'; investigation references persons 'acting on behalf of foreign intelligence'."
 }

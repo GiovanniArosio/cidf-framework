@@ -5,5 +5,10 @@
   "source_name": "Sky News",
   "date": "2022-03-31",
   "text": "This Sky News story explains that Russian government hackers have been linked to a cyberattack on Viasat equipment that occurred on the first day of the invasion of Ukraine. It notes that the incident knocked businesses and individuals offline and refers to destructive software found on routers as part of the operation. The article summarises assessments from US intelligence and security researchers, presenting the attack as an example of Russia’s use of cyber means alongside conventional military force while acknowledging that formal public attribution was still developing.",
-  "url": "https://news.sky.com/story/russian-government-hackers-linked-to-cyber-attack-on-first-day-of-ukraine-invasion-12579396"
+  "url": "https://news.sky.com/story/russian-government-hackers-linked-to-cyber-attack-on-first-day-of-ukraine-invasion-12579396",
+  "attribution_state": "attributed",
+  "attribution_actor": "russia",
+  "attribution_confidence": "medium",
+  "attribution_basis": "investigative_reporting",
+  "attribution_coding_note": "States 'Russian government hackers have been linked to' the attack per US intelligence and researchers, while noting 'formal public attribution was still developing'."
 }

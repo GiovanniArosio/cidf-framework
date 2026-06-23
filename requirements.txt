@@ -1,9 +1,11 @@
-bertopic>=0.16.0
+# Runtime dependencies actually used by the hardened framework.
+# (Removed: bertopic, anthropic, plotly, python-dotenv — no longer imported.
+#  Narrative Fragmentation uses sklearn K-Means, not BERTopic; attribution is
+#  coded manually, not via an LLM.)
 sentence-transformers>=2.7.0
 scikit-learn>=1.4.0
-pandas>=2.0.0
+scipy>=1.11.0
 numpy>=1.26.0
-anthropic>=0.25.0
+pandas>=2.0.0
 streamlit>=1.35.0
-plotly>=5.20.0
-python-dotenv>=1.0.0
+pytest>=8.0.0
