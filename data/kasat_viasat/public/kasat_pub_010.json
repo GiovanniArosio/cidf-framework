@@ -1,7 +1,7 @@
 {
   "doc_id": "kasat_pub_010",
   "case": "kasat_viasat",
-  "source_type": "media",
+  "source_type": "mainstream",
   "source_name": "TechCrunch",
   "date": "2022-03-30",
   "text": "This TechCrunch article discusses a cyberattack on Viasat’s KA-SAT network that caused satellite service outages across central and eastern Europe starting on 24 February, the day of the invasion of Ukraine. It recounts early characterisations of the incident and later reporting that destructive wiper malware played a role, referencing public statements by Viasat and research by SentinelLabs. The piece notes impacts on remote access to thousands of wind turbines in Germany and on customers in Ukraine and other European countries, and mentions warnings from US agencies about potential threats to additional satellite networks.",

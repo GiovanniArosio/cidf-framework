@@ -1,7 +1,7 @@
 {
   "doc_id": "kasat_pub_003",
   "case": "kasat_viasat",
-  "source_type": "media",
+  "source_type": "mainstream",
   "source_name": "Reuters",
   "date": "2022-03-11",
   "text": "This exclusive Reuters article reports that Western intelligence agencies were investigating a cyber incident that disrupted broadband satellite internet access in Ukraine and parts of Europe at the time of Russia’s invasion. It explains that hackers disabled modems that communicate with Viasat’s KA-SAT satellite, affecting tens of thousands of customers and having potential implications for Ukrainian military communications. The piece highlights uncertainty over the perpetrators, notes that the attack coincided with Russian military movements, and presents the investigation as part of wider efforts to understand cyber activity surrounding the conflict.",
