@@ -1,0 +1,9 @@
+{
+  "doc_id": "kasat_tech_001",
+  "case": "kasat_viasat",
+  "source_type": "technical",
+  "source_name": "Viasat",
+  "date": "2022-03-30",
+  "text": "Viasat's investigation identified a ground-based network intrusion in which an attacker exploited a misconfiguration in a VPN appliance to gain remote access to the trusted management segment of the KA-SAT network. The attacker then moved laterally through this trusted management network to a specific segment used to manage and operate the network, and used that access to execute legitimate, targeted management commands on a large number of residential modems simultaneously. Viasat also reported high volumes of focused malicious traffic from SurfBeam2 and SurfBeam 2+ modems and associated customer premises equipment, producing a targeted denial-of-service condition and causing large numbers of modems across Europe to exit the network.",
+  "url": "https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/"
+}

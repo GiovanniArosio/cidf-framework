@@ -1,0 +1,9 @@
+{
+  "doc_id": "kasat_tech_003",
+  "case": "kasat_viasat",
+  "source_type": "technical",
+  "source_name": "MITRE ATT&CK",
+  "date": "2024-01-01",
+  "text": "MITRE ATT&CK identifies AcidRain as an ELF binary targeting modems and routers using MIPS architecture and associates it with the ViaSat KA-SAT communication outage during the initial phase of Russia's 2022 full-scale invasion of Ukraine. MITRE maps AcidRain to File and Directory Discovery, Data Destruction, Disk Wipe: Disk Content Wipe, and System Shutdown/Reboot.",
+  "url": "https://attack.mitre.org/software/S1125/"
+}

@@ -1,0 +1,9 @@
+{
+  "doc_id": "kasat_tech_002",
+  "case": "kasat_viasat",
+  "source_type": "technical",
+  "source_name": "SentinelOne SentinelLabs",
+  "date": "2022-03-31",
+  "text": "SentinelLabs identified AcidRain as an ELF MIPS malware designed to wipe modems and routers. The malware performs an in-depth wipe of the filesystem and known storage device files. When running as root, AcidRain recursively overwrites and deletes non-standard files, iterates over device file identifiers, opens device files, overwrites them or uses IOCTLs to erase them, and finally reboots the device. SentinelLabs reported that Viasat confirmed the use of the AcidRain wiper in the February 24 attack against KA-SAT modems.",
+  "url": "https://www.sentinelone.com/labs/acidrain-a-modem-wiper-rains-down-on-europe/"
+}

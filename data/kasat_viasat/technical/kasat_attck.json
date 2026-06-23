@@ -1,0 +1,22 @@
+{
+  "case": "KA-SAT / Viasat",
+  "date": "2022-02-24",
+  "source": "Viasat official incident overview + SentinelOne AcidRain analysis + MITRE ATT&CK S1125 + UK/NCSC and CISA attribution statements",
+  "tactics": [
+    "TA0001 Initial Access",
+    "TA0007 Discovery",
+    "TA0008 Lateral Movement",
+    "TA0040 Impact"
+  ],
+  "techniques": [
+    "T1083 File and Directory Discovery",
+    "T1485 Data Destruction",
+    "T1561.001 Disk Wipe Disk Content Wipe",
+    "T1529 System Shutdown Reboot",
+    "T1498 Network Denial of Service"
+  ],
+  "stealth": 0.2,
+  "persistence": false,
+  "lateral_movement": true,
+  "methodological_note": "Evidence-based KA-SAT mapping. Initial Access, Lateral Movement, Discovery, and Impact are documented at tactic level. The techniques T1083, T1485, T1561.001, T1529, and T1498 are supported by Viasat, SentinelOne, and MITRE ATT&CK S1125. Persistence is coded false only as a conservative lower-bound in the current binary TCI model; a stricter evidence-status model should mark persistence as unknown. Stealth is coded low because the operation produced overt large-scale service disruption, but no source directly measures stealth; a stricter model should treat stealth as an inferred qualitative judgement rather than a directly documented component."
+}
