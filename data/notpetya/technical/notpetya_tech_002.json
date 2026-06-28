@@ -5,5 +5,5 @@
   "source_name": "ESET",
   "date": "2017-06-30",
   "text": "Diskcoder.C also known as ExPetr or NotPetya is a destructive wiper distributed via a backdoored M.E.Doc software update. ESET linked the malware to the TeleBots group with prior destructive operations against Ukrainian infrastructure including the 2015 BlackEnergy power grid attack. The malware encrypts the MBR and individual files using AES-128 encryption but deliberately discards the encryption keys making decryption impossible. The supply chain vector via M.E.Doc allowed initial access to thousands of Ukrainian organizations simultaneously.",
-  "url": "https://www.eset.com/int/about/newsroom/press-releases/research/notpetya-analysis"
+  "url": "https://www.welivesecurity.com/2017/06/30/telebots-back-supply-chain-attacks-against-ukraine/"
 }
