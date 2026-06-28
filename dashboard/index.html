@@ -8,433 +8,112 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0a0a0a;
-    --panel:#111111;
-    --panel-2:#0d0d0d;
-    --accent:#E8521A;
-    --accent-soft:rgba(232,82,26,0.3);
-    --accent-glow:rgba(232,82,26,0.4);
-    --text:#F0EDE8;
-    --text-dim:#7A7672;
-    --line:rgba(232,82,26,0.3);
-    --line-faint:rgba(240,237,232,0.08);
-    --green:#2D5A27;
-    --green-text:#69C45A;
-    --blue:#1A6BE8;
-    --red:#E81A1A;
-    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-    --sans:'Space Grotesk',system-ui,sans-serif;
-  }
-
-  *{box-sizing:border-box;border-radius:0 !important;margin:0;padding:0}
-
-  html{scroll-behavior:smooth}
-
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    /* faint dot-grid overlay */
-    background-image:radial-gradient(rgba(240,237,232,0.045) 1px, transparent 1px);
-    background-size:22px 22px;
-    background-position:-1px -1px;
-    overflow-x:hidden;
-  }
-
-  a{color:inherit;text-decoration:none}
-
-  ::selection{background:var(--accent);color:#0a0a0a}
-
-  .wrap{max-width:1320px;margin:0 auto;padding:0 28px}
-
-  .mono{font-family:var(--mono)}
-  .caps{text-transform:uppercase;letter-spacing:0.12em}
-  .dim{color:var(--text-dim)}
-  .accent{color:var(--accent)}
-
-  /* ============ TOP BAR ============ */
-  .topbar{
-    display:flex;justify-content:space-between;align-items:center;
-    font-family:var(--mono);font-size:11px;letter-spacing:0.14em;
-    text-transform:uppercase;color:var(--text-dim);
-    padding:14px 28px;max-width:1320px;margin:0 auto;
-  }
-  .topbar .left{color:var(--text)}
-  .topbar .left b{color:var(--accent);font-weight:700}
-  .topbar .right{text-align:right}
-  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--accent) 12%,var(--accent) 88%,transparent);opacity:0.6}
-
-  /* ============ HERO ============ */
-  .hero{
-    position:relative;padding:74px 0 60px;overflow:hidden;
-    border-bottom:1px solid var(--line);
-  }
-  .hero::before{ /* scanlines */
-    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-    background:repeating-linear-gradient(0deg,rgba(232,82,26,0.05) 0px,rgba(232,82,26,0.05) 1px,transparent 2px,transparent 5px);
-    opacity:0.5;
-  }
-  .hero::after{ /* corner ticks glow */
-    content:"";position:absolute;top:-40%;right:-10%;width:520px;height:520px;
-    background:radial-gradient(circle,rgba(232,82,26,0.12),transparent 62%);
-    pointer-events:none;z-index:0;
-  }
-  .hero .wrap{position:relative;z-index:1}
-  .hero .kicker{
-    font-family:var(--mono);font-size:11px;letter-spacing:0.3em;color:var(--accent);
-    text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px;
-  }
-  .hero .kicker::before{content:"";width:34px;height:1px;background:var(--accent)}
-  .hero h1{
-    font-size:clamp(40px,7vw,86px);font-weight:700;line-height:0.96;letter-spacing:-0.02em;
-    text-transform:uppercase;margin-bottom:24px;
-  }
-  .hero h1 .void{
-    color:var(--accent);
-    text-shadow:0 0 30px rgba(232,82,26,0.35);
-  }
-  .hero .sub{
-    max-width:680px;font-size:clamp(15px,1.6vw,18px);color:var(--text-dim);
-    font-weight:400;line-height:1.55;border-left:2px solid var(--accent);padding-left:18px;
-  }
-
-  /* stat counters */
-  .stats{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:54px;
-    border:1px solid var(--line);
-  }
-  .stat{
-    padding:26px 28px;position:relative;
-    border-right:1px solid var(--line);
-  }
-  .stat:last-child{border-right:none}
-  .stat .num{
-    font-family:var(--mono);font-size:clamp(34px,4.6vw,52px);font-weight:700;color:var(--text);
-    line-height:1;letter-spacing:-0.01em;
-  }
-  .stat .lbl{
-    font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
-    color:var(--text-dim);margin-top:12px;
-  }
-  .stat::after{content:"";position:absolute;left:0;bottom:0;width:38px;height:2px;background:var(--accent)}
-
-  /* ============ SECTION SCAFFOLD ============ */
-  section{padding:64px 0;border-bottom:1px solid var(--line-faint)}
-  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px;flex-wrap:wrap}
-  .sec-head .idx{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:0.1em}
-  .sec-head h2{font-size:clamp(20px,2.6vw,28px);font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
-  .sec-head .note{font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-left:auto;letter-spacing:0.05em}
-
-  /* ============ ARCHITECTURE STRIP ============ */
-  .arch{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap}
-  .arch-box{
-    flex:1;border:1px solid var(--line);background:var(--panel-2);padding:24px 22px;
-    transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease;
-  }
-  .arch-box:hover{box-shadow:0 0 12px var(--accent-glow);border-color:var(--accent);transform:translateY(-2px)}
-  .arch-box .tag{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent);letter-spacing:0.04em}
-  .arch-box .name{font-size:13px;text-transform:uppercase;letter-spacing:0.08em;margin:8px 0 12px;color:var(--text)}
-  .arch-box .desc{font-size:12.5px;color:var(--text-dim);line-height:1.5}
-  .arch-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:28px;padding:0 14px;font-family:var(--mono)}
-
-  /* ============ FORMULA PANEL ============ */
-  .formula{
-    background:var(--panel);border:1px solid var(--line);padding:38px 34px;position:relative;
-  }
-  .formula::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--accent)}
-  .formula .ftitle{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-dim);margin-bottom:22px}
-  .formula .main-eq{
-    font-family:var(--mono);font-size:clamp(20px,3.2vw,34px);font-weight:700;color:var(--text);letter-spacing:0.01em;
-  }
-  .formula .main-eq b{color:var(--accent)}
-  .formula .subs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0 22px}
-  .formula .sub-eq{
-    font-family:var(--mono);font-size:13px;color:var(--text);background:var(--panel-2);
-    border:1px solid var(--line-faint);border-left:2px solid var(--accent);padding:14px 16px;line-height:1.6;
-  }
-  .formula .sub-eq .k{color:var(--accent)}
-  .formula .annot{font-size:12.5px;color:var(--text-dim);font-style:italic;border-top:1px solid var(--line-faint);padding-top:18px;line-height:1.55}
-  .formula .annot::before{content:"▍ ";color:var(--accent);font-style:normal}
-
-  /* ============ CASE CARDS ============ */
-  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .case{
-    background:var(--panel-2);border:1px solid var(--line);display:flex;flex-direction:column;
-    transition:box-shadow .25s ease,border-color .25s ease;
-  }
-  .case:hover{box-shadow:0 0 14px var(--accent-glow);border-color:var(--accent)}
-  .case .chead{padding:20px 22px 18px;border-bottom:1px solid var(--line);position:relative}
-  .case .chead::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--ccol,var(--accent))}
-  .case .cn{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-  .case .codename{font-family:var(--mono);font-size:18px;font-weight:700;letter-spacing:0.03em;color:var(--text)}
-  .case .cdate{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:0.08em;white-space:nowrap}
-  .case .cdot{display:inline-block;width:9px;height:9px;background:var(--ccol);margin-right:8px;vertical-align:middle}
-
-  .case .cbody{padding:20px 22px;flex:1;display:flex;flex-direction:column;gap:18px}
-
-  /* score block */
-  .metric{margin-bottom:2px}
-  .metric .mtop{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);margin-bottom:7px}
-  .metric .mname{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim)}
-  .metric .mval{font-size:15px;font-weight:700;color:var(--text)}
-  .bar-track{height:6px;background:rgba(240,237,232,0.06);border:1px solid var(--line-faint);position:relative;overflow:hidden}
-  .bar-fill{height:100%;width:0;background:var(--accent);transition:width 1.1s cubic-bezier(.2,.7,.2,1);box-shadow:0 0 8px rgba(232,82,26,0.5)}
-  .bar-fill.cidi{background:linear-gradient(90deg,var(--accent),#ff7a44)}
-
-  .subgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;border-top:1px solid var(--line-faint);padding-top:16px}
-  .subgrid .scell{font-family:var(--mono);text-align:left}
-  .subgrid .sv{font-size:13px;font-weight:700;color:var(--text)}
-  .subgrid .sl{font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;line-height:1.3}
-  .subgrid .sv.na{color:var(--text-dim);font-size:11px}
-
-  .meta-rows{font-family:var(--mono);font-size:11.5px;display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--line-faint);padding-top:16px}
-  .mrow{display:flex;gap:10px;line-height:1.45}
-  .mrow .ml{color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;flex:0 0 86px;font-size:9.5px;padding-top:1px}
-  .mrow .mc{color:var(--text);flex:1}
-  .badge-attr{display:inline-block;border:1px solid var(--ccol);color:var(--ccol);padding:1px 7px;font-size:10px;letter-spacing:0.06em}
-
-  .case .cfoot{border-top:1px solid var(--line);padding:0}
-  .src-btn{
-    width:100%;background:transparent;border:none;color:var(--accent);font-family:var(--mono);
-    font-size:11px;letter-spacing:0.16em;text-transform:uppercase;padding:14px;cursor:pointer;
-    display:flex;justify-content:center;align-items:center;gap:8px;transition:background .2s ease,color .2s ease;
-  }
-  .src-btn:hover{background:rgba(232,82,26,0.08)}
-  .src-btn .arr{transition:transform .3s ease}
-  .src-btn.open .arr{transform:rotate(90deg)}
-
-  /* sources collapsible */
-  .sources-panel{max-height:0;overflow:hidden;transition:max-height .55s ease;background:var(--panel)}
-  .sources-panel.open{max-height:1400px;border-top:1px solid var(--line)}
-  .sources-inner{padding:18px 16px}
-  .src-table{width:100%;border-collapse:collapse;font-family:var(--mono)}
-  .src-table th{
-    font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);
-    text-align:left;padding:0 6px 10px;border-bottom:1px solid var(--line);font-weight:500;
-  }
-  .src-table td{font-size:10.5px;padding:9px 6px;border-bottom:1px solid var(--line-faint);vertical-align:top;color:var(--text)}
-  .src-table tr:last-child td{border-bottom:none}
-  .src-table .sid{color:var(--text-dim);white-space:nowrap;font-size:9.5px}
-  .src-table .stype{color:var(--text-dim);font-size:9px;white-space:nowrap}
-  .src-table a.surl{
-    color:var(--accent);display:block;max-width:96px;white-space:nowrap;overflow:hidden;
-    text-overflow:ellipsis;border-bottom:1px dotted var(--accent-soft);
-  }
-  .src-table a.surl:hover{border-bottom-style:solid}
-  .sbadge{display:inline-flex;align-items:center;gap:5px;font-size:9px;letter-spacing:0.06em;padding:2px 7px;border:1px solid;white-space:nowrap}
-  .sbadge.verified{color:var(--green-text);border-color:var(--green);background:rgba(45,90,39,0.18)}
-  .sbadge.cross{color:var(--accent);border-color:var(--accent-soft);background:rgba(232,82,26,0.1)}
-  .sbadge.contextual{color:var(--text-dim);border-color:rgba(122,118,114,0.5);background:rgba(122,118,114,0.1)}
-  .src-foot{font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:14px;padding-top:12px;border-top:1px solid var(--line-faint);letter-spacing:0.04em}
-  .src-foot a{color:var(--accent)}
-
-  /* ============ METHODOLOGY STRIP ============ */
-  .methods{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line)}
-  .method{padding:24px 20px;border-right:1px solid var(--line);transition:background .2s ease}
-  .method:last-child{border-right:none}
-  .method:hover{background:rgba(232,82,26,0.04)}
-  .method .mlabel{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:0.04em;text-transform:uppercase;line-height:1.25;min-height:34px}
-  .method .mdesc{font-size:12px;color:var(--text-dim);line-height:1.5;margin:12px 0 16px}
-  .mbadge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;padding:3px 9px;border:1px solid}
-  .mbadge.core{color:var(--green-text);border-color:var(--green);background:rgba(45,90,39,0.18)}
-  .mbadge.diagnostic{color:var(--accent);border-color:var(--accent-soft);background:rgba(232,82,26,0.1)}
-  .mbadge.contextual{color:var(--text-dim);border-color:rgba(122,118,114,0.5)}
-
-  /* ============ ACTORS NETWORK ============ */
-  .legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim)}
-  .legend span{display:flex;align-items:center;gap:8px}
-  .legend i{width:11px;height:11px;display:inline-block}
-  .net{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .net-col h3{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text);padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--line)}
-  .tags{display:flex;flex-direction:column;gap:8px}
-  .tag{
-    font-family:var(--mono);font-size:11px;color:var(--text);background:var(--panel-2);
-    border:1px solid var(--tcol,var(--accent));padding:7px 10px;letter-spacing:0.02em;
-    border-left-width:3px;transition:box-shadow .2s ease,transform .2s ease;
-  }
-  .tag:hover{box-shadow:0 0 10px var(--tglow);transform:translateX(2px)}
-  .tag small{color:var(--text-dim);font-size:9px}
-
-  /* ============ FOOTER ============ */
-  footer{padding:48px 0 60px;border-top:1px solid var(--line)}
-  footer .frow{font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:0.04em;line-height:2}
-  footer .frow b{color:var(--text)}
-  footer .frow a{color:var(--accent)}
-  footer .fbig{font-family:var(--sans);font-size:14px;color:var(--text);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
-  footer .fbig .accent{color:var(--accent)}
-
-  /* ============ RESPONSIVE ============ */
-  @media(max-width:900px){
-    .formula .subs{grid-template-columns:1fr}
-    .methods{grid-template-columns:repeat(2,1fr)}
-    .method:nth-child(2){border-right:none}
-    .method:nth-child(1),.method:nth-child(2){border-bottom:1px solid var(--line)}
-    .net{grid-template-columns:repeat(2,1fr)}
-  }
-  @media(max-width:768px){
-    .wrap{padding:0 18px}
-    .topbar{flex-direction:column;gap:6px;text-align:center}
-    .topbar .right{text-align:center}
-    .stats{grid-template-columns:1fr}
-    .stat{border-right:none;border-bottom:1px solid var(--line)}
-    .stat:last-child{border-bottom:none}
-    .arch{flex-direction:column}
-    .arch-arrow{transform:rotate(90deg);padding:10px 0}
-    .cases{grid-template-columns:1fr}
-    .methods{grid-template-columns:1fr}
-    .method{border-right:none;border-bottom:1px solid var(--line)}
-    .method:last-child{border-bottom:none}
-    .net{grid-template-columns:1fr}
-    .sources-panel.open{max-height:2400px}
-    .src-table a.surl{max-width:200px}
-  }
-</style>
+<link rel="stylesheet" href="assets/cidf.css">
 </head>
-<body>
+<body data-page="overview">
+<a class="skip" href="#main">Skip to main content</a>
 
-<!-- ===================== TOP BAR ===================== -->
 <div class="topbar">
   <div class="left mono caps"><b>CIDF</b> // Cyber-Interpretive Disruption Framework</div>
   <div class="right mono caps">LUISS Guido Carli — 2026</div>
 </div>
 <div class="rule"></div>
 
-<!-- ===================== HERO ===================== -->
-<header class="hero">
-  <div class="wrap">
-    <div class="kicker">Empirical Instrument · v1.0 · Corpus-Bound</div>
-    <h1>The <span class="void">Interpretive</span> Void</h1>
-    <p class="sub">Measuring the relationship between cyber-attack technical complexity and communicative disruption in the European public sphere.</p>
-
-    <div class="stats" id="stats">
-      <div class="stat">
-        <div class="num" data-target="3">0</div>
-        <div class="lbl">Cases Analyzed</div>
-      </div>
-      <div class="stat">
-        <div class="num" data-target="53">0</div>
-        <div class="lbl">Corpus Documents</div>
-      </div>
-      <div class="stat">
-        <div class="num" data-target="3">0</div>
-        <div class="lbl">Framework Components</div>
-      </div>
-    </div>
+<nav class="mainnav" aria-label="Primary">
+  <div class="navwrap">
+    <a href="index.html" data-nav="overview">Overview</a>
+    <a href="tci.html" data-nav="tci">TCI</a>
+    <a href="iva.html" data-nav="iva">IVA</a>
+    <a href="cidi.html" data-nav="cidi">CIDI</a>
+    <span class="nav-spacer"><a class="nav-gh mono" href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">GITHUB ↗</a></span>
   </div>
-</header>
+</nav>
 
-<!-- ===================== ARCHITECTURE STRIP ===================== -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="idx">01</span><h2>Framework Architecture</h2>
-      <span class="note mono">CORPUS → ANALYSIS → SYNTHESIS</span>
-    </div>
-    <div class="arch">
-      <div class="arch-box">
-        <div class="tag">TCI</div>
-        <div class="name">Technical Complexity Index</div>
-        <div class="desc">Evidence-aware MITRE ATT&amp;CK scoring across five components; reports a floor, an evidence-adjusted score, and evidence coverage.</div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-box">
-        <div class="tag">IVA</div>
-        <div class="name">Interpretive Void Analyzer</div>
-        <div class="desc">NLP instruments measuring communicative disruption — attribution drift, narrative fragmentation, timing — reported individually.</div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-box">
-        <div class="tag">CIDI</div>
-        <div class="name">Cyber-Interpretive Disruption Index</div>
-        <div class="desc">Scenario-based exploratory synthesis combining evidence-adjusted TCI with the Core Interpretive Vector. Not a single point estimate.</div>
+<main id="main">
+  <header class="hero">
+    <div class="wrap">
+      <div class="kicker">Empirical Instrument · v1.0 · Corpus-Bound</div>
+      <h1>The <span class="void">Interpretive</span> Void</h1>
+      <p class="sub">Measuring the relationship between cyber-attack technical complexity and communicative disruption in the European public sphere.</p>
+      <div class="stats">
+        <div class="stat"><div class="num" data-target="3">0</div><div class="lbl">Cases Analyzed</div></div>
+        <div class="stat"><div class="num" data-target="53">0</div><div class="lbl">Corpus Documents</div></div>
+        <div class="stat"><div class="num" data-target="3">0</div><div class="lbl">Framework Components</div></div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ===================== FORMULA PANEL ===================== -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="idx">02</span><h2>Composite Index — CIDI</h2>
-      <span class="note mono">CORE · INTERPRETIVE-PRIORITIZED SCENARIO</span>
-    </div>
-    <div class="formula">
-      <div class="ftitle">Composite Index — CIDI Core</div>
-      <div class="main-eq">CIDI = <b>0.40</b> × TCI<sub>EA</sub> + <b>0.60</b> × IVC</div>
-      <div class="subs">
-        <div class="sub-eq"><span class="k">TCI<sub>EA</sub></span> = evidence-adjusted mean of documented ATT&amp;CK components</div>
-        <div class="sub-eq"><span class="k">IVC</span> = 0.5 × Attribution_Drift + 0.5 × Narrative_Fragmentation</div>
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">01</span><h2>Framework Architecture</h2><span class="note mono">CORPUS → ANALYSIS → SYNTHESIS</span></div>
+      <div class="arch">
+        <a class="arch-box" href="tci.html"><div class="tag">TCI</div><div class="name">Technical Complexity Index</div><div class="desc">Evidence-aware MITRE ATT&amp;CK scoring across five components; reports a floor, an evidence-adjusted score, and evidence coverage.</div><div class="go">Analyze →</div></a>
+        <div class="arch-arrow">→</div>
+        <a class="arch-box" href="iva.html"><div class="tag">IVA</div><div class="name">Interpretive Void Analyzer</div><div class="desc">NLP instruments measuring communicative disruption — attribution drift, narrative fragmentation, timing — reported individually.</div><div class="go">Analyze →</div></a>
+        <div class="arch-arrow">→</div>
+        <a class="arch-box" href="cidi.html"><div class="tag">CIDI</div><div class="name">Cyber-Interpretive Disruption Index</div><div class="desc">Scenario-based exploratory synthesis combining evidence-adjusted TCI with the Core Interpretive Vector. Not a single point estimate.</div><div class="go">Analyze →</div></a>
       </div>
-      <div class="annot">Asymmetric weighting reflects the primacy of communicative disruption over technical sophistication. This is the interpretive-prioritized scenario of CIDI Core — one of three transparent weight scenarios (neutral 0.5/0.5, interpretive 0.4/0.6, technical 0.6/0.4); no single weighting is claimed as definitive. Values are exploratory and corpus-bound.</div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== CASE STUDIES ===================== -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="idx">03</span><h2>Case Studies</h2>
-      <span class="note mono">SOURCE: results/audit_results.json</span>
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">02</span><h2>Composite Index — CIDI</h2><span class="note mono">CORE · INTERPRETIVE-PRIORITIZED SCENARIO</span></div>
+      <div class="formula">
+        <div class="ftitle">Composite Index — CIDI Core</div>
+        <div class="main-eq">CIDI = <b>0.40</b> × TCI<sub>EA</sub> + <b>0.60</b> × IVC</div>
+        <div class="subs">
+          <div class="sub-eq"><span class="k">TCI<sub>EA</sub></span> = evidence-adjusted mean of documented ATT&amp;CK components</div>
+          <div class="sub-eq"><span class="k">IVC</span> = 0.5 × Attribution_Drift + 0.5 × Narrative_Fragmentation</div>
+        </div>
+        <div class="annot">Asymmetric weighting reflects the primacy of communicative disruption over technical sophistication. This is the interpretive-prioritized scenario of CIDI Core — one of three transparent weight scenarios (neutral 0.5/0.5, interpretive 0.4/0.6, technical 0.6/0.4); no single weighting is claimed as definitive. Values are exploratory and corpus-bound.</div>
+      </div>
     </div>
-    <div class="cases" id="cases"><!-- injected by JS --></div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== METHODOLOGY STRIP ===================== -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="idx">04</span><h2>IVA Dimensions</h2>
-      <span class="note mono">FOUR INSTRUMENTS · REPORTED INDIVIDUALLY</span>
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">03</span><h2>Case Studies</h2><span class="note mono">SOURCE: results/audit_results.json</span></div>
+      <div class="cases" id="cases"></div>
     </div>
-    <div class="methods">
-      <div class="method">
-        <div class="mlabel">Attribution<br>Drift</div>
-        <div class="mdesc">Instability of responsibility claims over time, from a manual, text-grounded structured coding protocol — no keyword or LLM extraction.</div>
-        <span class="mbadge core">CORE</span>
-      </div>
-      <div class="method">
-        <div class="mlabel">Narrative<br>Fragmentation</div>
-        <div class="mdesc">Diversity of competing narratives via K-Means clustering on sentence embeddings, reported with k = 3 / 4 / 5 sensitivity. Exploratory.</div>
-        <span class="mbadge core">CORE</span>
-      </div>
-      <div class="method">
-        <div class="mlabel">Technical–<br>Public Gap</div>
-        <div class="mdesc">Semantic, lexical and length distance between technical and public summaries. Excluded from every aggregate and every CIDI formula.</div>
-        <span class="mbadge diagnostic">DIAGNOSTIC</span>
-      </div>
-      <div class="method">
-        <div class="mlabel">Response<br>Timing Proxy</div>
-        <div class="mdesc">Duration of the communicative vacuum before authoritative response. Captures temporal pressure; returns an explicit unavailable state when evidence is thin.</div>
-        <span class="mbadge contextual">CONTEXTUAL</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== ACTORS NETWORK ===================== -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="idx">05</span><h2>Actors Network</h2>
-      <span class="note mono">COLOR-CODED BY CASE</span>
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">04</span><h2>Deep Analysis</h2><span class="note mono">COMPONENT-LEVEL DASHBOARDS</span></div>
+      <div class="xpages">
+        <a class="xcard" href="tci.html"><div class="xt">TCI</div><div class="xn">Technical Complexity</div><div class="xd">Evidence-status heatmap across the five ATT&amp;CK components, floor / evidence-adjusted / assessed score variants, and coverage.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="iva.html"><div class="xt">IVA</div><div class="xn">Interpretive Void</div><div class="xd">Four-dimension comparison, the weighted Attribution-Drift breakdown, attribution timelines with convergence, and narrative k-sensitivity.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="cidi.html"><div class="xt">CIDI</div><div class="xn">Disruption Index</div><div class="xd">Core &amp; Extended scenario matrix, technical-vs-interpretive composition, weight sensitivity, and ranking-stability.</div><div class="xgo">Open analysis →</div></a>
+      </div>
     </div>
-    <div class="legend">
-      <span><i style="background:#E8521A"></i>NotPetya · 2017</span>
-      <span><i style="background:#1A6BE8"></i>KA-SAT / Viasat · 2022</span>
-      <span><i style="background:#E81A1A"></i>PAP Hack · 2024</span>
-    </div>
-    <div class="net" id="net"><!-- injected by JS --></div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== FOOTER ===================== -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">05</span><h2>IVA Dimensions</h2><span class="note mono">FOUR INSTRUMENTS · REPORTED INDIVIDUALLY</span></div>
+      <div class="methods">
+        <div class="method"><div class="mlabel">Attribution<br>Drift</div><div class="mdesc">Instability of responsibility claims over time, from a manual, text-grounded structured coding protocol — no keyword or LLM extraction.</div><span class="mbadge core">CORE</span></div>
+        <div class="method"><div class="mlabel">Narrative<br>Fragmentation</div><div class="mdesc">Diversity of competing narratives via K-Means clustering on sentence embeddings, reported with k = 3 / 4 / 5 sensitivity. Exploratory.</div><span class="mbadge core">CORE</span></div>
+        <div class="method"><div class="mlabel">Technical–<br>Public Gap</div><div class="mdesc">Semantic, lexical and length distance between technical and public summaries. Excluded from every aggregate and every CIDI formula.</div><span class="mbadge diagnostic">DIAGNOSTIC</span></div>
+        <div class="method"><div class="mlabel">Response<br>Timing Proxy</div><div class="mdesc">Duration of the communicative vacuum before authoritative response. Captures temporal pressure; returns an explicit unavailable state when evidence is thin.</div><span class="mbadge contextual">CONTEXTUAL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">06</span><h2>Actors Network</h2><span class="note mono">COLOR-CODED BY CASE</span></div>
+      <div class="legend-row">
+        <span><i style="background:#E8521A"></i>NotPetya · 2017</span>
+        <span><i style="background:#1A6BE8"></i>KA-SAT / Viasat · 2022</span>
+        <span><i style="background:#E81A1A"></i>PAP Hack · 2024</span>
+      </div>
+      <div class="net" id="net"></div>
+    </div>
+  </section>
+</main>
+
 <footer>
   <div class="wrap">
     <div class="fbig">CIDF <span class="accent">//</span> v1.0</div>
@@ -444,219 +123,6 @@
   </div>
 </footer>
 
-<script>
-/* =========================================================
-   CIDF DASHBOARD — vanilla JS, data-driven
-   All scores read from results/audit_results.json (CIDI Core,
-   interpretive-prioritized 0.4/0.6 scenario). Verified source
-   URLs from docs/source_url_verification.csv.
-   ========================================================= */
-
-const CASES = [
-  {
-    id:'notpetya', codename:'NOTPETYA', date:'JUNE 2017', color:'#E8521A',
-    scores:{ tci:0.662, ivc:0.468, cidi:0.546 },
-    sub:{ attrDrift:0.291, narrFrag:0.646, rtp:0.422 },
-    coverage:0.80,
-    actors:'Sandworm (GRU), Ukraine SBU, US CISA, EU Council, Maersk, Merck',
-    attribution:'CONTESTED → ATTRIBUTED',
-    attributionMeta:'Feb 2018 · US / UK / AU',
-    corpus:'18 documents · 15 public + 3 technical',
-    sources:[
-      { id:'pub_006', name:'US-CERT / CISA',            type:'INSTITUTIONAL', url:'https://www.cisa.gov/news-events/alerts/2017/07/01/petya-ransomware', status:'verified' },
-      { id:'pub_009', name:'White House',               type:'INSTITUTIONAL', url:'https://trumpwhitehouse.archives.gov/briefings-statements/statement-press-secretary-25/', status:'verified' },
-      { id:'pub_008', name:'UK Foreign Office',         type:'INSTITUTIONAL', url:'https://www.gov.uk/government/news/foreign-office-minister-condemns-russia-for-notpetya-attacks', status:'verified' },
-      { id:'pub_015', name:'European Council',          type:'INSTITUTIONAL', url:'https://www.consilium.europa.eu/en/press/press-releases/2020/07/30/eu-imposes-the-first-ever-sanctions-against-cyber-attacks/', status:'verified' },
-      { id:'tech_001',name:'Cisco Talos',               type:'TECHNICAL',     url:'https://blog.talosintelligence.com/2017/07/the-medoc-connection.html', status:'verified' },
-      { id:'tech_003',name:'SentinelOne',               type:'TECHNICAL',     url:'https://www.sentinelone.com/blog/dissecting-notpetya-so-you-thought-it-was-ransomware/', status:'verified' },
-      { id:'pub_007', name:'Ukraine SBU (via SecurityAffairs)', type:'INSTITUTIONAL', url:'https://securityaffairs.com/60562/intelligence/sbu-investigation-notpetya.html', status:'cross' },
-      { id:'pub_012', name:'Wired',                     type:'MAINSTREAM',    url:'https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world', status:'verified' }
-    ]
-  },
-  {
-    id:'kasat', codename:'VIASAT KA-SAT', date:'FEBRUARY 2022', color:'#1A6BE8',
-    scores:{ tci:0.550, ivc:0.342, cidi:0.425 },
-    sub:{ attrDrift:0.174, narrFrag:0.509, rtp:null },
-    coverage:0.60,
-    actors:'GRU (AcidRain malware), Viasat Inc., SentinelLabs, EU / EEAS, NCSC UK, Enercon (collateral)',
-    attribution:'ATTRIBUTED',
-    attributionMeta:'May 2022 · EU / UK / US joint statement',
-    corpus:'18 documents · 15 public + 3 technical',
-    sources:[
-      { id:'tech_001',name:'Viasat',                    type:'TECHNICAL',     url:'https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/', status:'verified' },
-      { id:'tech_002',name:'SentinelLabs',              type:'TECHNICAL',     url:'https://www.sentinelone.com/labs/acidrain-a-modem-wiper-rains-down-on-europe/', status:'verified' },
-      { id:'pub_014', name:'Council of the EU / EEAS',  type:'INSTITUTIONAL', url:'https://euneighbourseast.eu/news-and-stories/latest-news/european-union-strongly-condemns-cyberattack-against-ukraine/', status:'verified' },
-      { id:'pub_015', name:'European Commission',       type:'INSTITUTIONAL', url:'https://ec.europa.eu/newsroom/cipr/redirection/item/740427/en/2357', status:'verified' },
-      { id:'pub_004', name:'Reuters (UK NCSC attribution)', type:'MAINSTREAM', url:'https://www.reuters.com/world/uk/uk-says-russia-was-behind-feb-24-viasat-cyber-attack-2022-05-10/', status:'verified' },
-      { id:'pub_007', name:'The Washington Post',       type:'MAINSTREAM',    url:'https://www.washingtonpost.com/national-security/2022/03/24/russian-military-behind-hack-satellite-communication-devices-ukraine-wars-outset-us-officials-say/', status:'verified' },
-      { id:'pub_006', name:'Wired',                     type:'MAINSTREAM',    url:'https://www.wired.com/story/viasat-internet-hack-ukraine-russia/', status:'verified' },
-      { id:'tech_003',name:'MITRE ATT&CK · AcidRain (S1125)', type:'TECHNICAL', url:'https://attack.mitre.org/software/S1125/', status:'contextual' }
-    ]
-  },
-  {
-    id:'pap', codename:'PAP HACK', date:'MAY 2024', color:'#E81A1A',
-    scores:{ tci:0.250, ivc:0.353, cidi:0.312 },
-    sub:{ attrDrift:0.110, narrFrag:0.595, rtp:0.167 },
-    coverage:0.40,
-    actors:'PAP (Polish Press Agency), ABW, Min. Gawkowski, PM Tusk, NASK / CERT.pl, Notes from Poland',
-    attribution:'APT28 (Russian GRU)',
-    attributionMeta:'Unofficial attribution',
-    corpus:'17 documents · 15 public + 2 technical',
-    sources:[
-      { id:'pub_001', name:'PAP (Polska Agencja Prasowa)', type:'INSTITUTIONAL', url:'https://www.pap.pl/en/news/fake-pap-report-looks-cyberattack-says-govt-official', status:'verified' },
-      { id:'tech_001',name:'Cybernews',                 type:'TECHNICAL',     url:'https://cybernews.com/security/russian-hackers-poland-pap-fake-news-ukraine-military/', status:'verified' },
-      { id:'pub_012', name:'Alliance for Securing Democracy (GMF)', type:'INSTITUTIONAL', url:'https://securingdemocracy.gmfus.org/incident/russian-hack-leads-to-false-news-agency-story-about-polish-mobilization/', status:'verified' },
-      { id:'pub_008', name:'Euractiv',                  type:'MAINSTREAM',    url:'https://www.euractiv.com/news/poland-sees-russian-cyberattack-behind-fake-military-draft-report/', status:'verified' },
-      { id:'pub_004', name:'Tusk / Gawkowski (via Notes from Poland)', type:'MAINSTREAM', url:'https://notesfrompoland.com/2024/05/31/fake-polish-press-agency-reports-on-sending-troops-to-ukraine-blamed-on-russian-hackers/', status:'cross' },
-      { id:'pub_007', name:'ABW (via RDC.pl)',          type:'INSTITUTIONAL', url:'https://www.rdc.pl/aktualnosci/polska/atak-hakerski-pap-mobilizacja-dementi-dobrzynski-cyberatak-wojna-hybrydowa_Gct0NJQDIbORD30CxBMl', status:'cross' },
-      { id:'pub_002', name:'AP (via US News)',          type:'MAINSTREAM',    url:'https://www.usnews.com/news/world/articles/2024-05-31/poland-says-a-fake-news-report-on-mobilizing-200-000-men-was-likely-the-work-of-russia', status:'cross' },
-      { id:'pub_014', name:'NASK → CERT.pl · APT28 (pre-incident)', type:'INSTITUTIONAL', url:'https://cert.pl/en/posts/2024/05/apt28-campaign/', status:'contextual' }
-    ]
-  }
-];
-
-const STATUS_LABEL = { verified:'✓ VERIFIED', cross:'⚠ CROSS-SOURCE', contextual:'○ CONTEXTUAL' };
-const TYPE_ABBR = { INSTITUTIONAL:'INST', MAINSTREAM:'MAIN', TECHNICAL:'TECH' };
-const fmt = v => v.toFixed(3);
-const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(e){ return u; } };
-
-/* ---------- render case cards ---------- */
-function metricRow(name, value, extraClass){
-  return `
-    <div class="metric">
-      <div class="mtop">
-        <span class="mname">${name}</span>
-        <span class="mval">${fmt(value)}</span>
-      </div>
-      <div class="bar-track"><div class="bar-fill ${extraClass||''}" data-value="${value}"></div></div>
-    </div>`;
-}
-
-function sourceRows(sources){
-  return sources.map(s => `
-    <tr>
-      <td class="sid">${s.id}</td>
-      <td>${s.name}</td>
-      <td class="stype" title="${s.type}">${TYPE_ABBR[s.type]||s.type}</td>
-      <td><a class="surl" href="${s.url}" target="_blank" rel="noopener" title="${s.url}">${hostOf(s.url)}</a></td>
-      <td><span class="sbadge ${s.status}">${STATUS_LABEL[s.status]}</span></td>
-    </tr>`).join('');
-}
-
-function caseCard(c){
-  const rtp = c.sub.rtp === null
-      ? `<div class="sv na">N/A</div><div class="sl">Resp. Timing<br>(unavailable)</div>`
-      : `<div class="sv">${fmt(c.sub.rtp)}</div><div class="sl">Resp.<br>Timing</div>`;
-  return `
-  <div class="case" style="--ccol:${c.color}">
-    <div class="chead">
-      <div class="cn">
-        <div class="codename"><span class="cdot"></span>${c.codename}</div>
-        <div class="cdate">${c.date}</div>
-      </div>
-    </div>
-    <div class="cbody">
-      ${metricRow('TCI<sub>EA</sub>', c.scores.tci)}
-      ${metricRow('IVC', c.scores.ivc)}
-      ${metricRow('CIDI', c.scores.cidi, 'cidi')}
-
-      <div class="subgrid">
-        <div class="scell"><div class="sv">${fmt(c.sub.attrDrift)}</div><div class="sl">Attribution<br>Drift</div></div>
-        <div class="scell"><div class="sv">${fmt(c.sub.narrFrag)}</div><div class="sl">Narrative<br>Fragmentation</div></div>
-        <div class="scell">${rtp}</div>
-      </div>
-
-      <div class="meta-rows">
-        <div class="mrow"><span class="ml">Coverage</span><span class="mc">${fmt(c.coverage)} <span class="dim">evidence</span></span></div>
-        <div class="mrow"><span class="ml">Attribution</span><span class="mc"><span class="badge-attr">${c.attribution}</span><br><span class="dim" style="font-size:9.5px">${c.attributionMeta}</span></span></div>
-        <div class="mrow"><span class="ml">Key actors</span><span class="mc">${c.actors}</span></div>
-        <div class="mrow"><span class="ml">Corpus</span><span class="mc">${c.corpus}</span></div>
-      </div>
-    </div>
-    <div class="cfoot">
-      <button class="src-btn" data-target="src-${c.id}">View Sources <span class="arr">→</span></button>
-      <div class="sources-panel" id="src-${c.id}">
-        <div class="sources-inner">
-          <table class="src-table">
-            <thead><tr><th>ID</th><th>Source</th><th>Type</th><th>URL</th><th>Status</th></tr></thead>
-            <tbody>${sourceRows(c.sources)}</tbody>
-          </table>
-          <div class="src-foot">Full corpus: <a href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">github.com/GiovanniArosio/cidf-framework</a></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
-document.getElementById('cases').innerHTML = CASES.map(caseCard).join('');
-
-/* ---------- sources toggle (max-height trick) ---------- */
-document.querySelectorAll('.src-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const panel = document.getElementById(btn.dataset.target);
-    const open = panel.classList.toggle('open');
-    btn.classList.toggle('open', open);
-    btn.firstChild.textContent = open ? 'Hide Sources ' : 'View Sources ';
-  });
-});
-
-/* ---------- actors network ---------- */
-const NET = {
-  'Threat Actors':[
-    ['Sandworm · GRU Unit 74455','#E8521A'],
-    ['GRU · AcidRain wiper','#1A6BE8'],
-    ['APT28 · Fancy Bear','#E81A1A']
-  ],
-  'Victim Organizations':[
-    ['Maersk','#E8521A'],['Merck','#E8521A'],['Ukraine infrastructure','#E8521A'],
-    ['Viasat Inc.','#1A6BE8'],['KA-SAT network','#1A6BE8'],['Enercon (collateral)','#1A6BE8'],
-    ['PAP · Polish Press Agency','#E81A1A']
-  ],
-  'Institutional Responders':[
-    ['US CISA / US-CERT','#E8521A'],['UK Foreign Office','#E8521A'],['European Council','#E8521A'],['Ukraine SBU','#E8521A'],
-    ['EU / EEAS','#1A6BE8'],['NCSC UK','#1A6BE8'],['European Commission','#1A6BE8'],
-    ['ABW','#E81A1A'],['NASK / CERT.pl','#E81A1A'],['Min. Gawkowski','#E81A1A'],['PM Tusk','#E81A1A']
-  ],
-  'Media & Research':[
-    ['Wired','#E8521A'],['Cisco Talos','#E8521A'],['SecurityAffairs','#E8521A'],
-    ['Washington Post','#1A6BE8'],['SentinelLabs','#1A6BE8'],['Reuters','#1A6BE8'],
-    ['Notes from Poland','#E81A1A'],['Cybernews','#E81A1A'],['Euractiv','#E81A1A']
-  ]
-};
-function hexA(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;}
-document.getElementById('net').innerHTML = Object.entries(NET).map(([col,tags])=>`
-  <div class="net-col">
-    <h3>${col}</h3>
-    <div class="tags">
-      ${tags.map(([t,c])=>`<span class="tag" style="--tcol:${c};--tglow:${hexA(c,0.4)}">${t}</span>`).join('')}
-    </div>
-  </div>`).join('');
-
-/* ---------- hero counters ---------- */
-function animateCounter(el){
-  const target = +el.dataset.target;
-  const dur = 1100, start = performance.now();
-  function step(now){
-    const p = Math.min((now-start)/dur, 1);
-    const eased = 1 - Math.pow(1-p, 3);
-    el.textContent = Math.round(eased*target);
-    if(p<1) requestAnimationFrame(step); else el.textContent = target;
-  }
-  requestAnimationFrame(step);
-}
-window.addEventListener('load', ()=> document.querySelectorAll('.stat .num').forEach(animateCounter));
-
-/* ---------- score bars animate on scroll ---------- */
-const barObserver = new IntersectionObserver((entries, obs)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const bar = e.target;
-      bar.style.width = (parseFloat(bar.dataset.value)*100) + '%';
-      obs.unobserve(bar);
-    }
-  });
-}, { threshold:0.35 });
-document.querySelectorAll('.bar-fill').forEach(b=> barObserver.observe(b));
-</script>
+<script src="assets/cidf.js"></script>
 </body>
 </html>

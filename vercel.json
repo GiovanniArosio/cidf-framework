@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "echo \"no install step — static site\"",
-  "buildCommand": "rm -rf public && mkdir public && cp dashboard/index.html public/index.html",
+  "buildCommand": "rm -rf public && mkdir -p public/assets && cp dashboard/index.html dashboard/tci.html dashboard/iva.html dashboard/cidi.html public/ && cp dashboard/assets/cidf.css dashboard/assets/cidf.js public/assets/",
   "outputDirectory": "public",
   "cleanUrls": true
 }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IVA — Interpretive Void Analyzer · CIDF</title>
+<meta name="description" content="Interpretive Void Analyzer — attribution drift, narrative fragmentation, response timing and the technical–public gap across three European cyber crises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cidf.css">
+</head>
+<body data-page="iva">
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="left mono caps"><b>CIDF</b> // Cyber-Interpretive Disruption Framework</div>
+  <div class="right mono caps">LUISS Guido Carli — 2026</div>
+</div>
+<div class="rule"></div>
+
+<nav class="mainnav" aria-label="Primary">
+  <div class="navwrap">
+    <a href="index.html" data-nav="overview">Overview</a>
+    <a href="tci.html" data-nav="tci">TCI</a>
+    <a href="iva.html" data-nav="iva">IVA</a>
+    <a href="cidi.html" data-nav="cidi">CIDI</a>
+    <span class="nav-spacer"><a class="nav-gh mono" href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">GITHUB ↗</a></span>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="phero">
+    <div class="wrap">
+      <div class="ptag">Component 02 · Communicative Layer</div>
+      <h1>IVA<small>Interpretive Void Analyzer — reported individually</small></h1>
+      <p class="pdesc">A set of NLP instruments measuring communicative disruption. The four dimensions are reported <b>individually, not as a single forced composite</b>: two are CORE inputs to the Interpretive Vector, one is CONTEXTUAL, and one is a DIAGNOSTIC excluded from every aggregate. All outputs are exploratory and corpus-bound.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">01</span><h2>Four dimensions, by case</h2><span class="note mono">SMALL MULTIPLES</span></div>
+      <p class="lead"><b>Attribution Drift</b> and <b>Narrative Fragmentation</b> are CORE (each weighted 0.5 in the Interpretive Vector). <b>Response Timing</b> is CONTEXTUAL — and <b>unavailable for KA-SAT</b>, where early-window evidence is insufficient and is never imputed. <b>Technical–Public Gap</b> is a DIAGNOSTIC, shown here as cosine distance but excluded from every CIDI formula.</p>
+      <div class="panel tall"><div data-chart="iva-dimensions"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">02</span><h2>Attribution Drift — internals</h2><span class="note mono">WEIGHTED 4-COMPONENT MODEL</span></div>
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="pno">02.1</span><h3>Sub-component breakdown</h3></div>
+          <div class="panel-sub">Drift = weighted mean of <b>actor plurality</b> (0.30), <b>temporal instability</b> (0.25), <b>convergence delay</b> (0.25) and <b>confidence dispersion</b> (0.20). All three cases identify a single actor (Russia), so actor-plurality is 0 throughout — drift is driven by timing and confidence, not by competing culprits.</div>
+          <div data-chart="iva-attrdrift"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="pno">02.2</span><h3>IVC core composition</h3></div>
+          <div class="panel-sub">The Interpretive Vector combines the two CORE dimensions with equal weight: <b>IVC = 0.5 × Attribution Drift + 0.5 × Narrative Fragmentation</b>. Fragmentation dominates the vector in all three cases.</div>
+          <div data-chart="iva-ivc"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">03</span><h2>Attribution timelines</h2><span class="note mono">SEQUENCE → CONVERGENCE</span></div>
+      <p class="lead">Each dot is an attribution-related document positioned by date, from the crisis date to the last sampled document. Convergence requires three consecutive documents naming the same specific actor. <b>KA-SAT</b> opens with two unresolved claims before converging on Russia after 59 days; <b>NotPetya</b> converges quickly but takes 233 days from crisis to its first in-scope attribution; <b>PAP</b> converges in a single day amid a compressed, days-long sequence.</p>
+      <div class="panel"><div data-chart="iva-timelines"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">04</span><h2>Narrative Fragmentation</h2><span class="note mono">K-MEANS · k = 3 / 4 / 5 SENSITIVITY</span></div>
+      <div class="grid-2-1">
+        <div class="panel">
+          <div class="panel-head"><span class="pno">04.1</span><h3>Cluster-count sensitivity</h3></div>
+          <div class="panel-sub">Diversity of competing narratives via K-Means on sentence embeddings (<span class="mono">all-MiniLM-L6-v2</span>). Reported across k = 3 / 4 / 5; <b>k = 4 is primary</b> (highlighted). Scores rise monotonically with k, as expected — the ordering between cases is stable.</div>
+          <div data-chart="iva-narrative"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="pno">04.2</span><h3>Dimension roles</h3></div>
+          <div class="panel-sub">How each dimension feeds the framework.</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line-faint);padding-bottom:9px"><span class="mono" style="font-size:11px">Attribution Drift</span><span class="mbadge core">CORE</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line-faint);padding-bottom:9px"><span class="mono" style="font-size:11px">Narrative Fragmentation</span><span class="mbadge core">CORE</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line-faint);padding-bottom:9px"><span class="mono" style="font-size:11px">Response Timing Proxy</span><span class="mbadge contextual">CONTEXTUAL</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="mono" style="font-size:11px">Technical–Public Gap</span><span class="mbadge diagnostic">DIAGNOSTIC</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="insight">
+        <span class="ih">What the numbers say</span>
+        Interpretive disruption does <b>not</b> track technical complexity. <b>PAP</b> — the least technically complex case — carries the second-highest IVC (0.353), just above KA-SAT (0.342), because its narrative fragmentation is high despite a fast, unanimous attribution. The "interpretive void" is widest where a low-sophistication information operation still generates competing narratives in the public sphere — precisely the asymmetry the CIDI weighting is designed to surface.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">05</span><h2>Continue</h2></div>
+      <div class="xpages">
+        <a class="xcard" href="cidi.html"><div class="xt">CIDI</div><div class="xn">Disruption Index</div><div class="xd">How the Interpretive Vector combines with evidence-adjusted TCI into the scenario-based composite.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="tci.html"><div class="xt">TCI</div><div class="xn">Technical Complexity</div><div class="xd">The technical layer — evidence-status matrix and score variants across the ATT&amp;CK components.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="index.html"><div class="xt">↩</div><div class="xn">Overview</div><div class="xd">Return to the framework overview, case cards and verified source corpus.</div><div class="xgo">Back to overview →</div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbig">CIDF <span class="accent">//</span> v1.0</div>
+    <div class="frow"><b>Giovanni Arosio</b> — LUISS Guido Carli, 2026</div>
+    <div class="frow">Framework available at <a href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">github.com/GiovanniArosio/cidf-framework</a></div>
+    <div class="frow dim">Released under MIT License for academic use · All outputs are exploratory, corpus-bound and non-causal</div>
+  </div>
+</footer>
+
+<script src="assets/cidf.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIDI — Cyber-Interpretive Disruption Index · CIDF</title>
+<meta name="description" content="Cyber-Interpretive Disruption Index — scenario-based synthesis of evidence-adjusted TCI and the Interpretive Vector, with ranking-stability analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cidf.css">
+</head>
+<body data-page="cidi">
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="left mono caps"><b>CIDF</b> // Cyber-Interpretive Disruption Framework</div>
+  <div class="right mono caps">LUISS Guido Carli — 2026</div>
+</div>
+<div class="rule"></div>
+
+<nav class="mainnav" aria-label="Primary">
+  <div class="navwrap">
+    <a href="index.html" data-nav="overview">Overview</a>
+    <a href="tci.html" data-nav="tci">TCI</a>
+    <a href="iva.html" data-nav="iva">IVA</a>
+    <a href="cidi.html" data-nav="cidi">CIDI</a>
+    <span class="nav-spacer"><a class="nav-gh mono" href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">GITHUB ↗</a></span>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="phero">
+    <div class="wrap">
+      <div class="ptag">Component 03 · Synthesis Layer</div>
+      <h1>CIDI<small>Cyber-Interpretive Disruption Index — scenario-based</small></h1>
+      <p class="pdesc">CIDI is a <b>scenario-based exploratory synthesis, not a primary inferential result</b>. It summarizes alternative, transparent modelling choices after the substantive comparison of evidence-aware TCI and the individual IVA components. <b>No unique empirically validated weighting is claimed</b>, and no single value is presented as "the" CIDI.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">01</span><h2>Scenario matrix</h2><span class="note mono">CORE &amp; EXTENDED × 3 WEIGHTS</span></div>
+      <p class="lead">Each level is evaluated under three transparent weight scenarios — <b>neutral</b> (0.50/0.50), <b>interpretive-prioritized</b> (0.40/0.60) and <b>technical-prioritized</b> (0.60/0.40). <b>Core</b> uses the equal-weight Interpretive Vector and is available for all cases. <b>Extended</b> adds the Response Timing Proxy at a lower weight — and is therefore <b>unavailable for KA-SAT</b>, where timing cannot be measured. Cell intensity encodes magnitude; the dot marks the top case per column.</p>
+      <div class="panel"><div data-chart="cidi-matrix"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">02</span><h2>What drives each score</h2><span class="note mono">TECHNICAL vs INTERPRETIVE</span></div>
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="pno">02.1</span><h3>Composition · interpretive scenario</h3></div>
+          <div class="panel-sub">CIDI Core (interpretive) = <b>0.40 × TCI</b> + <b>0.60 × IVC</b>. The split shows how much of each case's score is technical versus interpretive. For PAP the interpretive share <b>exceeds</b> the technical one — the inversion that defines the interpretive void.</div>
+          <div data-chart="cidi-composition"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="pno">02.2</span><h3>Weight sensitivity · Core</h3></div>
+          <div class="panel-sub">How each case's Core score moves across the three weight scenarios. The bands are narrow and never cross — the substantive comparison is robust to the weighting choice.</div>
+          <div data-chart="cidi-sensitivity"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">03</span><h2>Ranking stability</h2><span class="note mono">ROBUSTNESS, NOT POINT ESTIMATE</span></div>
+      <p class="lead">The reported result is a <b>ranking-stability comparison</b>, not a point estimate. Across all three Core weight scenarios the ordering is identical, and it holds for the Extended scenarios among the cases where it is available. This is a descriptive ordering over the available cases — no causal or out-of-sample claim is made.</p>
+      <div class="panel"><div data-chart="cidi-ranking"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="insight">
+        <span class="ih">Guarantees &amp; limitations</span>
+        The Technical–Public Gap diagnostic is <b>excluded from every aggregate</b> and never enters a CIDI formula. The Response Timing Proxy is <b>unavailable for KA-SAT and never imputed</b>, so KA-SAT has no Extended CIDI — a valid data limitation, not a missing value to fill. Evidence coverage is shown alongside scores but <b>never mathematically folded into them</b>. All outputs remain exploratory, corpus-bound and non-causal; the corpus is ~15 curated source-derived summaries per case, not the full public sphere.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">04</span><h2>Continue</h2></div>
+      <div class="xpages">
+        <a class="xcard" href="tci.html"><div class="xt">TCI</div><div class="xn">Technical Complexity</div><div class="xd">The technical input — evidence-status matrix and the floor / evidence-adjusted / assessed score variants.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="iva.html"><div class="xt">IVA</div><div class="xn">Interpretive Void Analyzer</div><div class="xd">The interpretive input — attribution drift, narrative fragmentation, timelines and the diagnostic gap.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="index.html"><div class="xt">↩</div><div class="xn">Overview</div><div class="xd">Return to the framework overview, case cards and verified source corpus.</div><div class="xgo">Back to overview →</div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbig">CIDF <span class="accent">//</span> v1.0</div>
+    <div class="frow"><b>Giovanni Arosio</b> — LUISS Guido Carli, 2026</div>
+    <div class="frow">Framework available at <a href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">github.com/GiovanniArosio/cidf-framework</a></div>
+    <div class="frow dim">Released under MIT License for academic use · All outputs are exploratory, corpus-bound and non-causal</div>
+  </div>
+</footer>
+
+<script src="assets/cidf.js"></script>
+</body>
+</html>

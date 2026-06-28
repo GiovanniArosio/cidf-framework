@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCI — Technical Complexity Index · CIDF</title>
+<meta name="description" content="Technical Complexity Index — evidence-aware MITRE ATT&CK scoring across five components for NotPetya, KA-SAT and PAP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cidf.css">
+</head>
+<body data-page="tci">
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="left mono caps"><b>CIDF</b> // Cyber-Interpretive Disruption Framework</div>
+  <div class="right mono caps">LUISS Guido Carli — 2026</div>
+</div>
+<div class="rule"></div>
+
+<nav class="mainnav" aria-label="Primary">
+  <div class="navwrap">
+    <a href="index.html" data-nav="overview">Overview</a>
+    <a href="tci.html" data-nav="tci">TCI</a>
+    <a href="iva.html" data-nav="iva">IVA</a>
+    <a href="cidi.html" data-nav="cidi">CIDI</a>
+    <span class="nav-spacer"><a class="nav-gh mono" href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">GITHUB ↗</a></span>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="phero">
+    <div class="wrap">
+      <div class="ptag">Component 01 · Technical Layer</div>
+      <h1>TCI<small>Technical Complexity Index — evidence-aware</small></h1>
+      <p class="pdesc">Operational sophistication scored on the MITRE ATT&amp;CK framework across five components. The model is <b>evidence-aware</b>: each component carries a status, and unknown evidence is <b>never</b> treated as documented absence. Outputs distinguish a conservative floor, an evidence-adjusted score, an assessed score including inference, and the underlying evidence coverage.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">01</span><h2>Evidence-adjusted score</h2><span class="note mono">PRIMARY TCI OUTPUT</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="tv">0.662</div><div class="tl2">NotPetya · TCI<sub>EA</sub></div><div class="tcap">coverage 0.80 · 4 documented components</div></div>
+        <div class="tile"><div class="tv">0.550</div><div class="tl2">KA-SAT · TCI<sub>EA</sub></div><div class="tcap">coverage 0.60 · persistence unknown</div></div>
+        <div class="tile"><div class="tv">0.250</div><div class="tl2">PAP Hack · TCI<sub>EA</sub></div><div class="tcap">coverage 0.40 · 3 of 5 unknown</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">02</span><h2>Evidence-status matrix</h2><span class="note mono">CASES × ATT&CK COMPONENTS</span></div>
+      <p class="lead">Each cell shows the component's raw value and its <b>evidence status</b>. The evidence-adjusted score is the mean of <b>documented</b> components only — <b>inferred</b> values inform the floor but not the adjusted score, and <b>unknown</b> components are excluded entirely rather than scored as zero. PAP's low score is driven by missing public technical evidence (three unknowns), not by a documented absence of capability.</p>
+      <div class="panel"><div data-chart="tci-evidence"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">03</span><h2>Score variants &amp; coverage</h2><span class="note mono">FLOOR · EVIDENCE-ADJ · ASSESSED</span></div>
+      <div class="grid-2-1">
+        <div class="panel">
+          <div class="panel-head"><span class="pno">03.1</span><h3>Three transparent score variants</h3></div>
+          <div class="panel-sub"><b>Floor</b> = conservative lower bound (inferred at floor, unknown = 0). <b>Evidence-adjusted</b> = documented components only (primary). <b>Assessed</b> = includes inference in the mean.</div>
+          <div data-chart="tci-variants"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="pno">03.2</span><h3>Evidence coverage</h3></div>
+          <div class="panel-sub">Share of applicable components with documented evidence. Shown alongside scores but <b>never folded into them</b>.</div>
+          <div data-chart="tci-coverage"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="insight">
+        <span class="ih">Reading the gradient</span>
+        TCI<sub>EA</sub> falls monotonically from <b>NotPetya (0.662)</b> → <b>KA-SAT (0.550)</b> → <b>PAP (0.250)</b>, but so does evidence coverage (0.80 → 0.60 → 0.40). The framework keeps these two quantities <b>separate</b>: PAP's score is low because most of its kill-chain is undocumented in the public corpus, which is a statement about <b>available evidence</b>, not a claim that the operation was technically trivial. This caveat is what the evidence-aware design exists to preserve.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="idx">04</span><h2>Continue</h2></div>
+      <div class="xpages">
+        <a class="xcard" href="iva.html"><div class="xt">IVA</div><div class="xn">Interpretive Void Analyzer</div><div class="xd">How communicative disruption was measured — attribution drift, narrative fragmentation, timing and the technical–public gap.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="cidi.html"><div class="xt">CIDI</div><div class="xn">Disruption Index</div><div class="xd">How TCI combines with the Interpretive Vector into the scenario-based composite index.</div><div class="xgo">Open analysis →</div></a>
+        <a class="xcard" href="index.html"><div class="xt">↩</div><div class="xn">Overview</div><div class="xd">Return to the framework overview, case cards and verified source corpus.</div><div class="xgo">Back to overview →</div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbig">CIDF <span class="accent">//</span> v1.0</div>
+    <div class="frow"><b>Giovanni Arosio</b> — LUISS Guido Carli, 2026</div>
+    <div class="frow">Framework available at <a href="https://github.com/GiovanniArosio/cidf-framework" target="_blank" rel="noopener">github.com/GiovanniArosio/cidf-framework</a></div>
+    <div class="frow dim">Released under MIT License for academic use · All outputs are exploratory, corpus-bound and non-causal</div>
+  </div>
+</footer>
+
+<script src="assets/cidf.js"></script>
+</body>
+</html>
